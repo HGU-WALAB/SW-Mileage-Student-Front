@@ -9,6 +9,7 @@ import { ColorSchema } from '../../theme/palette';
 import MileageTotalCompareChart from './MileageTotalCompareChart';
 import MileageTotalRankChart from './MileageTotalRankChart';
 import StudentNumPerItem from './StudentNumPerItem';
+import PointPerItem from './PointPerItem';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -77,7 +78,7 @@ export default function ChartTabs() {
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={3}>
-        항목 별 포인트
+        <PointPerItem />
       </CustomTabPanel>
     </Box>
   );

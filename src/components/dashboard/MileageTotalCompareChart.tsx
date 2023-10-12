@@ -1,5 +1,6 @@
-import { Box } from '@mui/material';
+import { Box, Chip } from '@mui/material';
 import { LineChart } from '@mui/x-charts';
+import { sx } from './StudentNumPerItem';
 
 const data = {
   myTotalScore: [100, 120, 80, 200, 150],
@@ -8,7 +9,8 @@ const data = {
 
 export default function MileageTotalCompareChart() {
   return (
-    <Box sx={{ width: '300px', height: '300px' }}>
+    <Box sx={sx}>
+      <Chip label="마일리지 총점 비교" color="primary" />
       <LineChart
         series={[
           { curve: 'linear', data: data.myTotalScore, label: '나의 마일리지 총점' },

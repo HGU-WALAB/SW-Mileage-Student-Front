@@ -1,5 +1,7 @@
 import { BarChart } from '@mui/x-charts';
 import React from 'react';
+import { Box, Chip } from '@mui/material';
+import { sx } from './StudentNumPerItem';
 
 const myNum = '3';
 const checkMe = (num: string) => {
@@ -97,5 +99,10 @@ export default function MileageTotalRankChart() {
   const [xHighlight, setXHightlight] = React.useState<'band' | 'none' | 'line'>('band');
 
   const [yHighlight, setYHightlight] = React.useState<'none' | 'line'>('none');
-  return <BarChart {...barChartsParams} axisHighlight={{ x: xHighlight, y: yHighlight }} />;
+  return (
+    <Box sx={sx}>
+      <Chip label="마일리지 총점 순위" color="primary" />
+      <BarChart {...barChartsParams} axisHighlight={{ x: xHighlight, y: yHighlight }} />;
+    </Box>
+  );
 }

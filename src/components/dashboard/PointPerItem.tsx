@@ -1,15 +1,8 @@
 import { Box, Chip } from '@mui/material';
 import { LineChart } from '@mui/x-charts';
+import { sx } from './StudentNumPerItem';
 
-export const sx = {
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: '50px',
-  mt: '50px',
-};
-
-const Data = [5, 8, 5, 2, 10, 1, 0];
+const Data = [30, 50, 20, 40, 50, 80, 20];
 const xLabels = [
   'TOPCIT 성적 우수자',
   '대경권 프로그래밍 대회',
@@ -19,14 +12,14 @@ const xLabels = [
   '웹 서비스 캠프',
   '전전 스터디',
 ];
-export default function StudentNumPerItem() {
+export default function PointPerItem() {
   return (
     <Box sx={sx}>
-      <Chip label="항목 별 등록된 학생 수" color="primary" />
+      <Chip label="항목 별 제공하는 포인트" color="primary" />
       <LineChart
         width={1000}
         height={300}
-        series={[{ data: Data, label: '등록된 학생 수' }]}
+        series={[{ data: Data, label: '항목의 포인트' }]}
         xAxis={[{ scaleType: 'point', data: xLabels }]}
       />
     </Box>
