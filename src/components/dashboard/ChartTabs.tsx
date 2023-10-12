@@ -7,6 +7,7 @@ import { LabelColor } from '../label/types';
 import { varBgColor } from '../animate/variants/background';
 import { ColorSchema } from '../../theme/palette';
 import MileageTotalCompareChart from './MileageTotalCompareChart';
+import MileageTotalRankChart from './MileageTotalRankChart';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -68,7 +69,7 @@ export default function ChartTabs() {
         <MileageTotalCompareChart />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        총점 순위
+        <MileageTotalRankChart />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         항목 별 학생 수
