@@ -49,31 +49,31 @@ export function useNavData() {
       // OVERVIEW
       // ----------------------------------------------------------------------
       {
-        subheader: 'overview v5.5.0',
+        subheader: 'SW 마일리지',
         items: [
-          { title: 'one', path: paths.dashboard.root, icon: ICONS.dashboard },
-          { title: 'two', path: paths.dashboard.two, icon: ICONS.ecommerce },
-          {
-            title: 'three',
-            path: paths.dashboard.three,
-            icon: ICONS.analytics,
-          },
+          { title: '신청', path: paths.dashboard.root, icon: ICONS.file },
+          { title: '통계', path: paths.dashboard.two, icon: ICONS.analytics },
+          // {
+          //   title: 'three',
+          //   path: paths.dashboard.three,
+          //   icon: ICONS.analytics,
+          // },
         ],
       },
 
       // MANAGEMENT
       // ----------------------------------------------------------------------
       {
-        subheader: 'management',
+        subheader: '사용자 정보',
         items: [
           {
-            title: 'user',
+            title: '학부생',
             path: paths.dashboard.group.root,
             icon: ICONS.user,
             children: [
-              { title: 'four', path: paths.dashboard.group.root },
-              { title: 'five', path: paths.dashboard.group.five },
-              { title: 'six', path: paths.dashboard.group.six },
+              { title: '프로필', path: paths.dashboard.group.root },
+              { title: '내 마일리지', path: paths.dashboard.group.five },
+              // { title: 'six', path: paths.dashboard.group.six },
             ],
           },
         ],
