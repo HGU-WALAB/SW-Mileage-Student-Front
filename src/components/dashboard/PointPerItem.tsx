@@ -18,7 +18,7 @@ export default function PointPerItem() {
       <Chip label="항목 별 제공하는 포인트" color="primary" />
       <LineChart
         width={1000}
-        height={300}
+        height={400}
         series={[{ data: Data, label: '항목의 포인트' }]}
         xAxis={[{ scaleType: 'point', data: xLabels }]}
       />

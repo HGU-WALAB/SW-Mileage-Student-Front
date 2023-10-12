@@ -102,7 +102,13 @@ export default function MileageTotalRankChart() {
   return (
     <Box sx={sx}>
       <Chip label="마일리지 총점 순위" color="primary" />
-      <BarChart {...barChartsParams} axisHighlight={{ x: xHighlight, y: yHighlight }} />;
+      <BarChart
+        {...barChartsParams}
+        axisHighlight={{ x: xHighlight, y: yHighlight }}
+        width={1000}
+        height={400}
+      />
+      ;
     </Box>
   );
 }
