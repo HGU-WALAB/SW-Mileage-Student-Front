@@ -5,6 +5,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 // components
 import { useSettingsContext } from 'src/components/settings';
+import ChartTabs from 'src/components/dashboard/ChartTabs';
 
 // ----------------------------------------------------------------------
 
@@ -14,7 +15,7 @@ export default function TwoView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Typography variant="h4"> 통계 자료 </Typography>
-
+      <ChartTabs />
       <Box
         sx={{
           mt: 5,

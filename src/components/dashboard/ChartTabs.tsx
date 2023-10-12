@@ -3,6 +3,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { LabelColor } from '../label/types';
+import { varBgColor } from '../animate/variants/background';
+import { ColorSchema } from '../../theme/palette';
+import MileageTotalCompareChart from './MileageTotalCompareChart';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -47,7 +51,13 @@ export default function ChartTabs() {
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+          textColor="primary"
+          indicatorColor="primary"
+        >
           <Tab label="총점 비교" {...a11yProps(0)} />
           <Tab label="총점 순위" {...a11yProps(1)} />
           <Tab label="항목 별 학생 수" {...a11yProps(2)} />
@@ -55,7 +65,7 @@ export default function ChartTabs() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        총점 비교
+        <MileageTotalCompareChart />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         총점 순위
