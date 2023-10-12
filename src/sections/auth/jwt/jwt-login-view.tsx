@@ -80,7 +80,7 @@ export default function JwtLoginView() {
         <Typography variant="body2">New user?</Typography>
 
         <Link component={RouterLink} href={paths.auth.jwt.register} variant="subtitle2">
-          Create an account
+          Create an account!!
         </Link>
       </Stack>
     </Stack>
