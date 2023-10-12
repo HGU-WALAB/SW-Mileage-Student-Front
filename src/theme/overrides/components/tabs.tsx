@@ -8,7 +8,7 @@ export function tabs(theme: Theme) {
     MuiTabs: {
       styleOverrides: {
         indicator: {
-          backgroundColor: theme.palette.text.primary,
+          // backgroundColor: theme.palette.text.primary,
         },
         scrollButtons: {
           width: 48,
