@@ -8,6 +8,7 @@ import { varBgColor } from '../animate/variants/background';
 import { ColorSchema } from '../../theme/palette';
 import MileageTotalCompareChart from './MileageTotalCompareChart';
 import MileageTotalRankChart from './MileageTotalRankChart';
+import StudentNumPerItem from './StudentNumPerItem';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -72,7 +73,7 @@ export default function ChartTabs() {
         <MileageTotalRankChart />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        항목 별 학생 수
+        <StudentNumPerItem />
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={3}>
