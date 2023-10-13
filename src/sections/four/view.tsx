@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 // components
 import { useSettingsContext } from 'src/components/settings';
 import { ResponsiveRadar } from '@nivo/radar';
-import { Paper } from '@mui/material';
 
 // ----------------------------------------------------------------------
 const data = [
