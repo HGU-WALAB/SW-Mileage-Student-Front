@@ -96,9 +96,9 @@ const barChartsParams = {
 };
 
 export default function MileageTotalRankChart() {
-  const [xHighlight, setXHightlight] = React.useState<'band' | 'none' | 'line'>('band');
+  const [xHighlight] = React.useState<'band' | 'none' | 'line'>('band');
 
-  const [yHighlight, setYHightlight] = React.useState<'none' | 'line'>('none');
+  const [yHighlight] = React.useState<'none' | 'line'>('none');
   return (
     <Box sx={sx}>
       <Chip label="마일리지 총점 순위" color="primary" />

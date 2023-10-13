@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { useDemoData } from '@mui/x-data-grid-generator';
 import { Box } from '@mui/material';
 
 export default function MyMileageTable() {
