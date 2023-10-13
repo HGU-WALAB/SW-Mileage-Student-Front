@@ -2,7 +2,6 @@ import { m } from 'framer-motion';
 // @mui
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import MenuItem from '@mui/material/MenuItem';
@@ -54,11 +53,6 @@ export default function AccountPopover() {
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const handleClickItem = (path: string) => {
-    popover.onClose();
-    router.push(path);
   };
 
   return (
