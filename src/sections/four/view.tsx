@@ -11,6 +11,9 @@ import { IStudentInfo } from 'src/apis/Profile';
 import ProfileLottie from 'src/components/profile/ProfileLottie';
 import FunctionButton from 'src/components/common/FunctionButton';
 import CancelButton from 'src/components/common/CancelButton';
+import { useForm } from 'react-hook-form';
+import ProfileEditCancelButton from 'src/components/profile/ProfileEditCancelButton';
+import React from 'react';
 
 // ----------------------------------------------------------------------
 const data = [
@@ -92,18 +95,37 @@ export default function FourView() {
     }
   };
 
-  const handleProfileEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  // const {
+  //   isLoading: getUserLoading,
+  //   data,
+  //   refetch,
+  // } = useQuery<IStudentInfo>(['User', 'me'], readOneMember, {
+  //   onSuccess: async (data) => {
+  //     setValue('name', data.name);
+  //     setValue('sid', data.sid);
+  //     setValue('grade', data.grade);
+  //     setValue('semester', data.semester);
+  //     setValue('deptname', data.deptname);
+  //     setValue('major1', data.major1);
+  //     setValue('major2', data.major2);
+  //     setValue('isEnrolled', data.isEnrolled);
+  //   },
+  // });
 
-    const { id } = e.currentTarget;
+  const { handleSubmit, watch, setValue, getValues, control } = useForm({
+    defaultValues: {
+      name: '오인혁',
+      sid: '21800446',
+      grade: '4',
+      semester: '8',
+      deptname: '전산전자공학부',
+      major1: '컴퓨터공학',
+      major2: '컴퓨터공학',
+      isEnrolled: 'true',
+    },
+  });
 
-    if (id === 'edit-open-profile') {
-      console.log('edit profile');
-    } else if (id === 'edit-close-profile') {
-      console.log('close profile');
-    }
-  };
-
+  const [isEditing, setIsEditing] = React.useState(false);
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Typography variant="h4"> 학부생 프로필 </Typography>
@@ -148,26 +170,7 @@ export default function FourView() {
           </Box>
         </Box>
 
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'end',
-            gap: '20px',
-            px: '20px',
-          }}
-        >
-          <FunctionButton
-            text="프로필 편집"
-            handleClick={handleProfileEdit}
-            id="edit-open-profile"
-          />
-          <FunctionButton
-            text="프로필 수정"
-            handleClick={handleProfileEdit}
-            id="edit-close-profile"
-          />
-          <CancelButton text="취소" handleClick={handleProfileEdit} id="edit-cancel-profile" />
-        </Box>
+        <ProfileEditCancelButton isEditing={isEditing} setIsEditing={setIsEditing} />
       </Box>
 
       <Box sx={{ width: '500px', height: '500px' }}>
