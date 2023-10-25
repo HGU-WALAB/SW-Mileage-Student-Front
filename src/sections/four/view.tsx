@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import { useSettingsContext } from 'src/components/settings';
 import { ResponsiveRadar } from '@nivo/radar';
 import { Paper } from '@mui/material';
+import { IStudentInfo } from 'src/apis/Profile';
 
 // ----------------------------------------------------------------------
 const data = [
@@ -44,18 +45,50 @@ const data = [
 export default function FourView() {
   const settings = useSettingsContext();
 
-  const studentInfo = [
-    '오인혁',
-    '재학중',
-    '전산전자공학부',
-    '4학년',
-    '8학기',
-    '21800446',
-    '컴퓨터공학',
-    '컴퓨터공학',
-  ];
+  const studentInfo: IStudentInfo = {
+    name: '오인혁',
+    sid: '21800446',
+    grade: 4,
+    semester: 8,
+    deptname: '전산전자공학부',
+    major1: '컴퓨터공학',
+    major2: '컴퓨터공학',
+    isEnrolled: true,
+  };
 
-  const studentInfoTitle = ['이름', '재학여부', '학부', '학년', '학기', '학번', '전공1', '전공2'];
+  type StudentField =
+    | 'name'
+    | 'sid'
+    | 'grade'
+    | 'semester'
+    | 'deptname'
+    | 'major1'
+    | 'major2'
+    | 'isEnrolled';
+
+  const studentFieldEng2Kor = (eng: StudentField) => {
+    switch (eng) {
+      case 'name':
+        return '이름';
+      case 'sid':
+        return '학번';
+      case 'grade':
+        return '학년';
+      case 'semester':
+        return '학기';
+      case 'deptname':
+        return '학부';
+      case 'major1':
+        return '전공1';
+      case 'major2':
+        return '전공2';
+      case 'isEnrolled':
+        return '재학여부';
+      default:
+        return '그 외 정보';
+    }
+  };
+
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Typography variant="h4"> 학부생 프로필 </Typography>
@@ -95,9 +128,10 @@ export default function FourView() {
             gridTemplateColumns: 'repeat(2, 1fr)',
           }}
         >
-          {studentInfoTitle.map((title, index) => (
+          {Object.entries(studentInfo).map(([key, value], index) => (
             <Box sx={{ fontSize: '20px', display: 'flex', gap: '20px' }} key={index}>
-              <Box sx={{ fontWeight: 'bold' }}>{title}</Box> {studentInfo[index]}
+              <Box sx={{ fontWeight: 'bold' }}>{studentFieldEng2Kor(key as StudentField)}</Box>{' '}
+              {value}
             </Box>
           ))}
         </Box>
