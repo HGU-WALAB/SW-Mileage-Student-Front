@@ -7,7 +7,6 @@ export default function ProfileLottie() {
     <Box
       sx={{
         width: '400px',
-        height: '400px',
       }}
     >
       <Lottie style={{ width: '400px' }} animationData={animationData} />

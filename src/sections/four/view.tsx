@@ -6,9 +6,11 @@ import Typography from '@mui/material/Typography';
 // components
 import { useSettingsContext } from 'src/components/settings';
 import { ResponsiveRadar } from '@nivo/radar';
-import { Paper } from '@mui/material';
+import { Button, Paper } from '@mui/material';
 import { IStudentInfo } from 'src/apis/Profile';
 import ProfileLottie from 'src/components/profile/ProfileLottie';
+import FunctionButton from 'src/components/common/FunctionButton';
+import CancelButton from 'src/components/common/CancelButton';
 
 // ----------------------------------------------------------------------
 const data = [
@@ -90,6 +92,18 @@ export default function FourView() {
     }
   };
 
+  const handleProfileEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const { id } = e.currentTarget;
+
+    if (id === 'edit-open-profile') {
+      console.log('edit profile');
+    } else if (id === 'edit-close-profile') {
+      console.log('close profile');
+    }
+  };
+
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Typography variant="h4"> 학부생 프로필 </Typography>
@@ -98,45 +112,61 @@ export default function FourView() {
         sx={{
           mt: 5,
           width: 1,
-          height: 320,
+          height: 500,
           borderRadius: 2,
           bgcolor: (theme) => alpha(theme.palette.grey[500], 0.04),
           border: (theme) => `dashed 1px ${theme.palette.divider}`,
           display: 'flex',
-          alignItems: 'center',
+          flexDirection: 'column',
         }}
       >
-        {/* <Box
-          sx={{
-            width: '600px',
-            px: 5,
-          }}
-        > */}
-        <ProfileLottie />
         <Box
           sx={{
-            mx: 5,
-            // width: '400px',
-            // height: '200px',
-            border: 1,
-            borderColor: 'lightGray',
-          }}
-        />
-        {/* </Box> */}
-        <Box
-          sx={{
-            width: '100%',
-            display: 'grid',
-            gap: '30px',
-            gridTemplateColumns: 'repeat(2, 1fr)',
+            display: 'flex',
+            alignItems: 'center',
           }}
         >
-          {Object.entries(studentInfo).map(([key, value], index) => (
-            <Box sx={{ fontSize: '20px', display: 'flex', gap: '20px' }} key={index}>
-              <Box sx={{ fontWeight: 'bold' }}>{studentFieldEng2Kor(key as StudentField)}</Box>{' '}
-              {value}
-            </Box>
-          ))}
+          <ProfileLottie />
+
+          <Box
+            sx={{
+              width: '100%',
+              display: 'grid',
+              gap: '30px',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+            }}
+          >
+            {Object.entries(studentInfo).map(([key, value], index) => (
+              <Box
+                sx={{ fontSize: '18px', display: 'flex', gap: '20px', minWidth: '180px' }}
+                key={index}
+              >
+                <Box sx={{ fontWeight: 'bold' }}>{studentFieldEng2Kor(key as StudentField)}</Box>{' '}
+                {value}
+              </Box>
+            ))}
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'end',
+            gap: '20px',
+            px: '20px',
+          }}
+        >
+          <FunctionButton
+            text="프로필 편집"
+            handleClick={handleProfileEdit}
+            id="edit-open-profile"
+          />
+          <FunctionButton
+            text="프로필 수정"
+            handleClick={handleProfileEdit}
+            id="edit-close-profile"
+          />
+          <CancelButton text="취소" handleClick={handleProfileEdit} id="edit-cancel-profile" />
         </Box>
       </Box>
 
