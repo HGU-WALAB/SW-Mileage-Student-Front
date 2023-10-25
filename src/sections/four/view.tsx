@@ -8,6 +8,7 @@ import { useSettingsContext } from 'src/components/settings';
 import { ResponsiveRadar } from '@nivo/radar';
 import { Paper } from '@mui/material';
 import { IStudentInfo } from 'src/apis/Profile';
+import ProfileLottie from 'src/components/profile/ProfileLottie';
 
 // ----------------------------------------------------------------------
 const data = [
@@ -105,21 +106,23 @@ export default function FourView() {
           alignItems: 'center',
         }}
       >
-        <Box
+        {/* <Box
           sx={{
             width: '600px',
             px: 5,
           }}
-        >
-          <Box
-            sx={{
-              width: '250px',
-              height: '250px',
-              border: 1,
-              borderColor: 'lightGray',
-            }}
-          />
-        </Box>
+        > */}
+        <ProfileLottie />
+        <Box
+          sx={{
+            mx: 5,
+            // width: '400px',
+            // height: '200px',
+            border: 1,
+            borderColor: 'lightGray',
+          }}
+        />
+        {/* </Box> */}
         <Box
           sx={{
             width: '100%',
