@@ -9,3 +9,11 @@ export const mileageStatusState = atom({
   key: 'mileageStatusState', // unique ID (with respect to other atoms/selectors)
   default: '진행 중', // default value (aka initial value)
 });
+
+export const userState = atom({
+  key: 'userAtom', // unique ID (with respect to other atoms/selectors)
+  default: {
+    name: '김민수',
+    sid: '2018000',
+  },
+});
