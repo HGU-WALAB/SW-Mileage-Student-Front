@@ -7,9 +7,26 @@ import Typography from '@mui/material/Typography';
 import { useSpring, animated } from '@react-spring/web';
 import { useRecoilValue } from 'recoil';
 import { userState } from 'src/utils/atom';
+import { styled } from '@mui/material';
 import TermsCheckbox from './TermsCheckBox';
 import FunctionButton from '../common/FunctionButton';
 import CancelButton from '../common/CancelButton';
+
+const FlexBox = styled(Box)({
+  minWidth: '800px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+});
+
+const ButtonBox = styled(Box)({
+  minWidth: '800px',
+  display: 'flex',
+  gap: '10px',
+  justifyContent: 'center',
+  alignItems: 'center',
+});
 
 interface FadeProps {
   children: React.ReactElement;
@@ -50,13 +67,15 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: '70%',
+  minWidth: '800px',
+
   display: 'flex',
   flexDirection: 'column',
   gap: '40px',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
+  py: 6,
 };
 
 interface IProps {
@@ -93,61 +112,49 @@ export default function TermsOfUse({ thisSemesterItemNum }: IProps) {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <Box
-              sx={{
-                minWidth: '400px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Typography color="primary" id="spring-modal-title" variant="h4" component="h2">
-                {`${userInfo.name}(${userInfo.sid}) 학생의 2023-01학기 등록된 마일리지 항목 개수는 ${thisSemesterItemNum}개입니다.`}
+            <FlexBox>
+              <Typography
+                sx={{ display: 'flex', gap: '5px' }}
+                id="spring-modal-title"
+                variant="h6"
+                component="h2"
+              >
+                <Typography
+                  color="primary"
+                  variant="h6"
+                >{`${userInfo.name} (${userInfo.sid})`}</Typography>
+                학생의
+                <Typography color="primary" variant="h6">
+                  2023-01
+                </Typography>
+                학기 등록된 마일리지 항목 개수는
+                <Typography color="primary" variant="h6">
+                  {thisSemesterItemNum}개
+                </Typography>
+                입니다.
               </Typography>
-            </Box>
-            <Box
-              sx={{
-                minWidth: '400px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant="h6">
+            </FlexBox>
+            <FlexBox>
+              <Typography variant="body1">
                 수집된 개인 정보자료 및 개인정보 제공 동의는 마일리지 지급을 위한 본인 확인을
                 위해서만 사용됩니다.
               </Typography>
-              <Typography variant="h6">
+              <Typography variant="body1">
                 본인은 상기 마일리지 항목의 내용에 대해 충분히 검토하였으며 그 내용을 확인합니다.
               </Typography>
-              <Typography variant="h6">
+              <Typography variant="body1">
                 따라서 현재 등록된 마일리지로 장학금 신청에 동의합니다.
               </Typography>
-            </Box>
-            <Box
-              sx={{
-                minWidth: '400px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
+            </FlexBox>
+            <FlexBox>
               <TermsCheckbox checked={checked} setChecked={setChecked} />
-            </Box>
-            <Box
-              sx={{
-                minWidth: '400px',
-                display: 'flex',
-                gap: '10px',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <FunctionButton text="신청하기" handleClick={handleApply} />
+            </FlexBox>
+            <ButtonBox>
+              <Button variant="contained" color="primary" onClick={handleApply} disabled={!checked}>
+                신청하기
+              </Button>
               <CancelButton text="취소하기" handleClick={handleClose} />
-            </Box>
+            </ButtonBox>
           </Box>
         </Fade>
       </Modal>
