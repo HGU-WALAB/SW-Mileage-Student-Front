@@ -15,19 +15,19 @@ export function table(theme: Theme) {
     },
     MuiTableRow: {
       styleOverrides: {
-        root: {
-          [`&.${tableRowClasses.selected}`]: {
-            backgroundColor: alpha(theme.palette.primary.dark, 0.04),
-            '&:hover': {
-              backgroundColor: alpha(theme.palette.primary.dark, 0.08),
-            },
-          },
-          '&:last-of-type': {
-            [`& .${tableCellClasses.root}`]: {
-              borderColor: 'transparent',
-            },
-          },
-        },
+        // root: {
+        //   [`&.${tableRowClasses.selected}`]: {
+        //     backgroundColor: alpha(theme.palette.primary.dark, 0.04),
+        //     '&:hover': {
+        //       backgroundColor: alpha(theme.palette.primary.dark, 0.08),
+        //     },
+        //   },
+        //   '&:last-of-type': {
+        //     [`& .${tableCellClasses.root}`]: {
+        //       borderColor: 'transparent',
+        //     },
+        //   },
+        // },
       },
     },
     MuiTableCell: {

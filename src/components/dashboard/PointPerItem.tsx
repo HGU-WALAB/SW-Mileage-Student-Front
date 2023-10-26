@@ -15,7 +15,6 @@ const xLabels = [
 export default function PointPerItem() {
   return (
     <Box sx={sx}>
-      <Chip label="항목 별 제공하는 포인트" color="primary" />
       <LineChart
         width={1000}
         height={400}

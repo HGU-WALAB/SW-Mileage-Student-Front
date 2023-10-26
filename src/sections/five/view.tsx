@@ -8,6 +8,8 @@ import SemesterDropdown from 'src/components/common/SemesterDropdown';
 import { Box, Chip } from '@mui/material';
 import { useRecoilValue } from 'recoil';
 import { mileageStatusState, semesterState } from 'src/utils/atom';
+import { Layout } from 'src/css/styled-components/Layout';
+import { Title } from 'src/css/styled-components/Title';
 
 // ----------------------------------------------------------------------
 
@@ -20,14 +22,17 @@ export default function FiveView() {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Box sx={{ display: 'flex', gap: '20px' }}>
-        <Typography variant="h4"> 나의 마일리지 </Typography>
-        <Chip label={semester} color="primary" variant="outlined" />
-        <Chip label={status} color="primary" variant="outlined" />
-      </Box>
-      <Box sx={{ height: '20px' }} />
-      <SemesterDropdown semesters={semesters} />
-      <MyMileageTable />
+      <Layout>
+        <Title> 나의 마일리지 </Title>
+
+        <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          <SemesterDropdown semesters={semesters} />
+          <Chip label={semester} color="primary" variant="soft" />
+          <Chip label={status} color="primary" variant="soft" />
+        </Box>
+
+        <MyMileageTable />
+      </Layout>
     </Container>
   );
 }

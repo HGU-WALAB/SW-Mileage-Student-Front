@@ -15,37 +15,39 @@ import { Controller, useForm } from 'react-hook-form';
 import ProfileEditCancelButton from 'src/components/profile/ProfileEditCancelButton';
 import React from 'react';
 import TypoWithEdit from 'src/components/profile/TypoWithEdit';
+import { Title } from 'src/css/styled-components/Title';
+import { Layout } from 'src/css/styled-components/Layout';
 
 // ----------------------------------------------------------------------
 const data = [
   {
     taste: 'Type A',
     // chardonay: 25,
-    // carmenere: 111,
+    max: 111,
     point: 73,
   },
   {
     taste: 'Type B',
     // chardonay: 88,
-    // carmenere: 108,
+    max: 108,
     point: 45,
   },
   {
     taste: 'Type C',
     // chardonay: 49,
-    // carmenere: 63,
+    max: 63,
     point: 34,
   },
   {
     taste: 'Type D',
     // chardonay: 109,
-    // carmenere: 102,
+    max: 102,
     point: 113,
   },
   {
     taste: 'Type E',
     // chardonay: 51,
-    // carmenere: 42,
+    max: 100,
     point: 98,
   },
 ];
@@ -129,54 +131,54 @@ export default function FourView() {
   const [isEditing, setIsEditing] = React.useState(false);
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Typography variant="h4"> 학부생 프로필 </Typography>
+      <Layout>
+        <Title> 학부생 프로필 </Title>
 
-      <Box
-        sx={{
-          mt: 5,
-          width: 1,
-          height: 400,
-          borderRadius: 2,
-          bgcolor: (theme) => alpha(theme.palette.grey[500], 0.04),
-          border: (theme) => `dashed 1px ${theme.palette.divider}`,
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
         <Box
           sx={{
+            width: 1,
+            height: 400,
+            borderRadius: 2,
+            bgcolor: (theme) => alpha(theme.palette.grey[500], 0.04),
+            border: (theme) => `dashed 1px ${theme.palette.divider}`,
             display: 'flex',
-            alignItems: 'center',
-            px: '30px',
-            gap: '30px',
+            flexDirection: 'column',
           }}
         >
-          <ProfileLottie />
-
           <Box
             sx={{
-              maxWidth: '500px',
-              display: 'grid',
+              display: 'flex',
+              alignItems: 'center',
+              px: '30px',
               gap: '30px',
-              gridTemplateColumns: 'repeat(2, 1fr)',
             }}
           >
-            {Object.entries(studentInfo).map(([key, value], index) => (
-              <TypoWithEdit
-                key={index}
-                name={value}
-                fieldName={studentFieldEng2Kor(key as StudentField)}
-              />
-            ))}
+            <ProfileLottie />
 
-            {/* <TypoWithEdit name="21800446" fieldName="학번" />
+            <Box
+              sx={{
+                maxWidth: '500px',
+                display: 'grid',
+                gap: '30px',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+              }}
+            >
+              {Object.entries(studentInfo).map(([key, value], index) => (
+                <TypoWithEdit
+                  key={index}
+                  name={value}
+                  fieldName={studentFieldEng2Kor(key as StudentField)}
+                />
+              ))}
+
+              {/* <TypoWithEdit name="21800446" fieldName="학번" />
             <TypoWithEdit name="4학년" fieldName="학년" />
             <TypoWithEdit name="8학기" fieldName="학기" />
             <TypoWithEdit name="전산전자공학부" fieldName="학부" />
             <TypoWithEdit name="컴퓨터공학" fieldName="전공1" />
             <TypoWithEdit name="컴퓨터공학" fieldName="전공2" />
             <TypoWithEdit name="재학 중" fieldName="재학여부" /> */}
-            {/* {Object.entries(studentInfo).map(([key, value], index) => (
+              {/* {Object.entries(studentInfo).map(([key, value], index) => (
               <Box
                 sx={{ fontSize: '18px', display: 'flex', gap: '20px', minWidth: '180px' }}
                 key={index}
@@ -185,60 +187,61 @@ export default function FourView() {
                 <Box sx={{ fontWeight: 'bold', color: 'gray' }}>{value}</Box>
               </Box>
             ))} */}
+            </Box>
           </Box>
+
+          {/* <ProfileEditCancelButton isEditing={isEditing} setIsEditing={setIsEditing} /> */}
         </Box>
 
-        {/* <ProfileEditCancelButton isEditing={isEditing} setIsEditing={setIsEditing} /> */}
-      </Box>
-
-      <Box sx={{ width: '500px', height: '500px' }}>
-        <ResponsiveRadar
-          data={data}
-          keys={['point']}
-          indexBy="taste"
-          valueFormat=">-.2f"
-          margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
-          borderColor={{ from: 'color' }}
-          gridLabelOffset={36}
-          dotSize={10}
-          dotColor={{ theme: 'background' }}
-          dotBorderWidth={2}
-          colors={{ scheme: 'nivo' }}
-          blendMode="multiply"
-          motionConfig="wobbly"
-          legends={[
-            {
-              anchor: 'top-left',
-              direction: 'column',
-              translateX: -50,
-              translateY: -40,
-              itemWidth: 80,
-              itemHeight: 20,
-              itemTextColor: '#999',
-              symbolSize: 12,
-              symbolShape: 'circle',
-              effects: [
-                {
-                  on: 'hover',
-                  style: {
-                    itemTextColor: '#000',
+        <Box sx={{ width: '500px', height: '500px' }}>
+          <ResponsiveRadar
+            data={data}
+            keys={['point', 'max']}
+            indexBy="taste"
+            valueFormat=">-.2f"
+            margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+            borderColor={{ from: 'color' }}
+            gridLabelOffset={36}
+            dotSize={10}
+            dotColor={{ theme: 'background' }}
+            dotBorderWidth={2}
+            colors={{ scheme: 'nivo' }}
+            blendMode="multiply"
+            motionConfig="wobbly"
+            legends={[
+              {
+                anchor: 'top-left',
+                direction: 'column',
+                translateX: -50,
+                translateY: -40,
+                itemWidth: 80,
+                itemHeight: 20,
+                itemTextColor: '#999',
+                symbolSize: 12,
+                symbolShape: 'circle',
+                effects: [
+                  {
+                    on: 'hover',
+                    style: {
+                      itemTextColor: '#000',
+                    },
                   },
-                },
-              ],
-            },
-          ]}
+                ],
+              },
+            ]}
+          />
+        </Box>
+        <Box
+          sx={{
+            mt: 5,
+            width: 1,
+            height: 320,
+            borderRadius: 2,
+            bgcolor: (theme) => alpha(theme.palette.grey[500], 0.04),
+            border: (theme) => `dashed 1px ${theme.palette.divider}`,
+          }}
         />
-      </Box>
-      <Box
-        sx={{
-          mt: 5,
-          width: 1,
-          height: 320,
-          borderRadius: 2,
-          bgcolor: (theme) => alpha(theme.palette.grey[500], 0.04),
-          border: (theme) => `dashed 1px ${theme.palette.divider}`,
-        }}
-      />
+      </Layout>
     </Container>
   );
 }

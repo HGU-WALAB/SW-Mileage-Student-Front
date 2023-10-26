@@ -13,14 +13,14 @@ import CancelButton from '../common/CancelButton';
 const Title = styled(Chip)({
   fontSize: '25px',
   padding: '20px',
-  borderRadius: '0',
+  borderRadius: '5px',
 });
 
 const MileageEA = styled(Chip)({
   fontSize: '15px',
   padding: '15px 5px',
 
-  borderRadius: '0',
+  borderRadius: '5px',
 });
 
 const FlexCenterBox = styled(Box)({
@@ -38,7 +38,7 @@ const MileageContainer = styled(Box)({
   overflowY: 'scroll',
   display: 'flex',
   flexDirection: 'column',
-  gap: '100px',
+  gap: '30px',
 });
 
 const MileageBox = styled(Box)({
@@ -194,7 +194,7 @@ export default function ApplyFormModal({ thisSemesterItemNum }: IProps) {
           <FlexEndBox>
             <MileageEA
               color="primary"
-              variant="outlined"
+              variant="soft"
               label={`등록된 마일리지 총 갯수 : ${thisSemesterItemNum}개`}
             />
           </FlexEndBox>

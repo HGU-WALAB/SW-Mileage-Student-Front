@@ -101,7 +101,6 @@ export default function MileageTotalRankChart() {
   const [yHighlight] = React.useState<'none' | 'line'>('none');
   return (
     <Box sx={sx}>
-      <Chip label="마일리지 총점 순위" color="primary" />
       <BarChart
         {...barChartsParams}
         axisHighlight={{ x: xHighlight, y: yHighlight }}
