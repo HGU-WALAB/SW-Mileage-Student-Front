@@ -6,5 +6,5 @@ export const dateConverter = (date: string) => {
   const hour = dateObj.getHours();
   const minute = dateObj.getMinutes();
   const second = dateObj.getSeconds();
-  return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
+  return `${year}년 ${month}월 ${day}일 ${hour}시`;
 };

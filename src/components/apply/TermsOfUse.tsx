@@ -95,10 +95,13 @@ export default function TermsOfUse({ thisSemesterItemNum }: IProps) {
   const handleApply = async () => {
     await handleClose();
     setIsShowApplyModal(true);
+    console.log('!!');
   };
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button variant="contained" color="primary" onClick={handleOpen}>
+        ☘️ 마일리지 신청 하기
+      </Button>
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"

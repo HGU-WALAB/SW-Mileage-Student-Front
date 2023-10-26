@@ -19,7 +19,8 @@ import {
   PiNumberNineLight,
 } from 'react-icons/pi';
 import { dateConverter } from 'src/utils/converter/dateConverter';
-import { Chip } from '@mui/material';
+import { Chip, Typography } from '@mui/material';
+import TermsOfUse from './TermsOfUse';
 
 const IconList = (idx: number) => {
   switch ((idx % 10) + 1) {
@@ -57,9 +58,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
+  //   '&:nth-of-type(odd)': {
+  //     backgroundColor: theme.palette.action.hover,
+  //   },
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
@@ -117,10 +118,10 @@ const rows = makeData(data);
 
 export default function BeforeApply() {
   return (
-    <TableContainer sx={{ width: '600px' }} component={Paper}>
-      <Table sx={{}} aria-label="customized table">
+    <TableContainer sx={{ width: '700px' }} component={Paper}>
+      <Table aria-label="customized table">
         <TableHead>
-          <TableRow>
+          <TableRow color="primary">
             <StyledTableCell>번호</StyledTableCell>
             <StyledTableCell align="right">학기</StyledTableCell>
             <StyledTableCell align="right">신청 시작일</StyledTableCell>
@@ -134,11 +135,18 @@ export default function BeforeApply() {
               <StyledTableCell component="th" scope="row">
                 {row.id}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.semester}</StyledTableCell>
+              <StyledTableCell align="right">
+                {' '}
+                <Typography color="primary" variant="body1" fontWeight={600}>
+                  {row.semester}
+                </Typography>
+              </StyledTableCell>
               <StyledTableCell align="right">{dateConverter(row.applyStart)}</StyledTableCell>
               <StyledTableCell align="right">{dateConverter(row.applyEnd)}</StyledTableCell>
               <StyledTableCell align="right">
-                <Chip variant="outlined" color="primary" label={row.status} />{' '}
+                <Typography color="primary" variant="body1" fontWeight={600}>
+                  {row.status}
+                </Typography>
               </StyledTableCell>
             </StyledTableRow>
           ))}
