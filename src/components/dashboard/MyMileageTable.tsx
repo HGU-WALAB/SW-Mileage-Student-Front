@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box, Typography } from '@mui/material';
-import { useRecoilValue } from 'recoil';
-import { semesterState } from 'src/utils/atom';
 
 export default function MyMileageTable() {
-  const semester = useRecoilValue(semesterState);
+  // const semester = useRecoilValue(semesterState);
 
   interface IGetMyMileage {
     list: IItemsBySemester[];

@@ -9,7 +9,6 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { IsShowStudentApplyModalState, userState } from 'src/utils/atom';
 import { styled } from '@mui/material';
 import TermsCheckbox from './TermsCheckBox';
-import FunctionButton from '../common/FunctionButton';
 import CancelButton from '../common/CancelButton';
 
 const FlexBox = styled(Box)({

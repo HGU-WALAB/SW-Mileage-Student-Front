@@ -19,8 +19,7 @@ import {
   PiNumberNineLight,
 } from 'react-icons/pi';
 import { dateConverter } from 'src/utils/converter/dateConverter';
-import { Chip, Typography } from '@mui/material';
-import TermsOfUse from './TermsOfUse';
+import { Typography } from '@mui/material';
 
 const IconList = (idx: number) => {
   switch ((idx % 10) + 1) {
@@ -57,7 +56,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
+const StyledTableRow = styled(TableRow)(() => ({
   //   '&:nth-of-type(odd)': {
   //     backgroundColor: theme.palette.action.hover,
   //   },

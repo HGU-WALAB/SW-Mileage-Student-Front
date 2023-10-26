@@ -1,4 +1,4 @@
-import { Box, Chip } from '@mui/material';
+import { Box } from '@mui/material';
 import { LineChart } from '@mui/x-charts';
 import { sx } from './StudentNumPerItem';
 

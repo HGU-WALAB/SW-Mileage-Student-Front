@@ -3,11 +3,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { IsShowStudentApplyModalState, userState } from 'src/utils/atom';
+import { useRecoilState } from 'recoil';
+import { IsShowStudentApplyModalState } from 'src/utils/atom';
 import { Chip, styled } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
-import FunctionButton from '../common/FunctionButton';
 import CancelButton from '../common/CancelButton';
 
 const Title = styled(Chip)({
@@ -168,8 +167,8 @@ interface IProps {
 
 export default function ApplyFormModal({ thisSemesterItemNum }: IProps) {
   const [isShowApplyModal, setIsShowApplyModal] = useRecoilState(IsShowStudentApplyModalState);
-  const userInfo = useRecoilValue(userState);
-  const handleOpen = () => setIsShowApplyModal(true);
+  // const userInfo = useRecoilValue(userState);
+  // const handleOpen = () => setIsShowApplyModal(true);
   const handleClose = () => setIsShowApplyModal(false);
 
   const handleApply = async () => {

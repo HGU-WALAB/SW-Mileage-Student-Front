@@ -1,4 +1,4 @@
-import { Box, Chip, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import { LineChart } from '@mui/x-charts';
 import { Content, ContentBox } from 'src/css/styled-components/Content';
 import { sx } from './StudentNumPerItem';
@@ -11,6 +11,7 @@ const data = {
 export default function MileageTotalCompareChart() {
   return (
     <Box sx={sx}>
+      {/* <Chip label="" color="primary" /> */}
       {/* <Chip label="" color="primary" /> */}
       <LineChart
         series={[

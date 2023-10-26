@@ -4,7 +4,7 @@ export const dateConverter = (date: string) => {
   const month = dateObj.getMonth() + 1;
   const day = dateObj.getDate();
   const hour = dateObj.getHours();
-  const minute = dateObj.getMinutes();
-  const second = dateObj.getSeconds();
+  //   const minute = dateObj.getMinutes();
+  //   const second = dateObj.getSeconds();
   return `${year}년 ${month}월 ${day}일 ${hour}시`;
 };

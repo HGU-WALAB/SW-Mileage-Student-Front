@@ -2,17 +2,11 @@
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 // components
 import { useSettingsContext } from 'src/components/settings';
 import { ResponsiveRadar } from '@nivo/radar';
-import { Button, Paper, TextField } from '@mui/material';
 import { IStudentInfo } from 'src/apis/Profile';
 import ProfileLottie from 'src/components/profile/ProfileLottie';
-import FunctionButton from 'src/components/common/FunctionButton';
-import CancelButton from 'src/components/common/CancelButton';
-import { Controller, useForm } from 'react-hook-form';
-import ProfileEditCancelButton from 'src/components/profile/ProfileEditCancelButton';
 import React from 'react';
 import TypoWithEdit from 'src/components/profile/TypoWithEdit';
 import { Title } from 'src/css/styled-components/Title';
@@ -128,7 +122,6 @@ export default function FourView() {
   //   },
   // });
 
-  const [isEditing, setIsEditing] = React.useState(false);
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Layout>
