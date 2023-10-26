@@ -5,6 +5,9 @@ import { useRecoilValue } from 'recoil';
 import { semesterState } from 'src/utils/atom';
 
 export default function MyMileageTable() {
+
+  
+
   const semester = useRecoilValue(semesterState);
 
   interface IGetMyMileage {
