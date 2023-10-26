@@ -4,12 +4,14 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useRecoilState } from 'recoil';
+import { semesterState } from 'src/utils/atom';
 
 interface IProps {
   semesters: string[];
 }
 export default function SemesterDropdown({ semesters }: IProps) {
-  const [semester, setSemester] = React.useState('');
+  const [semester, setSemester] = useRecoilState(semesterState);
 
   const handleChange = (event: SelectChangeEvent) => {
     setSemester(event.target.value as string);

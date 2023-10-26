@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
+import { useRecoilValue } from 'recoil';
+import { semesterState } from 'src/utils/atom';
 
 export default function MyMileageTable() {
+  const semester = useRecoilValue(semesterState);
+
   //   const { data } = useDemoData({
   //     dataSet: 'Commodity',
   //     rowLength: 5,
