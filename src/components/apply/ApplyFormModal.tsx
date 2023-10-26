@@ -12,15 +12,14 @@ import CancelButton from '../common/CancelButton';
 
 const Title = styled(Chip)({
   fontSize: '25px',
-  px: '20px',
-  py: '20px',
+  padding: '20px',
   borderRadius: '0',
 });
 
 const MileageEA = styled(Chip)({
-  fontSize: '18px',
-  px: '18px',
-  py: '18px',
+  fontSize: '15px',
+  padding: '15px 5px',
+
   borderRadius: '0',
 });
 
