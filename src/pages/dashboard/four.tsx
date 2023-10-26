@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <>
       <Helmet>
-        <title> Dashboard: Four</title>
+        <title>프로필</title>
       </Helmet>
 
       <FourView />

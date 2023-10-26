@@ -5,6 +5,12 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 // components
 import { useSettingsContext } from 'src/components/settings';
+import { Button, Modal } from '@mui/material';
+import TermsOfUse from 'src/components/apply/TermsOfUse';
+import React from 'react';
+import { useRecoilState } from 'recoil';
+import { IsShowStudentApplyModalState } from 'src/utils/atom';
+import ApplyFormModal from 'src/components/apply/ApplyFormModal';
 
 // ----------------------------------------------------------------------
 
@@ -13,18 +19,9 @@ export default function OneView() {
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
-      <Typography variant="h4"> Page One </Typography>
-
-      <Box
-        sx={{
-          mt: 5,
-          width: 1,
-          height: 320,
-          borderRadius: 2,
-          bgcolor: (theme) => alpha(theme.palette.grey[500], 0.04),
-          border: (theme) => `dashed 1px ${theme.palette.divider}`,
-        }}
-      />
+      <Typography variant="h4"> 마일리지 신청 </Typography>
+      <TermsOfUse thisSemesterItemNum={7} />
+      <ApplyFormModal thisSemesterItemNum={7} />
     </Container>
   );
 }
