@@ -1,10 +1,10 @@
 export interface IStudentInfo {
   name: string;
   sid: string;
-  deptname: string;
-  grade: number;
-  semester: number;
+  department: string;
+  year: number;
+  semesterCount: number;
   major1: string;
   major2: string;
-  isEnrolled: boolean;
+  isEnrolled: string;
 }

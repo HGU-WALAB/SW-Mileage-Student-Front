@@ -55,20 +55,20 @@ export default function FourView() {
   const studentInfo: IStudentInfo = {
     name: '오인혁',
     sid: '21800446',
-    grade: 4,
-    semester: 8,
-    deptname: '전산전자공학부',
+    year: 4,
+    semesterCount: 8,
+    department: '전산전자공학부',
     major1: '컴퓨터공학',
     major2: '컴퓨터공학',
-    isEnrolled: true,
+    isEnrolled: '재학 중',
   };
 
   type StudentField =
     | 'name'
     | 'sid'
-    | 'grade'
-    | 'semester'
-    | 'deptname'
+    | 'year'
+    | 'semesterCount'
+    | 'department'
     | 'major1'
     | 'major2'
     | 'isEnrolled';
@@ -79,11 +79,11 @@ export default function FourView() {
         return '이름';
       case 'sid':
         return '학번';
-      case 'grade':
+      case 'year':
         return '학년';
-      case 'semester':
+      case 'semesterCount':
         return '학기';
-      case 'deptname':
+      case 'department':
         return '학부';
       case 'major1':
         return '전공1';
@@ -113,18 +113,18 @@ export default function FourView() {
   //   },
   // });
 
-  const { handleSubmit, watch, setValue, getValues, control } = useForm({
-    defaultValues: {
-      name: '오인혁',
-      sid: '21800446',
-      grade: '4',
-      semester: '8',
-      deptname: '전산전자공학부',
-      major1: '컴퓨터공학',
-      major2: '컴퓨터공학',
-      isEnrolled: 'true',
-    },
-  });
+  // const { handleSubmit, watch, setValue, getValues, control } = useForm({
+  //   defaultValues: {
+  //     name: '오인혁',
+  //     sid: '21800446',
+  //     year: '4',
+  //     semesterCount: '8',
+  //     department: '전산전자공학부',
+  //     major1: '컴퓨터공학',
+  //     major2: '컴퓨터공학',
+  //     isEnrolled: 'true',
+  //   },
+  // });
 
   const [isEditing, setIsEditing] = React.useState(false);
   return (
@@ -135,7 +135,7 @@ export default function FourView() {
         sx={{
           mt: 5,
           width: 1,
-          height: 500,
+          height: 400,
           borderRadius: 2,
           bgcolor: (theme) => alpha(theme.palette.grey[500], 0.04),
           border: (theme) => `dashed 1px ${theme.palette.divider}`,
@@ -155,20 +155,27 @@ export default function FourView() {
 
           <Box
             sx={{
-              maxWidth: '600px',
+              maxWidth: '500px',
               display: 'grid',
               gap: '30px',
               gridTemplateColumns: 'repeat(2, 1fr)',
             }}
           >
-            <TypoWithEdit name="오인혁" fieldName="이름" />
-            <TypoWithEdit name="21800446" fieldName="학번" />
+            {Object.entries(studentInfo).map(([key, value], index) => (
+              <TypoWithEdit
+                key={index}
+                name={value}
+                fieldName={studentFieldEng2Kor(key as StudentField)}
+              />
+            ))}
+
+            {/* <TypoWithEdit name="21800446" fieldName="학번" />
             <TypoWithEdit name="4학년" fieldName="학년" />
             <TypoWithEdit name="8학기" fieldName="학기" />
             <TypoWithEdit name="전산전자공학부" fieldName="학부" />
             <TypoWithEdit name="컴퓨터공학" fieldName="전공1" />
             <TypoWithEdit name="컴퓨터공학" fieldName="전공2" />
-            <TypoWithEdit name="재학 중" fieldName="재학여부" />
+            <TypoWithEdit name="재학 중" fieldName="재학여부" /> */}
             {/* {Object.entries(studentInfo).map(([key, value], index) => (
               <Box
                 sx={{ fontSize: '18px', display: 'flex', gap: '20px', minWidth: '180px' }}
@@ -181,7 +188,7 @@ export default function FourView() {
           </Box>
         </Box>
 
-        <ProfileEditCancelButton isEditing={isEditing} setIsEditing={setIsEditing} />
+        {/* <ProfileEditCancelButton isEditing={isEditing} setIsEditing={setIsEditing} /> */}
       </Box>
 
       <Box sx={{ width: '500px', height: '500px' }}>
