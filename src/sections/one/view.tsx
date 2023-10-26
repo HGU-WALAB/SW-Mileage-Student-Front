@@ -8,20 +8,20 @@ import { useSettingsContext } from 'src/components/settings';
 import { Button, Modal } from '@mui/material';
 import TermsOfUse from 'src/components/apply/TermsOfUse';
 import React from 'react';
+import { useRecoilState } from 'recoil';
+import { IsShowStudentApplyModalState } from 'src/utils/atom';
+import ApplyFormModal from 'src/components/apply/ApplyFormModal';
 
 // ----------------------------------------------------------------------
 
 export default function OneView() {
   const settings = useSettingsContext();
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Typography variant="h4"> 마일리지 신청 </Typography>
       <TermsOfUse thisSemesterItemNum={7} />
+      <ApplyFormModal thisSemesterItemNum={7} />
     </Container>
   );
 }

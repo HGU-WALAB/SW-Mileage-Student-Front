@@ -5,8 +5,8 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useSpring, animated } from '@react-spring/web';
-import { useRecoilValue } from 'recoil';
-import { userState } from 'src/utils/atom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { IsShowStudentApplyModalState, userState } from 'src/utils/atom';
 import { styled } from '@mui/material';
 import TermsCheckbox from './TermsCheckBox';
 import FunctionButton from '../common/FunctionButton';
@@ -84,6 +84,7 @@ interface IProps {
 
 export default function TermsOfUse({ thisSemesterItemNum }: IProps) {
   const userInfo = useRecoilValue(userState);
+  const setIsShowApplyModal = useSetRecoilState(IsShowStudentApplyModalState);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -91,8 +92,9 @@ export default function TermsOfUse({ thisSemesterItemNum }: IProps) {
 
   const [checked, setChecked] = React.useState(false);
 
-  const handleApply = () => {
-    console.log('신청하기');
+  const handleApply = async () => {
+    await handleClose();
+    setIsShowApplyModal(true);
   };
   return (
     <div>

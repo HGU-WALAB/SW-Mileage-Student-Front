@@ -17,3 +17,8 @@ export const userState = atom({
     sid: '2018000',
   },
 });
+
+export const IsShowStudentApplyModalState = atom({
+  key: 'IsShowStudentApplyModalState', // unique ID (with respect to other atoms/selectors)
+  default: false,
+});
