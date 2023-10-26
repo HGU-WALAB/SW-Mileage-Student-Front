@@ -1,6 +1,6 @@
 import { BarChart } from '@mui/x-charts';
 import React from 'react';
-import { Box, Chip } from '@mui/material';
+import { Box } from '@mui/material';
 import { sx } from './StudentNumPerItem';
 
 const myNum = '3';

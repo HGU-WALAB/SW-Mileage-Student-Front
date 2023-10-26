@@ -1,6 +1,5 @@
 // @mui
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 // components
 import { useSettingsContext } from 'src/components/settings';
 import MyMileageTable from 'src/components/dashboard/MyMileageTable';
