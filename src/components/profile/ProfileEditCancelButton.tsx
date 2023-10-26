@@ -28,7 +28,7 @@ export default function ProfileEditCancelButton({ isEditing, setIsEditing }: IPr
         display: 'flex',
         justifyContent: 'end',
         gap: '20px',
-        px: '20px',
+        px: '30px',
       }}
     >
       <FunctionButton

@@ -6,14 +6,15 @@ import Typography from '@mui/material/Typography';
 // components
 import { useSettingsContext } from 'src/components/settings';
 import { ResponsiveRadar } from '@nivo/radar';
-import { Button, Paper } from '@mui/material';
+import { Button, Paper, TextField } from '@mui/material';
 import { IStudentInfo } from 'src/apis/Profile';
 import ProfileLottie from 'src/components/profile/ProfileLottie';
 import FunctionButton from 'src/components/common/FunctionButton';
 import CancelButton from 'src/components/common/CancelButton';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import ProfileEditCancelButton from 'src/components/profile/ProfileEditCancelButton';
 import React from 'react';
+import TypoWithEdit from 'src/components/profile/TypoWithEdit';
 
 // ----------------------------------------------------------------------
 const data = [
@@ -146,27 +147,37 @@ export default function FourView() {
           sx={{
             display: 'flex',
             alignItems: 'center',
+            px: '30px',
+            gap: '30px',
           }}
         >
           <ProfileLottie />
 
           <Box
             sx={{
-              width: '100%',
+              maxWidth: '600px',
               display: 'grid',
               gap: '30px',
               gridTemplateColumns: 'repeat(2, 1fr)',
             }}
           >
-            {Object.entries(studentInfo).map(([key, value], index) => (
+            <TypoWithEdit name="오인혁" fieldName="이름" />
+            <TypoWithEdit name="21800446" fieldName="학번" />
+            <TypoWithEdit name="4학년" fieldName="학년" />
+            <TypoWithEdit name="8학기" fieldName="학기" />
+            <TypoWithEdit name="전산전자공학부" fieldName="학부" />
+            <TypoWithEdit name="컴퓨터공학" fieldName="전공1" />
+            <TypoWithEdit name="컴퓨터공학" fieldName="전공2" />
+            <TypoWithEdit name="재학 중" fieldName="재학여부" />
+            {/* {Object.entries(studentInfo).map(([key, value], index) => (
               <Box
                 sx={{ fontSize: '18px', display: 'flex', gap: '20px', minWidth: '180px' }}
                 key={index}
               >
                 <Box sx={{ fontWeight: 'bold' }}>{studentFieldEng2Kor(key as StudentField)}</Box>{' '}
-                {value}
+                <Box sx={{ fontWeight: 'bold', color: 'gray' }}>{value}</Box>
               </Box>
-            ))}
+            ))} */}
           </Box>
         </Box>
 

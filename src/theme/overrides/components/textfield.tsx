@@ -8,7 +8,7 @@ import { outlinedInputClasses } from '@mui/material/OutlinedInput';
 
 export function textField(theme: Theme) {
   const color = {
-    focused: theme.palette.text.primary,
+    // focused: theme.palette.text.primary,
     active: theme.palette.text.secondary,
     placeholder: theme.palette.text.disabled,
   };
@@ -38,9 +38,9 @@ export function textField(theme: Theme) {
             ...font.label,
             fontWeight: 600,
             color: color.active,
-            [`&.${inputLabelClasses.focused}`]: {
-              color: color.focused,
-            },
+            // [`&.${inputLabelClasses.focused}`]: {
+            //   color: color.focused,
+            // },
             [`&.${inputLabelClasses.error}`]: {
               color: theme.palette.error.main,
             },
@@ -82,9 +82,9 @@ export function textField(theme: Theme) {
           '&:before': {
             borderBottomColor: alpha(theme.palette.grey[500], 0.32),
           },
-          '&:after': {
-            borderBottomColor: color.focused,
-          },
+          // '&:after': {
+          //   borderBottomColor: color.focused,
+          // },
         },
       },
     },
@@ -93,11 +93,11 @@ export function textField(theme: Theme) {
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          [`&.${outlinedInputClasses.focused}`]: {
-            [`& .${outlinedInputClasses.notchedOutline}`]: {
-              borderColor: color.focused,
-            },
-          },
+          // [`&.${outlinedInputClasses.focused}`]: {
+          //   [`& .${outlinedInputClasses.notchedOutline}`]: {
+          //     borderColor: color.focused,
+          //   },
+          // },
           [`&.${outlinedInputClasses.error}`]: {
             [`& .${outlinedInputClasses.notchedOutline}`]: {
               borderColor: theme.palette.error.main,
@@ -127,9 +127,9 @@ export function textField(theme: Theme) {
           '&:hover': {
             backgroundColor: alpha(theme.palette.grey[500], 0.16),
           },
-          [`&.${filledInputClasses.focused}`]: {
-            backgroundColor: alpha(theme.palette.grey[500], 0.16),
-          },
+          // [`&.${filledInputClasses.focused}`]: {
+          //   backgroundColor: alpha(theme.palette.grey[500], 0.16),
+          // },
           [`&.${filledInputClasses.error}`]: {
             backgroundColor: alpha(theme.palette.error.main, 0.08),
             [`&.${filledInputClasses.focused}`]: {
