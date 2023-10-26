@@ -5,9 +5,6 @@ import { useRecoilValue } from 'recoil';
 import { semesterState } from 'src/utils/atom';
 
 export default function MyMileageTable() {
-
-  
-
   const semester = useRecoilValue(semesterState);
 
   interface IGetMyMileage {
@@ -92,15 +89,15 @@ export default function MyMileageTable() {
   }
 
   return (
-    <Box sx={{ width: '100%', maxHeight: '700px', py: '50px', overflowY: 'scroll' }}>
-      {contents.list.map((ItemNcategory) => (
-        <>
+    <Box sx={{ width: '100%', maxHeight: '700px', overflowY: 'scroll' }}>
+      {contents.list.map((ItemNcategory, index) => (
+        <Box key={index}>
           <Typography variant="h6" sx={{ color: 'gray' }}>
-            {ItemNcategory.category}
+            {index + 1}. {ItemNcategory.category}
           </Typography>
           <Box sx={{ height: '20px' }} />
           <DataGrid {...makeData(ItemNcategory)} />
-        </>
+        </Box>
       ))}
     </Box>
   );

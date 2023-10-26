@@ -22,7 +22,6 @@ const xLabels = [
 export default function StudentNumPerItem() {
   return (
     <Box sx={sx}>
-      <Chip label="항목 별 등록된 학생 수" color="primary" />
       <LineChart
         width={1000}
         height={400}

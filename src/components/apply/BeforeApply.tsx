@@ -131,7 +131,7 @@ export default function BeforeApply() {
         </TableHead>
         <TableBody>
           {rows.map((row, idx) => (
-            <StyledTableRow key={idx}>
+            <StyledTableRow sx={{ backgroundColor: '#EEEEEE' }} key={idx}>
               <StyledTableCell component="th" scope="row">
                 {row.id}
               </StyledTableCell>

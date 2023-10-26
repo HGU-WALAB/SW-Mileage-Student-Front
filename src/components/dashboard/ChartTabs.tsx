@@ -50,7 +50,9 @@ export default function ChartTabs() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Box
+        sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex', justifyContent: 'center' }}
+      >
         <Tabs
           value={value}
           onChange={handleChange}
@@ -73,7 +75,6 @@ export default function ChartTabs() {
       <CustomTabPanel value={value} index={2}>
         <StudentNumPerItem />
       </CustomTabPanel>
-
       <CustomTabPanel value={value} index={3}>
         <PointPerItem />
       </CustomTabPanel>
