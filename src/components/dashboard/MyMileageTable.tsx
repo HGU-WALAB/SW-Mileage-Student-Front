@@ -7,17 +7,12 @@ import { semesterState } from 'src/utils/atom';
 export default function MyMileageTable() {
   const semester = useRecoilValue(semesterState);
 
-  //   const { data } = useDemoData({
-  //     dataSet: 'Commodity',
-  //     rowLength: 5,
-  //     maxColumns: 6,
-  //   });
-
   interface IGetMyMileage {
     list: IItemsBySemester[];
   }
   interface IItemsBySemester {
     category: string;
+    status: string; // 마일리지 진행 상태
     items: IMyItem[];
   }
 
@@ -32,6 +27,7 @@ export default function MyMileageTable() {
     list: [
       {
         category: '교과 - 전공활동',
+        status: '진행중',
         items: [
           {
             id: 1,
@@ -49,6 +45,7 @@ export default function MyMileageTable() {
       },
       {
         category: '교과 - 캡스톤',
+        status: '완료',
         items: [
           {
             id: 3,
@@ -84,11 +81,6 @@ export default function MyMileageTable() {
     },
   ];
 
-  // const data = {
-  //   columns: DataGripHeaderData,
-  //   rows: contents.list.map((ItemNcategory) => ItemNcategory.items).flat(),
-  // };
-
   function makeData(ItemNcategory: IItemsBySemester) {
     return {
       columns: DataGripHeaderData,
@@ -97,10 +89,12 @@ export default function MyMileageTable() {
   }
 
   return (
-    <Box sx={{ width: '100%', maxHeight: '700px', py: '50px' }}>
+    <Box sx={{ width: '100%', maxHeight: '700px', py: '50px', overflowY: 'scroll' }}>
       {contents.list.map((ItemNcategory) => (
         <>
-          <Typography variant="h5">{ItemNcategory.category}</Typography>
+          <Typography variant="h6" sx={{ color: 'gray' }}>
+            {ItemNcategory.category}
+          </Typography>
           <Box sx={{ height: '20px' }} />
           <DataGrid {...makeData(ItemNcategory)} />
         </>
