@@ -40,31 +40,31 @@ export default function App() {
   const queryClient = new QueryClient(); // 생성
 
   return (
-    <AuthProvider>
-      <RecoilRoot>
-        <QueryClientProvider client={queryClient}>
-          <SettingsProvider
-            defaultSettings={{
-              themeMode: 'light', // 'light' | 'dark'
-              themeDirection: 'ltr', //  'rtl' | 'ltr'
-              themeContrast: 'default', // 'default' | 'bold'
-              themeLayout: 'vertical', // 'vertical' | 'horizontal' | 'mini'
-              themeColorPresets: 'default', // 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red'
-              themeStretch: false,
-            }}
-          >
-            <ThemeProvider>
-              <MotionLazy>
-                <SettingsDrawer />
-                <ProgressBar />
-                <AuthConsumer>
-                  <Router />
-                </AuthConsumer>
-              </MotionLazy>
-            </ThemeProvider>
-          </SettingsProvider>
-        </QueryClientProvider>
-      </RecoilRoot>
-    </AuthProvider>
+    // <AuthProvider>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <SettingsProvider
+          defaultSettings={{
+            themeMode: 'light', // 'light' | 'dark'
+            themeDirection: 'ltr', //  'rtl' | 'ltr'
+            themeContrast: 'default', // 'default' | 'bold'
+            themeLayout: 'vertical', // 'vertical' | 'horizontal' | 'mini'
+            themeColorPresets: 'default', // 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red'
+            themeStretch: false,
+          }}
+        >
+          <ThemeProvider>
+            <MotionLazy>
+              <SettingsDrawer />
+              <ProgressBar />
+              <AuthConsumer>
+                <Router />
+              </AuthConsumer>
+            </MotionLazy>
+          </ThemeProvider>
+        </SettingsProvider>
+      </QueryClientProvider>
+    </RecoilRoot>
+    // </AuthProvider>
   );
 }
