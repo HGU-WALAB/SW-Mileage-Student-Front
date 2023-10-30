@@ -1,4 +1,5 @@
 export interface IStudentInfo {
+  id: number;
   name: string;
   sid: string;
   department: string;
@@ -6,5 +7,4 @@ export interface IStudentInfo {
   semesterCount: number;
   major1: string;
   major2: string;
-  isEnrolled: string;
 }

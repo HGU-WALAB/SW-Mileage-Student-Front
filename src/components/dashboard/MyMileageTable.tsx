@@ -1,8 +1,49 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box, Typography } from '@mui/material';
+import {
+  IMileageSemesterWithStatus,
+  getMyMileageBySemester,
+  getSemestersWithStatus,
+} from 'src/apis/mileage';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { semesterWithStatusState } from 'src/utils/atom';
+import { useQuery } from '@tanstack/react-query';
 
 export default function MyMileageTable() {
+  const [semesterWithStatus, setSemesterWithStatus] = useRecoilState(semesterWithStatusState);
+
+  const [updatedAt, setUpdatedAt] = React.useState(0);
+
+  const { data, dataUpdatedAt } = useQuery<IGetMyMileage>({
+    queryKey: ['semestersWithStatus'],
+    queryFn: async () => {
+      if (semesterWithStatus.semester !== '학기 미정') {
+        const response = await getMyMileageBySemester(semesterWithStatus.semester);
+
+        return response.data;
+      }
+      return { list: [] };
+    },
+  });
+
+  React.useEffect(() => {
+    if (dataUpdatedAt > updatedAt) {
+      setUpdatedAt(dataUpdatedAt);
+    }
+  }, [updatedAt, dataUpdatedAt]);
+
+  React.useEffect(() => {
+    const asyncFetch = async () => {
+      if (semesterWithStatus.semester === '학기 미정') {
+        return;
+      }
+      getMyMileageBySemester(semesterWithStatus.semester).then((response) => {
+        console.log(response.data as IGetMyMileage);
+      });
+    };
+    asyncFetch();
+  }, [semesterWithStatus]);
   // const semester = useRecoilValue(semesterState);
 
   interface IGetMyMileage {
@@ -88,7 +129,7 @@ export default function MyMileageTable() {
 
   return (
     <Box sx={{ width: '100%', maxHeight: '700px', overflowY: 'scroll' }}>
-      {contents.list.map((ItemNcategory, index) => (
+      {data?.list.map((ItemNcategory, index) => (
         <Box key={index}>
           <Typography variant="h6" sx={{ color: 'gray' }}>
             {index + 1}. {ItemNcategory.category}
