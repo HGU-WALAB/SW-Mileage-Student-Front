@@ -18,7 +18,7 @@ import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { SettingsProvider, SettingsDrawer } from 'src/components/settings';
 // auth
 import { AuthProvider, AuthConsumer } from 'src/auth/context/jwt';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider, useQueryClient } from '@tanstack/react-query';
 import { RecoilRoot } from 'recoil';
 // ----------------------------------------------------------------------
 
@@ -34,15 +34,14 @@ export default function App() {
   `;
 
   console.info(`%c${charAt}`, 'color: #5BE49B');
+  const queryClient = new QueryClient();
 
   useScrollToTop();
 
-  const queryClient = new QueryClient(); // 생성
-
   return (
     // <AuthProvider>
-    <RecoilRoot>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
         <SettingsProvider
           defaultSettings={{
             themeMode: 'light', // 'light' | 'dark'
@@ -63,8 +62,8 @@ export default function App() {
             </MotionLazy>
           </ThemeProvider>
         </SettingsProvider>
-      </QueryClientProvider>
-    </RecoilRoot>
-    // </AuthProvider>
+      </RecoilRoot>
+      {/* </AuthProvider> */}
+    </QueryClientProvider>
   );
 }

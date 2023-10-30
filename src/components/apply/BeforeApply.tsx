@@ -130,7 +130,6 @@ const makeData = (applyRecords: IGetMileageApplyRecords) => {
 // const rows = makeData(data);
 
 export default function BeforeApply() {
-  // const [data , setData] = React.useState<IGetMileageApplyRecords | {}>({});
   const [rows, setRows] = React.useState();
 
   const [updatedAt, setUpdatedAt] = React.useState(0);

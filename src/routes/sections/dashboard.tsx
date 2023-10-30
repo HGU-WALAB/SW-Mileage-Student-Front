@@ -29,7 +29,10 @@ export const dashboardRoutes = [
       </DashboardLayout>
     ),
     children: [
-      { element: <IndexPage />, index: true },
+      {
+        element: <IndexPage />,
+        index: true,
+      },
       { path: 'two', element: <PageTwo /> },
       { path: 'three', element: <PageThree /> },
       {
