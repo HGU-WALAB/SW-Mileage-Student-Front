@@ -3,22 +3,22 @@ import { DataGrid } from '@mui/x-data-grid';
 import { Box, Typography } from '@mui/material';
 import { getMyMileageBySemester, getSemestersWithStatus } from 'src/apis/mileage';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { semesterState } from 'src/utils/atom';
+import { semesterWithStatusState } from 'src/utils/atom';
 
 export default function MyMileageTable() {
-  const [semester, setSemester] = useRecoilState(semesterState);
+  const [semesterWithStatus, setSemesterWithStatus] = useRecoilState(semesterWithStatusState);
 
   React.useEffect(() => {
     const asyncFetch = async () => {
-      if (semester === '학기 미정') {
+      if (semesterWithStatus.semester === '학기 미정') {
         return;
       }
-      getMyMileageBySemester(semester).then((response) => {
+      getMyMileageBySemester(semesterWithStatus.semester).then((response) => {
         console.log(response);
       });
     };
     asyncFetch();
-  }, [semester]);
+  }, [semesterWithStatus]);
   // const semester = useRecoilValue(semesterState);
 
   interface IGetMyMileage {
