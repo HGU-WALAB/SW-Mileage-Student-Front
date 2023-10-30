@@ -10,7 +10,7 @@ export default function MyMileageTable() {
 
   React.useEffect(() => {
     const asyncFetch = async () => {
-      if (semester === '학기') {
+      if (semester === '학기 미정') {
         return;
       }
       getMyMileageBySemester(semester).then((response) => {

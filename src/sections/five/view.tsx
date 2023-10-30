@@ -18,13 +18,16 @@ export default function FiveView() {
   const semester = useRecoilValue(semesterState);
   const status = useRecoilValue(mileageStatusState);
   const settings = useSettingsContext();
-  const [semesters, setSemesters] = useState<string[]>([]);
+  const [semesters, setSemesters] = useState<string[]>(['학기 미정']);
 
   useEffect(() => {
     const asyncFetch = async () => {
       const res = await getSemestersWithStatus();
       console.log(res.data);
-      // await setSemesters([...res.data.list.map((e: IMileageSemesterWithStatus) => e.semester)]);
+      setSemesters([
+        '학기 미정',
+        ...res.data.list.map((e: IMileageSemesterWithStatus) => e.semester),
+      ]);
     };
     asyncFetch();
   }, []);
