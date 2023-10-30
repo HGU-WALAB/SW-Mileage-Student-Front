@@ -24,10 +24,14 @@ import { useAuthContext } from 'src/auth/hooks';
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import { IPostStudentLoginData, studentLogin } from 'src/apis/user';
+import { useSetRecoilState } from 'recoil';
+import { userState } from 'src/utils/atom';
 
 // ----------------------------------------------------------------------
 
 export default function JwtLoginView() {
+  const setUserInfo = useSetRecoilState(userState);
+
   const { login } = useAuthContext();
 
   const router = useRouter();
@@ -68,12 +72,12 @@ export default function JwtLoginView() {
         password: data.password,
       };
 
-      await studentLogin(loginData).then((res) =>
-        localStorage.setItem(
-          'accessToken',
-          (res.config.headers.Authorization as string).split('Bearer ')[1]
-        )
-      );
+      await studentLogin(loginData).then((res) => {
+        localStorage.setItem('accessToken', res.data.token);
+        console.log(res);
+        // console.log({ name: res.data.name, sid: res.data.sid });
+        setUserInfo({ name: res.data.name, sid: res.data.sid });
+      });
 
       // await login?.(data.email, data.password);
 

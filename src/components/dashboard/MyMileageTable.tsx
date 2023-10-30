@@ -1,8 +1,24 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box, Typography } from '@mui/material';
+import { getMyMileageBySemester, getSemestersWithStatus } from 'src/apis/mileage';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { semesterState } from 'src/utils/atom';
 
 export default function MyMileageTable() {
+  const [semester, setSemester] = useRecoilState(semesterState);
+
+  React.useEffect(() => {
+    const asyncFetch = async () => {
+      if (semester === '학기') {
+        return;
+      }
+      getMyMileageBySemester(semester).then((response) => {
+        console.log(response);
+      });
+    };
+    asyncFetch();
+  }, [semester]);
   // const semester = useRecoilValue(semesterState);
 
   interface IGetMyMileage {

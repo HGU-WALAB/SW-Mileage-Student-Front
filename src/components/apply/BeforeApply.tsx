@@ -20,6 +20,8 @@ import {
 } from 'react-icons/pi';
 import { dateConverter } from 'src/utils/converter/dateConverter';
 import { Typography } from '@mui/material';
+import { getSemestersWithStatus } from 'src/apis/mileage';
+import { useQuery } from '@tanstack/react-query';
 
 const IconList = (idx: number) => {
   switch ((idx % 10) + 1) {
@@ -68,6 +70,18 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 type IStatus = '선정 완료' | '신청 완료' | '신청 가능' | '신청 기간 아님';
 
+interface IRow {
+  id: React.ReactNode;
+  semester: string;
+  applyStart: string;
+  applyEnd: string;
+  status: IStatus;
+}
+
+interface IRows {
+  list: IRow[];
+}
+
 function createData(
   id: React.ReactNode,
   semester: string,
@@ -89,22 +103,22 @@ interface IMileageApplyRecord {
   applyEnd: string;
 }
 
-const data: IGetMileageApplyRecords = {
-  list: [
-    {
-      semester: '2022-01',
-      status: '신청 완료',
-      applyStart: '2021-09-01T00:00',
-      applyEnd: '2021-09-30T00:00',
-    },
-    {
-      semester: '2022-02',
-      status: '신청 가능',
-      applyStart: '2021-09-01T00:00',
-      applyEnd: '2021-09-30T00:00',
-    },
-  ],
-};
+// const data: IGetMileageApplyRecords = {
+//   list: [
+//     {
+//       semester: '2022-01',
+//       status: '신청 완료',
+//       applyStart: '2021-09-01T00:00',
+//       applyEnd: '2021-09-30T00:00',
+//     },
+//     {
+//       semester: '2022-02',
+//       status: '신청 가능',
+//       applyStart: '2021-09-01T00:00',
+//       applyEnd: '2021-09-30T00:00',
+//     },
+//   ],
+// };
 
 const makeData = (applyRecords: IGetMileageApplyRecords) => {
   const result = applyRecords.list.map((item, idx: number) =>
@@ -113,9 +127,19 @@ const makeData = (applyRecords: IGetMileageApplyRecords) => {
   return result;
 };
 
-const rows = makeData(data);
+// const rows = makeData(data);
 
 export default function BeforeApply() {
+  // const [data , setData] = React.useState<IGetMileageApplyRecords | {}>({});
+  const [rows, setRows] = React.useState();
+
+  React.useEffect(() => {
+    getSemestersWithStatus().then((res) => {
+      console.log(res);
+      setRows(makeData(res.data as IGetMileageApplyRecords) as any);
+    });
+  }, []);
+
   return (
     <TableContainer sx={{ width: '700px' }} component={Paper}>
       <Table aria-label="customized table">
@@ -129,7 +153,7 @@ export default function BeforeApply() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, idx) => (
+          {(rows as any)?.map((row: IRow, idx: number) => (
             <StyledTableRow sx={{ backgroundColor: '#EEEEEE' }} key={idx}>
               <StyledTableCell component="th" scope="row">
                 {row.id}

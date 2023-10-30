@@ -4,12 +4,14 @@ import Container from '@mui/material/Container';
 // components
 import { useSettingsContext } from 'src/components/settings';
 import TermsOfUse from 'src/components/apply/TermsOfUse';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ApplyFormModal from 'src/components/apply/ApplyFormModal';
 import BeforeApply from 'src/components/apply/BeforeApply';
 import { Title } from 'src/css/styled-components/Title';
 import { Layout } from 'src/css/styled-components/Layout';
 import { Content, ContentBox } from 'src/css/styled-components/Content';
+import { useQuery } from 'react-query';
+import { getSemestersWithStatus } from 'src/apis/mileage';
 
 // ----------------------------------------------------------------------
 

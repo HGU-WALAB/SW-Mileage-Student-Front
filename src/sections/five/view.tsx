@@ -9,6 +9,8 @@ import { useRecoilValue } from 'recoil';
 import { mileageStatusState, semesterState } from 'src/utils/atom';
 import { Layout } from 'src/css/styled-components/Layout';
 import { Title } from 'src/css/styled-components/Title';
+import { IMileageSemesterWithStatus, getSemestersWithStatus } from 'src/apis/mileage';
+import { useEffect, useState } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -16,8 +18,16 @@ export default function FiveView() {
   const semester = useRecoilValue(semesterState);
   const status = useRecoilValue(mileageStatusState);
   const settings = useSettingsContext();
+  const [semesters, setSemesters] = useState<string[]>([]);
 
-  const semesters = ['2022-01', '2022-02', '2023-01', '2023-02'];
+  useEffect(() => {
+    const asyncFetch = async () => {
+      const res = await getSemestersWithStatus();
+      console.log(res.data);
+      // await setSemesters([...res.data.list.map((e: IMileageSemesterWithStatus) => e.semester)]);
+    };
+    asyncFetch();
+  }, []);
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
