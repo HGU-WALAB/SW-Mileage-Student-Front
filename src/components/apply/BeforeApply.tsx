@@ -133,12 +133,24 @@ export default function BeforeApply() {
   // const [data , setData] = React.useState<IGetMileageApplyRecords | {}>({});
   const [rows, setRows] = React.useState();
 
+  const [updatedAt, setUpdatedAt] = React.useState(0);
+
+  const { data, dataUpdatedAt } = useQuery<IGetMileageApplyRecords>({
+    queryKey: ['mileageApplyRecords'],
+    queryFn: async () => {
+      const response = await getSemestersWithStatus();
+
+      setRows(makeData(response.data as IGetMileageApplyRecords) as any);
+
+      return response.data;
+    },
+  });
+
   React.useEffect(() => {
-    getSemestersWithStatus().then((res) => {
-      console.log(res);
-      setRows(makeData(res.data as IGetMileageApplyRecords) as any);
-    });
-  }, []);
+    if (dataUpdatedAt > updatedAt) {
+      setUpdatedAt(dataUpdatedAt);
+    }
+  }, [updatedAt, dataUpdatedAt]);
 
   return (
     <TableContainer sx={{ width: '700px' }} component={Paper}>
