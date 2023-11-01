@@ -20,7 +20,7 @@ export interface IGetMileageSemestersWithStatuses {
 }
 
 export interface IMileageSemesterWithStatus {
-  semester: string;
+  name: string;
   status: string;
   applyStart: string;
   applyEnd: string;

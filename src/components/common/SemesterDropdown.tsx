@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { semesterWithStatusState } from 'src/utils/atom';
 
 interface ISemesterWithStatus {
-  semester: string;
+  name: string;
   status: string;
 }
 
@@ -20,10 +20,10 @@ export default function SemesterDropdown({ semestersWithStatus }: IProps) {
   const [semesterWithStatus, setSemesterWithStatus] = useRecoilState(semesterWithStatusState);
 
   const handleChange = (event: SelectChangeEvent) => {
-    const selectedSemester = semestersWithStatus.find((s) => s.semester === event.target.value);
-
+    const selectedSemester = semestersWithStatus.find((s) => s?.name === event.target.value);
+    console.log(selectedSemester);
     if (selectedSemester) {
-      setSemesterWithStatus(selectedSemester);
+      setSemesterWithStatus(selectedSemester as ISemesterWithStatus);
     }
   };
 
@@ -34,13 +34,13 @@ export default function SemesterDropdown({ semestersWithStatus }: IProps) {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={semesterWithStatus.semester}
+          value={semesterWithStatus.name}
           label="학기"
           onChange={handleChange} // 이벤트 핸들러를 직접 전달합니다.
         >
-          {semestersWithStatus.map((s: ISemesterWithStatus, index: number) => (
-            <MenuItem key={index} value={s.semester}>
-              {s.semester} - {s.status}
+          {semestersWithStatus?.map((s: ISemesterWithStatus, index: number) => (
+            <MenuItem key={index} value={s?.name}>
+              {s?.name} - {s?.status}
             </MenuItem>
           ))}
         </Select>
