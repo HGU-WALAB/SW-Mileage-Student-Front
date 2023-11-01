@@ -11,6 +11,8 @@ import React from 'react';
 import TypoWithEdit from 'src/components/profile/TypoWithEdit';
 import { Title } from 'src/css/styled-components/Title';
 import { Layout } from 'src/css/styled-components/Layout';
+import { useQuery } from '@tanstack/react-query';
+import { getStudentProfile } from 'src/apis/user';
 
 // ----------------------------------------------------------------------
 const data = [
@@ -46,18 +48,34 @@ const data = [
   },
 ];
 export default function FourView() {
+  const [updatedAt, setUpdatedAt] = React.useState(0);
+
+  const { data: studentInfo, dataUpdatedAt } = useQuery<IStudentInfo>({
+    queryKey: ['userProfile'],
+    queryFn: async () => {
+      const response = await getStudentProfile();
+      return response.data.data as Promise<IStudentInfo>;
+    },
+  });
+
+  React.useEffect(() => {
+    if (dataUpdatedAt > updatedAt) {
+      setUpdatedAt(dataUpdatedAt);
+    }
+  }, [updatedAt, dataUpdatedAt]);
+
   const settings = useSettingsContext();
 
-  const studentInfo: IStudentInfo = {
-    name: '오인혁',
-    sid: '21800446',
-    year: 4,
-    semesterCount: 8,
-    department: '전산전자공학부',
-    major1: '컴퓨터공학',
-    major2: '컴퓨터공학',
-    isEnrolled: '재학 중',
-  };
+  // const studentInfo: IStudentInfo = {
+  //   name: '오인혁',
+  //   sid: '21800446',
+  //   year: 4,
+  //   semesterCount: 8,
+  //   department: '전산전자공학부',
+  //   major1: '컴퓨터공학',
+  //   major2: '컴퓨터공학',
+  //   isEnrolled: '재학 중',
+  // };
 
   type StudentField =
     | 'name'
@@ -156,13 +174,14 @@ export default function FourView() {
                 gridTemplateColumns: 'repeat(2, 1fr)',
               }}
             >
-              {Object.entries(studentInfo).map(([key, value], index) => (
-                <TypoWithEdit
-                  key={index}
-                  name={value}
-                  fieldName={studentFieldEng2Kor(key as StudentField)}
-                />
-              ))}
+              {studentInfo &&
+                Object.entries(studentInfo).map(([key, value], index) => (
+                  <TypoWithEdit
+                    key={index}
+                    name={value}
+                    fieldName={studentFieldEng2Kor(key as StudentField)}
+                  />
+                ))}
 
               {/* <TypoWithEdit name="21800446" fieldName="학번" />
             <TypoWithEdit name="4학년" fieldName="학년" />

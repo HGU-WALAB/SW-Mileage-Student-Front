@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 // auth
-import { AuthGuard } from 'src/auth/guard';
+// import { AuthGuard } from 'src/auth/guard';
 // layouts
 import DashboardLayout from 'src/layouts/dashboard';
 // components
@@ -22,16 +22,17 @@ export const dashboardRoutes = [
   {
     path: 'dashboard',
     element: (
-      <AuthGuard>
-        <DashboardLayout>
-          <Suspense fallback={<LoadingScreen />}>
-            <Outlet />
-          </Suspense>
-        </DashboardLayout>
-      </AuthGuard>
+      <DashboardLayout>
+        <Suspense fallback={<LoadingScreen />}>
+          <Outlet />
+        </Suspense>
+      </DashboardLayout>
     ),
     children: [
-      { element: <IndexPage />, index: true },
+      {
+        element: <IndexPage />,
+        index: true,
+      },
       { path: 'two', element: <PageTwo /> },
       { path: 'three', element: <PageThree /> },
       {

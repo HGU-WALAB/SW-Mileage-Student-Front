@@ -23,10 +23,15 @@ import { useAuthContext } from 'src/auth/hooks';
 // components
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
+import { IPostStudentLoginData, studentLogin } from 'src/apis/user';
+import { useSetRecoilState } from 'recoil';
+import { userState } from 'src/utils/atom';
 
 // ----------------------------------------------------------------------
 
 export default function JwtLoginView() {
+  const setUserInfo = useSetRecoilState(userState);
+
   const { login } = useAuthContext();
 
   const router = useRouter();
@@ -40,7 +45,7 @@ export default function JwtLoginView() {
   const password = useBoolean();
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Email must be a valid email address'),
+    email: Yup.string().required('Email is required'),
     password: Yup.string().required('Password is required'),
   });
 
@@ -62,9 +67,21 @@ export default function JwtLoginView() {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
-      await login?.(data.email, data.password);
+      const loginData: IPostStudentLoginData = {
+        uniqueId: data.email,
+        password: data.password,
+      };
 
-      router.push(returnTo || PATH_AFTER_LOGIN);
+      await studentLogin(loginData).then((res) => {
+        localStorage.setItem('accessToken', res.data.token);
+        console.log(res);
+        // console.log({ name: res.data.name, sid: res.data.sid });
+        setUserInfo({ name: res.data.name, sid: res.data.sid });
+      });
+
+      // await login?.(data.email, data.password);
+
+      router.push('/dashboard');
     } catch (error) {
       console.error(error);
       reset();

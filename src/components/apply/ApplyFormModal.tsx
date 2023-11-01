@@ -163,12 +163,11 @@ const style = {
 
 interface IProps {
   thisSemesterItemNum: number;
+  data: IGetThisSemesterItem;
 }
 
-export default function ApplyFormModal({ thisSemesterItemNum }: IProps) {
+export default function ApplyFormModal({ thisSemesterItemNum, data }: IProps) {
   const [isShowApplyModal, setIsShowApplyModal] = useRecoilState(IsShowStudentApplyModalState);
-  // const userInfo = useRecoilValue(userState);
-  // const handleOpen = () => setIsShowApplyModal(true);
   const handleClose = () => setIsShowApplyModal(false);
 
   const handleApply = async () => {
@@ -199,7 +198,7 @@ export default function ApplyFormModal({ thisSemesterItemNum }: IProps) {
           </FlexEndBox>
 
           <MileageContainer>
-            {contents.list.map((ItemNcategory, index) => (
+            {data?.list.map((ItemNcategory, index) => (
               <MileageBox>
                 <MileageTitle variant="h5">
                   {`${index + 1}. ${ItemNcategory.category}`}
