@@ -97,7 +97,7 @@ interface IGetMileageApplyRecords {
 }
 
 interface IMileageApplyRecord {
-  semester: string;
+  name: string;
   status: string;
   applyStart: string;
   applyEnd: string;
@@ -122,7 +122,7 @@ interface IMileageApplyRecord {
 
 const makeData = (applyRecords: IGetMileageApplyRecords) => {
   const result = applyRecords.list.map((item, idx: number) =>
-    createData(IconList(idx), item.semester, item.applyStart, item.applyEnd, item.status as IStatus)
+    createData(IconList(idx), item.name, item.applyStart, item.applyEnd, item.status as IStatus)
   );
   return result;
 };
