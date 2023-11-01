@@ -22,6 +22,8 @@ import { dateConverter } from 'src/utils/converter/dateConverter';
 import { Typography } from '@mui/material';
 import { getSemestersWithStatus } from 'src/apis/mileage';
 import { useQuery } from '@tanstack/react-query';
+import { useSetRecoilState } from 'recoil';
+import { canRegisterState } from 'src/utils/atom';
 
 const IconList = (idx: number) => {
   switch ((idx % 10) + 1) {
@@ -132,6 +134,8 @@ const makeData = (applyRecords: IGetMileageApplyRecords) => {
 export default function BeforeApply() {
   const [rows, setRows] = React.useState();
 
+  const setCanRegister = useSetRecoilState(canRegisterState);
+
   const [updatedAt, setUpdatedAt] = React.useState(0);
 
   const { data, dataUpdatedAt } = useQuery<IGetMileageApplyRecords>({
@@ -141,6 +145,12 @@ export default function BeforeApply() {
 
       setRows(makeData(response.data as IGetMileageApplyRecords) as any);
 
+      const availableObj = response.data.list.find(
+        (obj: IMileageApplyRecord) => obj.status === '신청 가능'
+      );
+      if (availableObj) {
+        setCanRegister(availableObj);
+      }
       return response.data;
     },
   });

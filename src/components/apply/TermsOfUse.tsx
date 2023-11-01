@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useSpring, animated } from '@react-spring/web';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { IsShowStudentApplyModalState, userState } from 'src/utils/atom';
+import { IsShowStudentApplyModalState, canRegisterState, userState } from 'src/utils/atom';
 import { styled } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { getAllMileageThisSemester } from 'src/apis/mileage';
@@ -83,7 +83,15 @@ interface IProps {
   thisSemesterItemNum: number;
 }
 
+interface IMileageApplyRecord {
+  name: string;
+  status: string;
+  applyStart: string;
+  applyEnd: string;
+}
+
 export default function TermsOfUse({ thisSemesterItemNum }: IProps) {
+  const canRegister = useRecoilValue(canRegisterState);
   const userInfo = useRecoilValue(userState);
   const setIsShowApplyModal = useSetRecoilState(IsShowStudentApplyModalState);
 
@@ -100,9 +108,12 @@ export default function TermsOfUse({ thisSemesterItemNum }: IProps) {
   };
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleOpen}>
-        ☘️ 마일리지 신청 하기
-      </Button>
+      {(canRegister as IMileageApplyRecord | null)?.status === '신청 가능' && (
+        <Button variant="contained" color="primary" onClick={handleOpen}>
+          ☘️ 마일리지 신청 하기
+        </Button>
+      )}
+
       <Modal
         aria-labelledby="spring-modal-title"
         aria-describedby="spring-modal-description"

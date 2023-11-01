@@ -22,3 +22,8 @@ export const IsShowStudentApplyModalState = atom({
   key: 'IsShowStudentApplyModalState', // unique ID (with respect to other atoms/selectors)
   default: false,
 });
+
+export const canRegisterState = atom({
+  key: 'canRegisterState', // unique ID (with respect to other atoms/selectors)
+  default: null,
+});
