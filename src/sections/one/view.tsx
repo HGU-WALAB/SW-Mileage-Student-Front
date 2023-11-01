@@ -13,6 +13,7 @@ import { Content, ContentBox } from 'src/css/styled-components/Content';
 // import { useQuery } from 'react-query';
 import { getAllMileageThisSemester } from 'src/apis/mileage';
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 // ----------------------------------------------------------------------
 
