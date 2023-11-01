@@ -18,8 +18,8 @@ export default function MyMileageTable() {
   const { data, dataUpdatedAt } = useQuery<IGetMyMileage>({
     queryKey: ['semestersWithStatus'],
     queryFn: async () => {
-      if (semesterWithStatus.semester !== '학기 미정') {
-        const response = await getMyMileageBySemester(semesterWithStatus.semester);
+      if (semesterWithStatus.name !== '학기 미정') {
+        const response = await getMyMileageBySemester(semesterWithStatus.name);
 
         return response.data;
       }
@@ -35,10 +35,10 @@ export default function MyMileageTable() {
 
   React.useEffect(() => {
     const asyncFetch = async () => {
-      if (semesterWithStatus.semester === '학기 미정') {
+      if (semesterWithStatus.name === '학기 미정') {
         return;
       }
-      getMyMileageBySemester(semesterWithStatus.semester).then((response) => {
+      getMyMileageBySemester(semesterWithStatus.name).then((response) => {
         console.log(response.data as IGetMyMileage);
       });
     };

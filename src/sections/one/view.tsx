@@ -13,6 +13,9 @@ import { Content, ContentBox } from 'src/css/styled-components/Content';
 // import { useQuery } from 'react-query';
 import { getAllMileageThisSemester } from 'src/apis/mileage';
 import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useRecoilValue } from 'recoil';
+import { canRegisterState } from 'src/utils/atom';
 
 // ----------------------------------------------------------------------
 
@@ -33,7 +36,13 @@ interface IItem {
   isRegistered: boolean;
 }
 
+interface ICanRegister {
+  applyStart?: string;
+  applyEnd?: string;
+}
 export default function OneView() {
+  const canRegister = useRecoilValue(canRegisterState);
+
   const settings = useSettingsContext();
 
   const [updatedAt, setUpdatedAt] = React.useState(0);
@@ -57,10 +66,17 @@ export default function OneView() {
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Layout>
         <Title> SW 마일리지 신청 </Title>
-        <ContentBox>
-          <Content> 현재 마일리지 신청 기간입니다. </Content>
-          <Content> 신청 기간은 9월 1일 ~ 9월 30일 까지 입니다. (D-30) </Content>
-        </ContentBox>
+        {canRegister && (
+          <ContentBox>
+            <Content> 현재 마일리지 신청 기간입니다. </Content>
+            <Content>
+              {' '}
+              신청 기간은 parseMonthAndDay(canRegister.applyStart) ~
+              parseMonthAndDay(canRegister.applyEnd) 까지 입니다. daysBetween(
+              {(canRegister as ICanRegister)?.applyStart},{(canRegister as ICanRegister)?.applyEnd})
+            </Content>
+          </ContentBox>
+        )}
         <ApplyFormModal
           data={data as IGetThisSemesterItem}
           thisSemesterItemNum={data?.count as number}

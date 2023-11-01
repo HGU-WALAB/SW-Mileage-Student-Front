@@ -17,7 +17,7 @@ import { AxiosError } from 'axios';
 // ----------------------------------------------------------------------
 
 export interface ISemesterWithStatus {
-  semester: string;
+  name: string;
   status: string;
 }
 
@@ -50,12 +50,16 @@ export default function FiveView() {
       const res = await getSemestersWithStatus();
       console.log(res.data);
       setSemestersWithStatus([
-        { semester: '학기 미정', status: '진행 상태 없음' },
-        ...res.data.list.map((e: IMileageSemesterWithStatus) => e.semester),
+        { name: '학기 미정', status: '진행 상태 없음' },
+        ...res.data.list.map((e: IMileageSemesterWithStatus) => ({
+          name: e?.name,
+          status: e?.status,
+        })),
       ]);
     };
     asyncFetch();
   }, []);
+
   //
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
@@ -64,7 +68,7 @@ export default function FiveView() {
 
         <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <SemesterDropdown semestersWithStatus={semestersWithStatus} />
-          <Chip label={semesterWithStatus.semester} color="primary" variant="soft" />
+          <Chip label={semesterWithStatus.name} color="primary" variant="soft" />
           <Chip label={semesterWithStatus.status} color="primary" variant="soft" />
         </Box>
 

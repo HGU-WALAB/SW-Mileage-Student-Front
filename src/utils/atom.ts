@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 export const semesterWithStatusState = atom({
   key: 'semesterState', // unique ID (with respect to other atoms/selectors)
-  default: { semester: '학기 미정', status: '진행 상태 없음' }, // default value (aka initial value)
+  default: { name: '학기 미정', status: '진행 상태 없음' }, // default value (aka initial value)
 });
 
 export const mileageStatusState = atom({
@@ -21,4 +21,9 @@ export const userState = atom({
 export const IsShowStudentApplyModalState = atom({
   key: 'IsShowStudentApplyModalState', // unique ID (with respect to other atoms/selectors)
   default: false,
+});
+
+export const canRegisterState = atom({
+  key: 'canRegisterState', // unique ID (with respect to other atoms/selectors)
+  default: null,
 });
