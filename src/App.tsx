@@ -38,8 +38,6 @@ export default function App() {
 
   useScrollToTop();
 
-  const queryClient = new QueryClient(); // 생성
-
   return (
     // <AuthProvider>
     <QueryClientProvider client={queryClient}>

@@ -62,41 +62,6 @@ export default function MyMileageTable() {
     description: string; // 비고
   }
 
-  const contents: IGetMyMileage = {
-    list: [
-      {
-        category: '교과 - 전공활동',
-        status: '진행중',
-        items: [
-          {
-            id: 1,
-            itemName: 'TOPCIT 성적 우수자',
-            count: 1,
-            description: 'TOPCIT 성적 우수자입니다.',
-          },
-          {
-            id: 2,
-            itemName: '대경권 프로그래밍 대회',
-            count: 1,
-            description: '대경권 프로그래밍 대회입니다.',
-          },
-        ],
-      },
-      {
-        category: '교과 - 캡스톤',
-        status: '완료',
-        items: [
-          {
-            id: 3,
-            itemName: '캡스톤 프로젝트',
-            count: 1,
-            description: '캡스톤 프로젝트입니다.',
-          },
-        ],
-      },
-    ],
-  };
-
   const DataGripHeaderData = [
     {
       field: 'id',
@@ -154,35 +119,6 @@ export default function MyMileageTable() {
     ],
   };
 
-  const DataGripHeaderData = [
-    {
-      field: 'id',
-      headerName: '번호',
-      width: 100,
-    },
-    {
-      field: 'itemName',
-      headerName: '항목명',
-      width: 200,
-    },
-    {
-      field: 'count',
-      headerName: '횟수',
-      width: 100,
-    },
-    {
-      field: 'description',
-      headerName: '비고',
-      width: 300,
-    },
-  ];
-
-  function makeData(ItemNcategory: IItemsBySemester) {
-    return {
-      columns: DataGripHeaderData,
-      rows: ItemNcategory.items,
-    };
-  }
   function makeData(ItemNcategory: IItemsBySemester) {
     return {
       columns: DataGripHeaderData,

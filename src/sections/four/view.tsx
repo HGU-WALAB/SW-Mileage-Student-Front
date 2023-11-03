@@ -175,13 +175,16 @@ export default function FourView() {
               }}
             >
               {studentInfo &&
-                Object.entries(studentInfo).map(([key, value], index) => (
-                  <TypoWithEdit
-                    key={index}
-                    name={value}
-                    fieldName={studentFieldEng2Kor(key as StudentField)}
-                  />
-                ))}
+                Object.entries(studentInfo).map(
+                  ([key, value], index) =>
+                    key !== 'id' && (
+                      <TypoWithEdit
+                        key={index}
+                        name={value}
+                        fieldName={studentFieldEng2Kor(key as StudentField)}
+                      />
+                    )
+                )}
 
               {/* <TypoWithEdit name="21800446" fieldName="학번" />
             <TypoWithEdit name="4학년" fieldName="학년" />
