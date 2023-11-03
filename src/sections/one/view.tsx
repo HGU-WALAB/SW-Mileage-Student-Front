@@ -14,8 +14,10 @@ import { Content, ContentBox } from 'src/css/styled-components/Content';
 import { getAllMileageThisSemester } from 'src/apis/mileage';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { useRecoilValue } from 'recoil';
-import { canRegisterState } from 'src/utils/atom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { canRegisterState, thisSemesterState } from 'src/utils/atom';
+import axiosInstance from 'src/utils/axios';
+import { daysBetween, parseMonthAndDay } from 'src/utils/converter/dateConverter';
 
 // ----------------------------------------------------------------------
 
@@ -41,7 +43,8 @@ interface ICanRegister {
   applyEnd?: string;
 }
 export default function OneView() {
-  const canRegister = useRecoilValue(canRegisterState);
+  const canRegister = useRecoilValue<ICanRegister | null>(canRegisterState);
+  const setThisSemester = useSetRecoilState(thisSemesterState);
 
   const settings = useSettingsContext();
 
@@ -50,7 +53,10 @@ export default function OneView() {
   const { data, dataUpdatedAt } = useQuery<IGetThisSemesterItem>({
     queryKey: ['thisSemesterItem'],
     queryFn: async () => {
-      const response = await getAllMileageThisSemester('2023-01');
+      const res = await axiosInstance.get('api/mileage/semesters/currentSemester');
+      setThisSemester(res.data.data.name);
+      console.log(res.data.data.name);
+      const response = await getAllMileageThisSemester(res.data.data.name);
       console.log(response.data);
       return response.data; // Axios의 응답에서 .data 속성을 반환
     },
@@ -66,15 +72,19 @@ export default function OneView() {
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Layout>
         <Title> SW 마일리지 신청 </Title>
-        {canRegister && (
+        {canRegister ? (
           <ContentBox>
             <Content> 현재 마일리지 신청 기간입니다. </Content>
             <Content>
               {' '}
-              신청 기간은 parseMonthAndDay(canRegister.applyStart) ~
-              parseMonthAndDay(canRegister.applyEnd) 까지 입니다. daysBetween(
-              {(canRegister as ICanRegister)?.applyStart},{(canRegister as ICanRegister)?.applyEnd})
+              신청 기간은 {parseMonthAndDay(canRegister.applyStart)} ~
+              {parseMonthAndDay(canRegister.applyEnd)} 까지 입니다. (D-
+              {daysBetween(canRegister.applyStart, canRegister.applyEnd)})
             </Content>
+          </ContentBox>
+        ) : (
+          <ContentBox>
+            <Content> 현재 마일리지 신청 기간이 아닙니다. </Content>
           </ContentBox>
         )}
         <ApplyFormModal

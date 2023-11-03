@@ -27,3 +27,8 @@ export const canRegisterState = atom({
   key: 'canRegisterState', // unique ID (with respect to other atoms/selectors)
   default: null,
 });
+
+export const thisSemesterState = atom({
+  key: 'thisSemesterState', // unique ID (with respect to other atoms/selectors)
+  default: null,
+});
