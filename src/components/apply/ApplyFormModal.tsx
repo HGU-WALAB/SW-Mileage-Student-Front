@@ -7,6 +7,7 @@ import { useRecoilState } from 'recoil';
 import { IsShowStudentApplyModalState } from 'src/utils/atom';
 import { Chip, styled } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
+import { postMileageApply } from 'src/apis/mileage';
 import CancelButton from '../common/CancelButton';
 
 const Title = styled(Chip)({
@@ -172,6 +173,7 @@ export default function ApplyFormModal({ thisSemesterItemNum, data }: IProps) {
 
   const handleApply = async () => {
     if (window.confirm('마일리지 신청 하시겠습니까?')) {
+      await postMileageApply();
       await alert('마일리지 신청이 완료되었습니다.');
       handleClose();
     }

@@ -22,3 +22,5 @@ export const getAllMileageThisSemesterURI = (semester: string) =>
 export const postStudentLoginURI = `/api/student/login`;
 
 export const GetMyProfileURI = `/api/mileage/students/me`;
+
+export const postMileageApplyURI = `/api/mileage/apply`;

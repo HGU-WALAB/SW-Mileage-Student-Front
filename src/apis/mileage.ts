@@ -3,6 +3,7 @@ import {
   GetMileageSemesterMeURI,
   GetMyMileageBySemesterURI,
   getAllMileageThisSemesterURI,
+  postMileageApplyURI,
 } from 'src/utils/endPoints';
 
 /**
@@ -41,5 +42,14 @@ export const getMyMileageBySemester = async (semester: string) => {
  */
 export const getAllMileageThisSemester = async (semester: string) => {
   const response = await axiosInstance.get(getAllMileageThisSemesterURI(semester));
+  return response;
+};
+
+/**
+ * @ breif 마일리지 신청
+ */
+
+export const postMileageApply = async () => {
+  const response = await axiosInstance.post(postMileageApplyURI);
   return response;
 };
