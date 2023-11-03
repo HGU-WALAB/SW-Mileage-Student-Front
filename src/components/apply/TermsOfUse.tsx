@@ -6,7 +6,12 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useSpring, animated } from '@react-spring/web';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { IsShowStudentApplyModalState, canRegisterState, userState } from 'src/utils/atom';
+import {
+  IsShowStudentApplyModalState,
+  canRegisterState,
+  thisSemesterState,
+  userState,
+} from 'src/utils/atom';
 import { styled } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { getAllMileageThisSemester } from 'src/apis/mileage';
@@ -91,6 +96,7 @@ interface IMileageApplyRecord {
 }
 
 export default function TermsOfUse({ thisSemesterItemNum }: IProps) {
+  const thisRegister = useRecoilValue(thisSemesterState);
   const canRegister = useRecoilValue(canRegisterState);
   const userInfo = useRecoilValue(userState);
   const setIsShowApplyModal = useSetRecoilState(IsShowStudentApplyModalState);
@@ -104,7 +110,6 @@ export default function TermsOfUse({ thisSemesterItemNum }: IProps) {
   const handleApply = async () => {
     await handleClose();
     setIsShowApplyModal(true);
-    console.log('!!');
   };
   return (
     <div>
@@ -142,7 +147,7 @@ export default function TermsOfUse({ thisSemesterItemNum }: IProps) {
                 >{`${userInfo.name} (${userInfo.sid})`}</Typography>
                 학생의
                 <Typography color="primary" variant="h6">
-                  2023-01
+                  {thisRegister}
                 </Typography>
                 학기 등록된 마일리지 항목 개수는
                 <Typography color="primary" variant="h6">

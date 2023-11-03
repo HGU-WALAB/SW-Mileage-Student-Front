@@ -18,6 +18,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { canRegisterState, thisSemesterState } from 'src/utils/atom';
 import axiosInstance from 'src/utils/axios';
 import { daysBetween, parseMonthAndDay } from 'src/utils/converter/dateConverter';
+import { Typography } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -42,6 +43,7 @@ interface ICanRegister {
   applyStart?: string;
   applyEnd?: string;
 }
+
 export default function OneView() {
   const canRegister = useRecoilValue<ICanRegister | null>(canRegisterState);
   const setThisSemester = useSetRecoilState(thisSemesterState);
@@ -75,11 +77,14 @@ export default function OneView() {
         {canRegister ? (
           <ContentBox>
             <Content> 현재 마일리지 신청 기간입니다. </Content>
-            <Content>
+            <Content sx={{ display: 'flex', gap: '5px' }}>
               {' '}
               신청 기간은 {parseMonthAndDay(canRegister.applyStart)} ~
-              {parseMonthAndDay(canRegister.applyEnd)} 까지 입니다. (D-
-              {daysBetween(canRegister.applyStart, canRegister.applyEnd)})
+              {parseMonthAndDay(canRegister.applyEnd)} 까지 입니다.{' '}
+              <Typography color="primary">
+                [D-
+                {daysBetween(canRegister.applyStart, canRegister.applyEnd)}]
+              </Typography>
             </Content>
           </ContentBox>
         ) : (

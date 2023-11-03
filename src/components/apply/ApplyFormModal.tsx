@@ -167,7 +167,20 @@ interface IProps {
   data: IGetThisSemesterItem;
 }
 
+interface IItem {
+  id: number; // 번호
+  itemName: string; // 항목명
+  description: string; // 비고
+  isRegistered: boolean;
+}
+
+function countRegisteredItems(items: IItem[]) {
+  const registeredItems = items.filter((item) => item.isRegistered === true);
+  return registeredItems.length;
+}
+
 export default function ApplyFormModal({ thisSemesterItemNum, data }: IProps) {
+  console.log(data);
   const [isShowApplyModal, setIsShowApplyModal] = useRecoilState(IsShowStudentApplyModalState);
   const handleClose = () => setIsShowApplyModal(false);
 
