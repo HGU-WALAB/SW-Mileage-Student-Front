@@ -8,6 +8,7 @@ import { IsShowStudentApplyModalState } from 'src/utils/atom';
 import { Chip, styled } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { postMileageApply } from 'src/apis/mileage';
+import { useSnackbar } from 'notistack';
 import CancelButton from '../common/CancelButton';
 
 const Title = styled(Chip)({
@@ -180,6 +181,7 @@ function countRegisteredItems(items: IItem[]) {
 }
 
 export default function ApplyFormModal({ thisSemesterItemNum, data }: IProps) {
+  const { enqueueSnackbar } = useSnackbar();
   console.log(data);
   const [isShowApplyModal, setIsShowApplyModal] = useRecoilState(IsShowStudentApplyModalState);
   const handleClose = () => setIsShowApplyModal(false);
@@ -187,7 +189,14 @@ export default function ApplyFormModal({ thisSemesterItemNum, data }: IProps) {
   const handleApply = async () => {
     if (window.confirm('마일리지 신청 하시겠습니까?')) {
       await postMileageApply();
-      await alert('마일리지 신청이 완료되었습니다.');
+      await enqueueSnackbar('마일리지 신청이 완료되었습니다', {
+        variant: 'success',
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'center',
+        },
+        autoHideDuration: 3000,
+      });
       handleClose();
     }
   };
