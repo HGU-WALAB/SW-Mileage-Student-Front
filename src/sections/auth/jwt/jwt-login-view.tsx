@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import LoadingButton from '@mui/lab/LoadingButton';
-import Link from '@mui/material/Link';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
@@ -26,6 +25,7 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import { IPostStudentLoginData, studentLogin } from 'src/apis/user';
 import { useSetRecoilState } from 'recoil';
 import { userState } from 'src/utils/atom';
+import { Link } from 'react-router-dom';
 import { _emails } from '../../../_mock/assets';
 
 // ----------------------------------------------------------------------
@@ -86,15 +86,7 @@ export default function JwtLoginView() {
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5 }}>
-      <Typography variant="h4">Sign in to Minimal</Typography>
-
-      <Stack direction="row" spacing={0.5}>
-        <Typography variant="body2">New user?</Typography>
-
-        <Link component={RouterLink} href={paths.auth.jwt.register} variant="subtitle2">
-          Create an account!!
-        </Link>
-      </Stack>
+      <Typography variant="h4">마일리지 학생 시스템</Typography>
     </Stack>
   );
 
@@ -118,9 +110,14 @@ export default function JwtLoginView() {
           ),
         }}
       />
-
-      <Link variant="body2" color="inherit" underline="always" sx={{ alignSelf: 'flex-end' }}>
-        Forgot password?
+      <Link
+        to="https://hisnet.handong.edu/"
+        style={{ color: 'inherit', display: 'flex', justifyContent: 'end' }}
+        target="_blank"
+      >
+        <Typography variant="body2" color="inherit">
+          히즈넷 가기
+        </Typography>
       </Link>
 
       <LoadingButton
@@ -131,7 +128,7 @@ export default function JwtLoginView() {
         variant="contained"
         loading={isSubmitting}
       >
-        Login
+        로그인
       </LoadingButton>
     </Stack>
   );
@@ -141,7 +138,7 @@ export default function JwtLoginView() {
       {renderHead}
 
       <Alert severity="info" sx={{ mb: 3 }}>
-        Use email : <strong>demo@minimals.cc</strong> / password :<strong> demo1234</strong>
+        히즈넷 아이디/비밀번호로 로그인 하세요
       </Alert>
 
       {renderForm}
