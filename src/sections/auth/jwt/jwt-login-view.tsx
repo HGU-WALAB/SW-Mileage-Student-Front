@@ -26,32 +26,27 @@ import FormProvider, { RHFTextField } from 'src/components/hook-form';
 import { IPostStudentLoginData, studentLogin } from 'src/apis/user';
 import { useSetRecoilState } from 'recoil';
 import { userState } from 'src/utils/atom';
+import { _emails } from '../../../_mock/assets';
 
 // ----------------------------------------------------------------------
 
 export default function JwtLoginView() {
   const setUserInfo = useSetRecoilState(userState);
 
-  const { login } = useAuthContext();
-
   const router = useRouter();
 
   const [errorMsg, setErrorMsg] = useState('');
 
-  const searchParams = useSearchParams();
-
-  const returnTo = searchParams.get('returnTo');
-
   const password = useBoolean();
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required'),
-    password: Yup.string().required('Password is required'),
+    sid: Yup.string().required('필수 항목 입니다.'),
+    password: Yup.string().required('필수 항목 입니다.'),
   });
 
   const defaultValues = {
-    email: 'demo@minimals.cc',
-    password: 'demo1234',
+    sid: '',
+    password: '',
   };
 
   const methods = useForm({
@@ -68,7 +63,7 @@ export default function JwtLoginView() {
   const onSubmit = handleSubmit(async (data) => {
     try {
       const loginData: IPostStudentLoginData = {
-        uniqueId: data.email,
+        uniqueId: data.sid,
         password: data.password,
       };
 
@@ -107,11 +102,11 @@ export default function JwtLoginView() {
     <Stack spacing={2.5}>
       {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
 
-      <RHFTextField name="email" label="Email address" />
+      <RHFTextField name="sid" label="히즈넷 아이디" />
 
       <RHFTextField
         name="password"
-        label="Password"
+        label="히즈넷 비밀번호"
         type={password.value ? 'text' : 'password'}
         InputProps={{
           endAdornment: (
