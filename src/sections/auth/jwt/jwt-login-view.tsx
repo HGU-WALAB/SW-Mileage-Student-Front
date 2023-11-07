@@ -73,10 +73,6 @@ export default function JwtLoginView() {
       await studentLogin(loginData).then((res) => {
         enqueueSnackbar('로그인 성공', {
           variant: 'success',
-          anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'center',
-          },
           autoHideDuration: 3000,
         });
 
@@ -92,10 +88,6 @@ export default function JwtLoginView() {
     } catch (error) {
       enqueueSnackbar('로그인 실패', {
         variant: 'error',
-        anchorOrigin: {
-          vertical: 'top',
-          horizontal: 'center',
-        },
         autoHideDuration: 1000,
       });
 

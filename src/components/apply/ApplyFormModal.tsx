@@ -191,10 +191,10 @@ export default function ApplyFormModal({ thisSemesterItemNum, data }: IProps) {
       await postMileageApply();
       await enqueueSnackbar('마일리지 신청이 완료되었습니다', {
         variant: 'success',
-        anchorOrigin: {
-          vertical: 'top',
-          horizontal: 'center',
-        },
+        // anchorOrigin: {
+        //   vertical: 'top',
+        //   horizontal: 'center',
+        // },
         autoHideDuration: 3000,
       });
       handleClose();
