@@ -26,11 +26,14 @@ import { IPostStudentLoginData, studentLogin } from 'src/apis/user';
 import { useSetRecoilState } from 'recoil';
 import { userState } from 'src/utils/atom';
 import { Link } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 import { _emails } from '../../../_mock/assets';
+import { direction } from '../../../theme/options/right-to-left';
 
 // ----------------------------------------------------------------------
 
 export default function JwtLoginView() {
+  const { enqueueSnackbar } = useSnackbar();
   const setUserInfo = useSetRecoilState(userState);
 
   const router = useRouter();
@@ -68,6 +71,15 @@ export default function JwtLoginView() {
       };
 
       await studentLogin(loginData).then((res) => {
+        enqueueSnackbar('로그인 성공', {
+          variant: 'success',
+          anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'center',
+          },
+          autoHideDuration: 3000,
+        });
+
         localStorage.setItem('accessToken', res.data.token);
         console.log(res);
         // console.log({ name: res.data.name, sid: res.data.sid });
@@ -78,6 +90,15 @@ export default function JwtLoginView() {
 
       router.push('/dashboard');
     } catch (error) {
+      enqueueSnackbar('로그인 실패', {
+        variant: 'error',
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'center',
+        },
+        autoHideDuration: 1000,
+      });
+
       console.error(error);
       reset();
       setErrorMsg(typeof error === 'string' ? error : error.message);
