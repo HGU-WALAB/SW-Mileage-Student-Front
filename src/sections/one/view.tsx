@@ -19,6 +19,7 @@ import { canRegisterState, thisSemesterState } from 'src/utils/atom';
 import axiosInstance from 'src/utils/axios';
 import { daysBetween, parseMonthAndDay } from 'src/utils/converter/dateConverter';
 import { Typography } from '@mui/material';
+import ApplyDuration from 'src/components/apply/ApplyDuration';
 
 // ----------------------------------------------------------------------
 
@@ -39,13 +40,7 @@ interface IItem {
   isRegistered: boolean;
 }
 
-interface ICanRegister {
-  applyStart?: string;
-  applyEnd?: string;
-}
-
 export default function OneView() {
-  const canRegister = useRecoilValue<ICanRegister | null>(canRegisterState);
   const setThisSemester = useSetRecoilState(thisSemesterState);
 
   const settings = useSettingsContext();
@@ -74,28 +69,8 @@ export default function OneView() {
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Layout>
         <Title> SW 마일리지 신청 </Title>
-        {canRegister ? (
-          <ContentBox>
-            <Content> 현재 마일리지 신청 기간입니다. </Content>
-            <Content sx={{ display: 'flex', gap: '5px' }}>
-              {' '}
-              신청 기간은 {parseMonthAndDay(canRegister.applyStart)} ~
-              {parseMonthAndDay(canRegister.applyEnd)} 까지 입니다.{' '}
-              <Typography color="primary">
-                [D-
-                {daysBetween(canRegister.applyStart, canRegister.applyEnd)}]
-              </Typography>
-            </Content>
-          </ContentBox>
-        ) : (
-          <ContentBox>
-            <Content> 현재 마일리지 신청 기간이 아닙니다 </Content>
-          </ContentBox>
-        )}
-        <ApplyFormModal
-          data={data as IGetThisSemesterItem}
-          thisSemesterItemNum={data?.count as number}
-        />
+        <ApplyDuration />
+
         <Box
           sx={{
             display: 'flex',
@@ -108,6 +83,10 @@ export default function OneView() {
         <Box>
           <TermsOfUse thisSemesterItemNum={data?.count as number} />
         </Box>
+        <ApplyFormModal
+          data={data as IGetThisSemesterItem}
+          thisSemesterItemNum={data?.count as number}
+        />
       </Layout>
     </Container>
   );

@@ -17,34 +17,34 @@ import { getStudentProfile } from 'src/apis/user';
 // ----------------------------------------------------------------------
 const data = [
   {
-    taste: 'Type A',
+    taste: ' A',
     // chardonay: 25,
-    max: 111,
-    point: 73,
+    평균: 111,
+    나: 73,
   },
   {
-    taste: 'Type B',
+    taste: ' B',
     // chardonay: 88,
-    max: 108,
-    point: 45,
+    평균: 108,
+    나: 45,
   },
   {
-    taste: 'Type C',
+    taste: ' C',
     // chardonay: 49,
-    max: 63,
-    point: 34,
+    평균: 63,
+    나: 34,
   },
   {
-    taste: 'Type D',
+    taste: ' D',
     // chardonay: 109,
-    max: 102,
-    point: 113,
+    평균: 102,
+    나: 113,
   },
   {
-    taste: 'Type E',
+    taste: ' E',
     // chardonay: 51,
-    max: 100,
-    point: 98,
+    평균: 100,
+    나: 98,
   },
 ];
 export default function FourView() {
@@ -212,7 +212,7 @@ export default function FourView() {
         <Box sx={{ width: '500px', height: '500px' }}>
           <ResponsiveRadar
             data={data}
-            keys={['point', 'max']}
+            keys={['나', '평균']}
             indexBy="taste"
             valueFormat=">-.2f"
             margin={{ top: 70, right: 80, bottom: 40, left: 80 }}

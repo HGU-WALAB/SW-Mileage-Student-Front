@@ -15,7 +15,7 @@ export default function MyMileageTable() {
 
   const [updatedAt, setUpdatedAt] = React.useState(0);
 
-  const { data, dataUpdatedAt } = useQuery<IGetMyMileage>({
+  const { data, dataUpdatedAt, refetch } = useQuery<IGetMyMileage>({
     queryKey: ['semestersWithStatus'],
     queryFn: async () => {
       if (semesterWithStatus.name !== '학기 미정') {
@@ -34,16 +34,17 @@ export default function MyMileageTable() {
   }, [updatedAt, dataUpdatedAt]);
 
   React.useEffect(() => {
-    const asyncFetch = async () => {
-      if (semesterWithStatus.name === '학기 미정') {
-        return;
-      }
-      getMyMileageBySemester(semesterWithStatus.name).then((response) => {
-        console.log(response.data as IGetMyMileage);
-      });
-    };
-    asyncFetch();
-  }, [semesterWithStatus]);
+    // const asyncFetch = async () => {
+    //   if (semesterWithStatus.name === '학기 미정') {
+    //     return;
+    //   }
+    //   getMyMileageBySemester(semesterWithStatus.name).then((response) => {
+    //     // setContent(response.data as IGetMyMileage);
+    //   });
+    // };
+    // asyncFetch();
+    refetch();
+  }, [semesterWithStatus, refetch]);
   // const semester = useRecoilValue(semesterState);
 
   interface IGetMyMileage {
@@ -64,7 +65,7 @@ export default function MyMileageTable() {
 
   const DataGripHeaderData = [
     {
-      field: 'id',
+      field: 'num',
       headerName: '번호',
       width: 100,
     },
@@ -122,16 +123,19 @@ export default function MyMileageTable() {
   function makeData(ItemNcategory: IItemsBySemester) {
     return {
       columns: DataGripHeaderData,
-      rows: ItemNcategory.items,
+      rows: ItemNcategory.items.map((item, idx) => ({
+        num: idx + 1,
+        ...item,
+      })),
     };
   }
 
   return (
     <Box sx={{ width: '100%', maxHeight: '700px', overflowY: 'scroll' }}>
-      {data?.list.map((ItemNcategory, index) => (
-        <Box key={index}>
+      {data?.list.map((ItemNcategory, idx) => (
+        <Box key={idx}>
           <Typography variant="h6" sx={{ color: 'gray' }}>
-            {index + 1}. {ItemNcategory.category}
+            {idx + 1}. {ItemNcategory.category}
           </Typography>
           <Box sx={{ height: '20px' }} />
           <DataGrid {...makeData(ItemNcategory)} />

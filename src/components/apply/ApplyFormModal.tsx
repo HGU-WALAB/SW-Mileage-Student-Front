@@ -9,6 +9,7 @@ import { Chip, styled } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { postMileageApply } from 'src/apis/mileage';
 import { useSnackbar } from 'notistack';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelButton from '../common/CancelButton';
 
 const Title = styled(Chip)({
@@ -109,7 +110,7 @@ const contents: IGetThisSemesterItem = {
 
 const DataGripHeaderData = [
   {
-    field: 'id',
+    field: 'num',
     headerName: '번호',
     width: 100,
   },
@@ -127,14 +128,21 @@ const DataGripHeaderData = [
   {
     field: 'isRegistered',
     headerName: '등록 여부',
-    width: 100,
+    renderCell: (params: any) => (params.value ? <CheckCircleIcon color="primary" /> : ''),
+    width: 150,
   },
 ];
 
 function makeData(ItemNcategory: IThisSemesterItemWithCategory) {
+  const transformedRows = ItemNcategory.items.map((item, idx) => ({
+    num: idx + 1,
+    ...item,
+    isRegistered: item.isRegistered ? <CheckCircleIcon /> : '',
+  }));
+
   return {
     columns: DataGripHeaderData,
-    rows: ItemNcategory.items,
+    rows: transformedRows,
   };
 }
 
@@ -228,6 +236,7 @@ export default function ApplyFormModal({ thisSemesterItemNum, data }: IProps) {
                   {`${index + 1}. ${ItemNcategory.category}`}
                 </MileageTitle>
                 <SizedBox />
+
                 <DataGrid {...makeData(ItemNcategory)} />
               </MileageBox>
             ))}

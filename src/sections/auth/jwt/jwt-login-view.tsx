@@ -99,7 +99,7 @@ export default function JwtLoginView() {
 
   const renderHead = (
     <Stack spacing={2} sx={{ mb: 5 }}>
-      <Typography variant="h4">마일리지 학생 시스템</Typography>
+      <Typography variant="h4"> 로그인</Typography>
     </Stack>
   );
 
