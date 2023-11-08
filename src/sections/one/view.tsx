@@ -89,7 +89,7 @@ export default function OneView() {
           </ContentBox>
         ) : (
           <ContentBox>
-            <Content> 현재 마일리지 신청 기간이 아닙니다. </Content>
+            <Content> 현재 마일리지 신청 기간이 아닙니다 </Content>
           </ContentBox>
         )}
         <ApplyFormModal
