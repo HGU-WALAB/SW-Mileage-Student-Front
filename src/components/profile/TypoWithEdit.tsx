@@ -7,7 +7,7 @@ interface IProps {
 
 export default function TypoWithEdit({ name, fieldName }: IProps) {
   return (
-    <Box sx={{ fontSize: '18px', display: 'flex', gap: '20px', minWidth: '180px' }}>
+    <Box sx={{ fontSize: '17px', display: 'flex', gap: '20px', whiteSpace: 'nowrap' }}>
       <Box sx={{ fontWeight: 'medium' }}>{fieldName}</Box>{' '}
       <Box sx={{ fontWeight: 'medium', color: 'gray' }}>{name}</Box>
     </Box>

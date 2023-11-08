@@ -148,7 +148,6 @@ export default function FourView() {
         <Box
           sx={{
             width: 1,
-            height: 400,
             borderRadius: 2,
             bgcolor: (theme) => alpha(theme.palette.grey[500], 0.04),
             border: (theme) => `dashed 1px ${theme.palette.divider}`,
@@ -159,9 +158,11 @@ export default function FourView() {
           <Box
             sx={{
               display: 'flex',
+              justifyContent: 'center',
               alignItems: 'center',
-              px: '30px',
+              p: '30px',
               gap: '30px',
+              height: 350,
             }}
           >
             <ProfileLottie />
