@@ -148,8 +148,13 @@ export default function BeforeApply() {
       const availableObj = response.data.list.find(
         (obj: IMileageApplyRecord) => obj.status === '신청 가능'
       );
+      const applyCompleteObj = response.data.list.find(
+        (obj: IMileageApplyRecord) => obj.status === '신청 완료'
+      );
       if (availableObj) {
         setCanRegister(availableObj);
+      } else if (applyCompleteObj) {
+        setCanRegister(applyCompleteObj);
       }
       return response.data;
     },
