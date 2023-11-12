@@ -124,7 +124,6 @@ export const sx = {
   flexDirection: 'column',
   alignItems: 'center',
   gap: '50px',
-  mt: '50px',
 };
 
 const data = [

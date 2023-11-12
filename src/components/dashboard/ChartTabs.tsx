@@ -3,10 +3,13 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { Alert, AlertTitle } from '@mui/material';
+import { Content, ContentBox } from 'src/css/styled-components/Content';
 import MileageTotalCompareChart from './MileageTotalCompareChart';
 import MileageTotalRankChart from './MileageTotalRankChart';
 import StudentNumPerItem from './StudentNumPerItem';
 import PointPerItem from './PointPerItem';
+import ChartInfo from './ChartInfo';
 // import Example from './StudentNumPerItem';
 
 interface TabPanelProps {
@@ -50,9 +53,23 @@ export default function ChartTabs() {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box
+      sx={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '50px',
+        alignItems: 'center',
+      }}
+    >
       <Box
-        sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex', justifyContent: 'center' }}
+        sx={{
+          borderBottom: 1,
+          borderColor: 'divider',
+          display: 'flex',
+          justifyContent: 'center',
+          width: '100%',
+        }}
       >
         <Tabs
           value={value}
@@ -62,11 +79,13 @@ export default function ChartTabs() {
           indicatorColor="primary"
         >
           <Tab label="총점 비교" {...a11yProps(0)} />
-          <Tab label="총점 순위" {...a11yProps(1)} />
-          <Tab label="항목 별 학생 수" {...a11yProps(2)} />
-          <Tab label="항목 별 포인트" {...a11yProps(3)} />
+          <Tab label="타입별 비교" {...a11yProps(1)} />
+          <Tab label="인기 항목" {...a11yProps(2)} />
         </Tabs>
       </Box>
+
+      <ChartInfo index={value} />
+
       <CustomTabPanel value={value} index={0}>
         <MileageTotalCompareChart />
       </CustomTabPanel>
@@ -75,10 +94,6 @@ export default function ChartTabs() {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
         <StudentNumPerItem />
-        {/* <StudentNumPerIteㅡ /> */}
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={3}>
-        <PointPerItem />
       </CustomTabPanel>
     </Box>
   );
