@@ -12,7 +12,7 @@ interface ICanRegister {
 
 export default function ApplyDuration() {
   const canRegister = useRecoilValue<ICanRegister | null>(canRegisterState);
-
+  console.log(canRegister);
   const renderAlertContent = () => {
     if (!canRegister) {
       // 적절한 처리 혹은 기본 반환값을 추가하세요
