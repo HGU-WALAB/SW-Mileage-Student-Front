@@ -8,6 +8,8 @@ import { IsShowStudentApplyModalState } from 'src/utils/atom';
 import { Chip, styled } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { postMileageApply } from 'src/apis/mileage';
+import { useSnackbar } from 'notistack';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelButton from '../common/CancelButton';
 
 const Title = styled(Chip)({
@@ -108,7 +110,7 @@ const contents: IGetThisSemesterItem = {
 
 const DataGripHeaderData = [
   {
-    field: 'id',
+    field: 'num',
     headerName: '번호',
     width: 100,
   },
@@ -126,14 +128,21 @@ const DataGripHeaderData = [
   {
     field: 'isRegistered',
     headerName: '등록 여부',
-    width: 100,
+    renderCell: (params: any) => (params.value ? <CheckCircleIcon color="primary" /> : ''),
+    width: 150,
   },
 ];
 
 function makeData(ItemNcategory: IThisSemesterItemWithCategory) {
+  const transformedRows = ItemNcategory.items.map((item, idx) => ({
+    num: idx + 1,
+    ...item,
+    isRegistered: item.isRegistered ? <CheckCircleIcon /> : '',
+  }));
+
   return {
     columns: DataGripHeaderData,
-    rows: ItemNcategory.items,
+    rows: transformedRows,
   };
 }
 
@@ -180,6 +189,7 @@ function countRegisteredItems(items: IItem[]) {
 }
 
 export default function ApplyFormModal({ thisSemesterItemNum, data }: IProps) {
+  const { enqueueSnackbar } = useSnackbar();
   console.log(data);
   const [isShowApplyModal, setIsShowApplyModal] = useRecoilState(IsShowStudentApplyModalState);
   const handleClose = () => setIsShowApplyModal(false);
@@ -187,7 +197,15 @@ export default function ApplyFormModal({ thisSemesterItemNum, data }: IProps) {
   const handleApply = async () => {
     if (window.confirm('마일리지 신청 하시겠습니까?')) {
       await postMileageApply();
-      await alert('마일리지 신청이 완료되었습니다.');
+      await enqueueSnackbar('마일리지 신청이 완료되었습니다', {
+        variant: 'success',
+        // anchorOrigin: {
+        //   vertical: 'top',
+        //   horizontal: 'center',
+        // },
+        autoHideDuration: 3000,
+      });
+      window.location.reload();
       handleClose();
     }
   };
@@ -219,6 +237,7 @@ export default function ApplyFormModal({ thisSemesterItemNum, data }: IProps) {
                   {`${index + 1}. ${ItemNcategory.category}`}
                 </MileageTitle>
                 <SizedBox />
+
                 <DataGrid {...makeData(ItemNcategory)} />
               </MileageBox>
             ))}

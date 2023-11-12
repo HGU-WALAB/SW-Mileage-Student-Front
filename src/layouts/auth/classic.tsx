@@ -16,6 +16,8 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import { bgGradient } from 'src/theme/css';
 // components
 import Logo from 'src/components/logo';
+import ApplyDuration from 'src/components/apply/ApplyDuration';
+import { Alert, AlertTitle } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -82,8 +84,8 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
         }),
       }}
     >
-      <Typography variant="h3" sx={{ maxWidth: 480, textAlign: 'center' }}>
-        {title || 'Hi, Welcome back'}
+      <Typography variant="h3" sx={{ maxWidth: 480, textAlign: 'center' }} color="primary">
+        {title || 'SW 마일리지 시스템'}
       </Typography>
 
       <Box
@@ -99,7 +101,7 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
         }}
       />
 
-      <Stack direction="row" spacing={2}>
+      {/* <Stack direction="row" spacing={2}>
         {METHODS.map((option) => (
           <Tooltip key={option.label} title={option.label}>
             <Link component={RouterLink} href={option.path}>
@@ -118,7 +120,9 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
             </Link>
           </Tooltip>
         ))}
-      </Stack>
+      </Stack> */}
+
+      <ApplyDuration />
     </Stack>
   );
 

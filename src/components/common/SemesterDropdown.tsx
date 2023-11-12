@@ -40,7 +40,7 @@ export default function SemesterDropdown({ semestersWithStatus }: IProps) {
         >
           {semestersWithStatus?.map((s: ISemesterWithStatus, index: number) => (
             <MenuItem key={index} value={s?.name}>
-              {s?.name} - {s?.status}
+              {s?.name}
             </MenuItem>
           ))}
         </Select>

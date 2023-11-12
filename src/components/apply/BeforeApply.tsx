@@ -148,8 +148,13 @@ export default function BeforeApply() {
       const availableObj = response.data.list.find(
         (obj: IMileageApplyRecord) => obj.status === '신청 가능'
       );
+      const applyCompleteObj = response.data.list.find(
+        (obj: IMileageApplyRecord) => obj.status === '신청 완료'
+      );
       if (availableObj) {
         setCanRegister(availableObj);
+      } else if (applyCompleteObj) {
+        setCanRegister(applyCompleteObj);
       }
       return response.data;
     },
@@ -175,7 +180,7 @@ export default function BeforeApply() {
         </TableHead>
         <TableBody>
           {(rows as any)?.map((row: IRow, idx: number) => (
-            <StyledTableRow sx={{ backgroundColor: '#EEEEEE' }} key={idx}>
+            <StyledTableRow sx={{ backgroundColor: 'background.neutral' }} key={idx}>
               <StyledTableCell component="th" scope="row">
                 {row.id}
               </StyledTableCell>

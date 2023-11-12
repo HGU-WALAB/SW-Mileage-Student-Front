@@ -6,10 +6,11 @@ export default function ProfileLottie() {
   return (
     <Box
       sx={{
-        width: '400px',
+        display: { md: 'block', xs: 'none' },
+        width: '350px',
       }}
     >
-      <Lottie style={{ width: '400px' }} animationData={animationData} />
+      <Lottie animationData={animationData} />
     </Box>
   );
 }

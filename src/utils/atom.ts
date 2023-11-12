@@ -28,6 +28,11 @@ export const canRegisterState = atom({
   default: null,
 });
 
+// {
+//   applyStart: '2023-11-07T00:00:00',
+//   applyEnd: '2023-11-09T00:00:00',
+// },
+
 export const thisSemesterState = atom({
   key: 'thisSemesterState', // unique ID (with respect to other atoms/selectors)
   default: null,

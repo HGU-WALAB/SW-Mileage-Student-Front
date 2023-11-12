@@ -20,6 +20,7 @@ import { SettingsProvider, SettingsDrawer } from 'src/components/settings';
 import { AuthProvider, AuthConsumer } from 'src/auth/context/jwt';
 import { QueryClient, QueryClientProvider, useQueryClient } from '@tanstack/react-query';
 import { RecoilRoot } from 'recoil';
+import { SnackbarProvider } from 'notistack';
 // ----------------------------------------------------------------------
 
 export default function App() {
@@ -53,13 +54,15 @@ export default function App() {
           }}
         >
           <ThemeProvider>
-            <MotionLazy>
-              <SettingsDrawer />
-              <ProgressBar />
-              <AuthConsumer>
-                <Router />
-              </AuthConsumer>
-            </MotionLazy>
+            <SnackbarProvider maxSnack={3}>
+              <MotionLazy>
+                <SettingsDrawer />
+                <ProgressBar />
+                <AuthConsumer>
+                  <Router />
+                </AuthConsumer>
+              </MotionLazy>
+            </SnackbarProvider>
           </ThemeProvider>
         </SettingsProvider>
       </RecoilRoot>

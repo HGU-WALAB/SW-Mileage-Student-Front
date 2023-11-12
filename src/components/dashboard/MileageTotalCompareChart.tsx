@@ -3,8 +3,8 @@ import { LineChart } from '@mui/x-charts';
 import { sx } from './StudentNumPerItem';
 
 const data = {
-  myTotalScore: [100, 120, 80, 200, 150],
-  studentsAvgTotalScore: [110, 120, 70, 150, 180],
+  myTotalScore: [100, 120, 80, 130, 110],
+  studentsAvgTotalScore: [110, 120, 70, 120, 140],
 };
 
 export default function MileageTotalCompareChart() {
