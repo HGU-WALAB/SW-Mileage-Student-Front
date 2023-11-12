@@ -1,20 +1,64 @@
 import { Box } from '@mui/material';
 import { LineChart } from '@mui/x-charts';
+import { AreaChart, XAxis, YAxis, CartesianGrid, Tooltip, Area } from 'recharts';
 import { sx } from './StudentNumPerItem';
 
-const data = {
-  myTotalScore: [100, 120, 80, 130, 110],
-  studentsAvgTotalScore: [110, 120, 70, 120, 140],
-};
+const data = [
+  {
+    name: '2020-02',
+    '마일리지 총합 평균': 1890,
+    '내 마일리지 총합': 4800,
+  },
+  {
+    name: '2020-01',
+    '마일리지 총합 평균': 2390,
+    '내 마일리지 총합': 3800,
+  },
+  {
+    name: '2021-02',
+    '마일리지 총합 평균': 1890,
+    '내 마일리지 총합': 4800,
+  },
+  {
+    name: '2021-01',
+    '마일리지 총합 평균': 2390,
+    '내 마일리지 총합': 3800,
+  },
+  {
+    name: '2022-01',
+    '마일리지 총합 평균': 4000,
+    '내 마일리지 총합': 2400,
+  },
+  {
+    name: '2022-02',
+    '마일리지 총합 평균': 3000,
+    '내 마일리지 총합': 1398,
+  },
+  {
+    name: '2023-01',
+    '마일리지 총합 평균': 2000,
+    '내 마일리지 총합': 9800,
+  },
+  {
+    name: '2023-02',
+    '마일리지 총합 평균': 2780,
+    '내 마일리지 총합': 3908,
+  },
+];
+
+// const data = {
+//   "내 마일리지 총합"Score: [100, 120, 80, 130, 110],
+//   studentsAvgTotalScore: [110, 120, 70, 120, 140],
+// };
 
 export default function MileageTotalCompareChart() {
   return (
     <Box sx={sx}>
       {/* <Chip label="" color="primary" /> */}
       {/* <Chip label="" color="primary" /> */}
-      <LineChart
+      {/* <LineChart
         series={[
-          { curve: 'linear', data: data.myTotalScore, label: '나의 마일리지 총점' },
+          { curve: 'linear', data: data."내 마일리지 총합"Score, label: '나의 마일리지 총점' },
           { curve: 'linear', data: data.studentsAvgTotalScore, label: '평균 마일리지 총점' },
         ]}
         xAxis={[
@@ -26,7 +70,43 @@ export default function MileageTotalCompareChart() {
         ]}
         width={1000}
         height={400}
-      />
+      /> */}
+
+      <AreaChart
+        width={1000}
+        height={400}
+        data={data}
+        margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+      >
+        <defs>
+          <linearGradient id="coloruv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+          </linearGradient>
+          <linearGradient id="colorpv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
+            <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
+          </linearGradient>
+        </defs>
+        <XAxis dataKey="name" />
+        <YAxis />
+        <CartesianGrid strokeDasharray="3 3" />
+        <Tooltip />
+        <Area
+          type="monotone"
+          dataKey="마일리지 총합 평균"
+          stroke="#8884d8"
+          fillOpacity={1}
+          fill="url(#coloruv)"
+        />
+        <Area
+          type="monotone"
+          dataKey="내 마일리지 총합"
+          stroke="#82ca9d"
+          fillOpacity={1}
+          fill="url(#colorpv)"
+        />
+      </AreaChart>
     </Box>
   );
 }
