@@ -14,6 +14,8 @@ export default function ChartInfo({ index }: IProps) {
         return '마일리지 타입별 비교';
       case 2:
         return '마일리지 인기 항목';
+      case 3:
+        return '나의 마일리지 타입별 분포';
       default:
         return 'undefined Title';
     }
@@ -27,13 +29,15 @@ export default function ChartInfo({ index }: IProps) {
         return '나의 마일리지를 타입 별로 비교해 보세요';
       case 2:
         return '학생들이 많이 활동한 마일리지를 보여줍니다';
+      case 3:
+        return '나의 마일리지가 현재 최대치로부터 얼마나 충족 되었는 지 타입 별로 보여줍니다.';
       default:
         return 'undefined Content';
     }
   };
 
   return (
-    <Alert severity="info" sx={{ width: '500px' }}>
+    <Alert severity="info" sx={{ width: '550px' }}>
       <AlertTitle>{infoTitle()}</AlertTitle>
       <ContentBox>
         <Content sx={{ display: 'flex', gap: '5px', fontSize: '15px' }}>{infoContent()}</Content>

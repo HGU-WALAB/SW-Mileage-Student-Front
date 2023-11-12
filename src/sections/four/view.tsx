@@ -13,6 +13,7 @@ import { Title } from 'src/css/styled-components/Title';
 import { Layout } from 'src/css/styled-components/Layout';
 import { useQuery } from '@tanstack/react-query';
 import { getStudentProfile } from 'src/apis/user';
+import ChartInfo from 'src/components/dashboard/ChartInfo';
 
 // ----------------------------------------------------------------------
 const data = [
@@ -209,6 +210,7 @@ export default function FourView() {
           {/* <ProfileEditCancelButton isEditing={isEditing} setIsEditing={setIsEditing} /> */}
         </Box>
 
+        <ChartInfo index={3} />
         <Box sx={{ width: '500px', height: '500px' }}>
           <ResponsiveRadar
             data={data}
@@ -247,7 +249,7 @@ export default function FourView() {
             ]}
           />
         </Box>
-        <Box
+        {/* <Box
           sx={{
             mt: 5,
             width: 1,
@@ -256,7 +258,7 @@ export default function FourView() {
             bgcolor: (theme) => alpha(theme.palette.grey[500], 0.04),
             border: (theme) => `dashed 1px ${theme.palette.divider}`,
           }}
-        />
+        /> */}
       </Layout>
     </Container>
   );
