@@ -1,4 +1,5 @@
 export const dateConverter = (date?: string) => {
+  if (!date) return '미정';
   const dateObj = new Date(date as string);
   const year = dateObj.getFullYear();
   const month = dateObj.getMonth() + 1;

@@ -205,6 +205,7 @@ export default function ApplyFormModal({ thisSemesterItemNum, data }: IProps) {
         // },
         autoHideDuration: 3000,
       });
+      window.location.reload();
       handleClose();
     }
   };
