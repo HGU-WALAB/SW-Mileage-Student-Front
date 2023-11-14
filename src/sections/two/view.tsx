@@ -21,16 +21,6 @@ export default function TwoView() {
         <Title> 마일리지 통계 자료 </Title>
         <ChartTabs />
 
-        <Box sx={{ height: '50px' }} />
-        <Alert severity="info">
-          <AlertTitle>마일리지 총점 비교</AlertTitle>
-          <ContentBox>
-            <Content sx={{ display: 'flex', gap: '5px', fontSize: '15px' }}>
-              나의 마일리지를 다른 학생들의 평균 마일리지와 비교해 보세요
-            </Content>
-          </ContentBox>
-        </Alert>
-
         {/* <Box
           sx={{
             mt: 5,
