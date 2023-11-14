@@ -24,3 +24,7 @@ export const postStudentLoginURI = `/api/student/login`;
 export const GetMyProfileURI = `/api/mileage/students/me`;
 
 export const postMileageApplyURI = `/api/mileage/apply`;
+
+export const ChartOneURI = `/api/mileage/charts/total-score`;
+
+export const ChartTwoURI = `/api/mileage/charts/category-type`;
