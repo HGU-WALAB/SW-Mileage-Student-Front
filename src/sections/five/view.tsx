@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import { useSettingsContext } from 'src/components/settings';
 import MyMileageTable from 'src/components/dashboard/MyMileageTable';
 import SemesterDropdown from 'src/components/common/SemesterDropdown';
-import { Box, Chip } from '@mui/material';
+import { Box, Checkbox, Chip, FormControlLabel } from '@mui/material';
 import { useRecoilValue } from 'recoil';
 import { mileageStatusState, semesterWithStatusState } from 'src/utils/atom';
 import { Layout } from 'src/css/styled-components/Layout';
@@ -26,7 +26,7 @@ export default function FiveView() {
 
   const status = useRecoilValue(mileageStatusState);
   const settings = useSettingsContext();
-  const [semestersWithStatus, setSemestersWithStatus] = useState<ISemesterWithStatus[]>([]);
+
   // const [updatedAt, setUpdatedAt] = useState(0);
 
   // const { data, dataUpdatedAt } = useQuery<IMileageSemesterWithStatus[]>(
@@ -52,10 +52,7 @@ export default function FiveView() {
         <Title> 나의 마일리지 </Title>
 
         <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-          <SemesterDropdown
-            semestersWithStatus={semestersWithStatus}
-            setSemestersWithStatus={setSemestersWithStatus}
-          />
+          <SemesterDropdown />
           <Chip label={semesterWithStatus.name} color="primary" variant="soft" />
           <Chip label={semesterWithStatus.status} color="primary" variant="soft" />
         </Box>

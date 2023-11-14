@@ -1,9 +1,14 @@
 import { BarChart } from '@mui/x-charts';
-import React, { useState } from 'react';
-import { Box } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Checkbox, FormControlLabel } from '@mui/material';
 import { ResponsiveRadar } from '@nivo/radar';
 import { ISemesterWithStatus } from 'src/sections/five/view';
 
+import { getCategoryTypeCompChart } from 'src/apis/chart';
+import { ICategoryTypeCompChartReqData } from 'src/utils/endPoints';
+import { semesterWithStatusState } from 'src/utils/atom';
+import { useRecoilValue } from 'recoil';
+import { useQuery } from '@tanstack/react-query';
 import SemesterDropdown from '../common/SemesterDropdown';
 
 const myNum = '3';
@@ -98,38 +103,38 @@ const checkMe = (num: string) => {
 //   height: 300,
 // };
 
-const data = [
-  {
-    taste: ' A',
-    // chardonay: 25,
-    평균: 111,
-    나: 73,
-  },
-  {
-    taste: ' B',
-    // chardonay: 88,
-    평균: 108,
-    나: 45,
-  },
-  {
-    taste: ' C',
-    // chardonay: 49,
-    평균: 63,
-    나: 34,
-  },
-  {
-    taste: ' D',
-    // chardonay: 109,
-    평균: 102,
-    나: 113,
-  },
-  {
-    taste: ' E',
-    // chardonay: 51,
-    평균: 100,
-    나: 98,
-  },
-];
+// const data = [
+//   {
+//     taste: ' A',
+//     // chardonay: 25,
+//     평균: 111,
+//     나: 73,
+//   },
+//   {
+//     taste: ' B',
+//     // chardonay: 88,
+//     평균: 108,
+//     나: 45,
+//   },
+//   {
+//     taste: ' C',
+//     // chardonay: 49,
+//     평균: 63,
+//     나: 34,
+//   },
+//   {
+//     taste: ' D',
+//     // chardonay: 109,
+//     평균: 102,
+//     나: 113,
+//   },
+//   {
+//     taste: ' E',
+//     // chardonay: 51,
+//     평균: 100,
+//     나: 98,
+//   },
+// ];
 
 const sx = {
   display: 'flex',
@@ -139,18 +144,60 @@ const sx = {
 };
 
 export default function MileageTotalRankChart() {
-  const [semestersWithStatus, setSemestersWithStatus] = useState<ISemesterWithStatus[]>([]);
+  const semesterWithStatus = useRecoilValue(semesterWithStatusState);
+
+  const [isYearFilter, setIsYearFilter] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsYearFilter(event.target.checked);
+  };
+
+  const [updatedAt, setUpdatedAt] = React.useState(0);
+
+  const { data, dataUpdatedAt, refetch } = useQuery({
+    queryKey: ['CategoryTypeCompChart'],
+    queryFn: async () => {
+      if (semesterWithStatus.name !== '학기 미정') {
+        const resData: ICategoryTypeCompChartReqData = {
+          isYearFilter,
+          semester: semesterWithStatus.name,
+        };
+        const response = await getCategoryTypeCompChart(resData);
+
+        return response.data.list.map((item) => ({
+          type: item.type,
+          나: item.myMileage,
+          평균: item.averageMileage,
+        }));
+      }
+      return [];
+    },
+  });
+
+  React.useEffect(() => {
+    if (dataUpdatedAt > updatedAt) {
+      setUpdatedAt(dataUpdatedAt);
+    }
+  }, [updatedAt, dataUpdatedAt]);
+
+  React.useEffect(() => {
+    refetch();
+  }, [isYearFilter, semesterWithStatus, refetch]);
+
   return (
     <Box sx={sx}>
-      <SemesterDropdown
-        semestersWithStatus={semestersWithStatus}
-        setSemestersWithStatus={setSemestersWithStatus}
+      <FormControlLabel
+        control={<Checkbox defaultChecked checked={isYearFilter} onChange={handleChange} />}
+        label="같은 학년만 표시"
       />
+
+      <SemesterDropdown />
+
       <Box sx={{ width: '500px', height: '500px' }}>
         <ResponsiveRadar
-          data={data}
+          data={data as any}
           keys={['나', '평균']}
-          indexBy="taste"
+          indexBy="type"
           valueFormat=">-.2f"
           margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
           borderColor={{ from: 'color' }}

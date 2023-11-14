@@ -13,12 +13,9 @@ interface ISemesterWithStatus {
   status: string;
 }
 
-interface IProps {
-  semestersWithStatus: ISemesterWithStatus[];
-  setSemestersWithStatus: React.Dispatch<React.SetStateAction<ISemesterWithStatus[]>>;
-}
+export default function SemesterDropdown() {
+  const [semestersWithStatus, setSemestersWithStatus] = React.useState<ISemesterWithStatus[]>([]);
 
-export default function SemesterDropdown({ semestersWithStatus, setSemestersWithStatus }: IProps) {
   React.useEffect(() => {
     const asyncFetch = async () => {
       const res = await getSemestersWithStatus();
@@ -37,7 +34,9 @@ export default function SemesterDropdown({ semestersWithStatus, setSemestersWith
   const [semesterWithStatus, setSemesterWithStatus] = useRecoilState(semesterWithStatusState);
 
   const handleChange = (event: SelectChangeEvent) => {
-    const selectedSemester = semestersWithStatus.find((s) => s?.name === event.target.value);
+    const selectedSemester = semestersWithStatus.find(
+      (s: ISemesterWithStatus) => s.name === event.target.value
+    );
     console.log(selectedSemester);
     if (selectedSemester) {
       setSemesterWithStatus(selectedSemester as ISemesterWithStatus);
