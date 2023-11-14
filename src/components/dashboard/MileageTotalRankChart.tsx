@@ -1,8 +1,10 @@
 import { BarChart } from '@mui/x-charts';
-import React from 'react';
+import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import { ResponsiveRadar } from '@nivo/radar';
-import { sx } from './StudentNumPerItem';
+import { ISemesterWithStatus } from 'src/sections/five/view';
+
+import SemesterDropdown from '../common/SemesterDropdown';
 
 const myNum = '3';
 const checkMe = (num: string) => {
@@ -129,19 +131,21 @@ const data = [
   },
 ];
 
-export default function MileageTotalRankChart() {
-  const [xHighlight] = React.useState<'band' | 'none' | 'line'>('band');
+const sx = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '10px',
+};
 
-  const [yHighlight] = React.useState<'none' | 'line'>('none');
+export default function MileageTotalRankChart() {
+  const [semestersWithStatus, setSemestersWithStatus] = useState<ISemesterWithStatus[]>([]);
   return (
     <Box sx={sx}>
-      {/* <BarChart
-        {...barChartsParams}
-        axisHighlight={{ x: xHighlight, y: yHighlight }}
-        width={1000}
-        height={400}
-      /> */}
-
+      <SemesterDropdown
+        semestersWithStatus={semestersWithStatus}
+        setSemestersWithStatus={setSemestersWithStatus}
+      />
       <Box sx={{ width: '500px', height: '500px' }}>
         <ResponsiveRadar
           data={data}
