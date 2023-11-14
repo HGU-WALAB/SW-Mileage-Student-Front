@@ -1,8 +1,9 @@
 // ----------------------------------------------------------------------
+const DOMAIN = process.env.REACT_APP_HOST_BASE_DOMAIN;
 
 const ROOTS = {
-  AUTH: '/auth',
-  DASHBOARD: '/dashboard',
+  AUTH: `${DOMAIN}/auth`,
+  DASHBOARD: `${DOMAIN}/dashboard`,
 };
 
 // ----------------------------------------------------------------------

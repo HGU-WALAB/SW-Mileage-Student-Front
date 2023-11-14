@@ -75,6 +75,7 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
       alignItems="center"
       justifyContent="center"
       sx={{
+        backgroundColor: 'background.neutral',
         ...bgGradient({
           color: alpha(
             theme.palette.background.default,
@@ -131,6 +132,7 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
       component="main"
       direction="row"
       sx={{
+        backgroundColor: 'background.neutral',
         minHeight: '100vh',
       }}
     >

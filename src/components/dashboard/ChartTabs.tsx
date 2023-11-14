@@ -3,13 +3,13 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Alert, AlertTitle } from '@mui/material';
+import { Alert, AlertTitle, useTheme } from '@mui/material';
 import { Content, ContentBox } from 'src/css/styled-components/Content';
 import MileageTotalCompareChart from './MileageTotalCompareChart';
 import MileageTotalRankChart from './MileageTotalRankChart';
-import StudentNumPerItem from './StudentNumPerItem';
 import PointPerItem from './PointPerItem';
 import ChartInfo from './ChartInfo';
+import StudentNumPerItem from './StudentNumPerItem';
 // import Example from './StudentNumPerItem';
 
 interface TabPanelProps {
@@ -46,6 +46,7 @@ function a11yProps(index: number) {
 }
 
 export default function ChartTabs() {
+  const theme = useTheme();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -93,7 +94,7 @@ export default function ChartTabs() {
         <MileageTotalRankChart />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        <StudentNumPerItem />
+        <StudentNumPerItem theme={theme} />
       </CustomTabPanel>
     </Box>
   );

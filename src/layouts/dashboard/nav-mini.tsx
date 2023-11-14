@@ -32,6 +32,7 @@ export default function NavMini() {
         sx={{
           top: 22,
           left: NAV.W_MINI - 12,
+          backgroundColor: 'black',
         }}
       />
 
