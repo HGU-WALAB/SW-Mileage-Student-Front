@@ -29,12 +29,12 @@ declare module '@mui/material/styles' {
 }
 
 const primaryFont = 'Public Sans, sans-serif'; // Google Font
-// const secondaryFont = 'CircularStd, sans-serif'; // Local Font
+const secondaryFont = 'CircularStd, sans-serif'; // Local Font
 
 // ----------------------------------------------------------------------
 
 export const typography = {
-  fontFamily: primaryFont,
+  fontFamily: secondaryFont,
   fontWeightRegular: 400,
   fontWeightMedium: 500,
   fontWeightSemiBold: 600,

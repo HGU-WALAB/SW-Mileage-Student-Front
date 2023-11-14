@@ -105,8 +105,8 @@
 //     </ResponsiveContainer>
 //   );
 // }
-
-import { Avatar, Card, CardContent, CardHeader, Typography } from '@mui/material';
+import { withTheme } from '@mui/material/styles';
+import { Avatar, Card, CardContent, CardHeader, Theme, Typography } from '@mui/material';
 import React, { PureComponent } from 'react';
 import {
   BarChart,
@@ -118,6 +118,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import { palette } from '../../theme/palette';
 
 export const sx = {
   display: 'flex',
@@ -210,8 +211,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-export default class StudentNumPerItem extends PureComponent {
+interface StudentNumPerItemProps {
+  theme: Theme;
+}
+export default class StudentNumPerItem extends PureComponent<StudentNumPerItemProps> {
   render() {
+    const { theme } = this.props;
     return (
       // <ResponsiveContainer width="100%" height="100%">
       <BarChart
@@ -230,7 +235,7 @@ export default class StudentNumPerItem extends PureComponent {
         <YAxis />
         <Tooltip content={<CustomTooltip />} />
         <Legend />
-        <Bar dataKey="마일리지 항목" barSize={30} fill="#8884d8" />
+        <Bar dataKey="마일리지 항목" barSize={30} fill={theme.palette.primary.main} />
       </BarChart>
       // </ResponsiveContainer>
     );
