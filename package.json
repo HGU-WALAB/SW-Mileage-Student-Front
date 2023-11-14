@@ -71,6 +71,7 @@
     "react-router": "^6.15.0",
     "react-router-dom": "^6.15.0",
     "react-scripts": "^5.0.1",
+    "recharts": "^2.9.3",
     "recoil": "^0.7.7",
     "simplebar-react": "^3.2.4",
     "styled-components": "^6.0.9",
@@ -112,7 +113,6 @@
     "prettier": "^3.0.3",
     "react-icons": "^4.11.0",
     "react-query": "^3.39.3",
-    "recharts": "^2.9.3",
     "recoil": "^0.7.7",
     "typescript": "^5.2.2"
   },
