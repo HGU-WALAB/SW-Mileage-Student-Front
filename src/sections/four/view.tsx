@@ -14,40 +14,42 @@ import { Layout } from 'src/css/styled-components/Layout';
 import { useQuery } from '@tanstack/react-query';
 import { getStudentProfile } from 'src/apis/user';
 import ChartInfo from 'src/components/dashboard/ChartInfo';
+import { IGetMyMilageCompChart, getMyCategoryTypeCompChart } from 'src/apis/chart';
 
 // ----------------------------------------------------------------------
-const data = [
-  {
-    taste: ' A',
-    // chardonay: 25,
-    평균: 111,
-    나: 73,
-  },
-  {
-    taste: ' B',
-    // chardonay: 88,
-    평균: 108,
-    나: 45,
-  },
-  {
-    taste: ' C',
-    // chardonay: 49,
-    평균: 63,
-    나: 34,
-  },
-  {
-    taste: ' D',
-    // chardonay: 109,
-    평균: 102,
-    나: 113,
-  },
-  {
-    taste: ' E',
-    // chardonay: 51,
-    평균: 100,
-    나: 98,
-  },
-];
+// const data = [
+//   {
+//     taste: ' A',
+//     // chardonay: 25,
+//     평균: 111,
+//     나: 73,
+//   },
+//   {
+//     taste: ' B',
+//     // chardonay: 88,
+//     평균: 108,
+//     나: 45,
+//   },
+//   {
+//     taste: ' C',
+//     // chardonay: 49,
+//     평균: 63,
+//     나: 34,
+//   },
+//   {
+//     taste: ' D',
+//     // chardonay: 109,
+//     평균: 102,
+//     나: 113,
+//   },
+//   {
+//     taste: ' E',
+//     // chardonay: 51,
+//     평균: 100,
+//     나: 98,
+//   },
+// ];
+
 export default function FourView() {
   const [updatedAt, setUpdatedAt] = React.useState(0);
 
@@ -66,17 +68,6 @@ export default function FourView() {
   }, [updatedAt, dataUpdatedAt]);
 
   const settings = useSettingsContext();
-
-  // const studentInfo: IStudentInfo = {
-  //   name: '오인혁',
-  //   sid: '21800446',
-  //   year: 4,
-  //   semesterCount: 8,
-  //   department: '전산전자공학부',
-  //   major1: '컴퓨터공학',
-  //   major2: '컴퓨터공학',
-  //   isEnrolled: '재학 중',
-  // };
 
   type StudentField =
     | 'name'
@@ -111,35 +102,21 @@ export default function FourView() {
     }
   };
 
-  // const {
-  //   isLoading: getUserLoading,
-  //   data,
-  //   refetch,
-  // } = useQuery<IStudentInfo>(['User', 'me'], readOneMember, {
-  //   onSuccess: async (data) => {
-  //     setValue('name', data.name);
-  //     setValue('sid', data.sid);
-  //     setValue('grade', data.grade);
-  //     setValue('semester', data.semester);
-  //     setValue('deptname', data.deptname);
-  //     setValue('major1', data.major1);
-  //     setValue('major2', data.major2);
-  //     setValue('isEnrolled', data.isEnrolled);
-  //   },
-  // });
+  const { data, refetch } = useQuery({
+    queryKey: ['MyMilageCompChart'],
+    queryFn: async () => {
+      const response = await getMyCategoryTypeCompChart();
+      return response.data?.list?.map((item) => ({
+        type: item?.type,
+        나: item?.myMileage,
+        최대: item?.upperLimitMileage,
+      }));
+    },
+  });
 
-  // const { handleSubmit, watch, setValue, getValues, control } = useForm({
-  //   defaultValues: {
-  //     name: '오인혁',
-  //     sid: '21800446',
-  //     year: '4',
-  //     semesterCount: '8',
-  //     department: '전산전자공학부',
-  //     major1: '컴퓨터공학',
-  //     major2: '컴퓨터공학',
-  //     isEnrolled: 'true',
-  //   },
-  // });
+  React.useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
@@ -187,35 +164,16 @@ export default function FourView() {
                       />
                     )
                 )}
-
-              {/* <TypoWithEdit name="21800446" fieldName="학번" />
-            <TypoWithEdit name="4학년" fieldName="학년" />
-            <TypoWithEdit name="8학기" fieldName="학기" />
-            <TypoWithEdit name="전산전자공학부" fieldName="학부" />
-            <TypoWithEdit name="컴퓨터공학" fieldName="전공1" />
-            <TypoWithEdit name="컴퓨터공학" fieldName="전공2" />
-            <TypoWithEdit name="재학 중" fieldName="재학여부" /> */}
-              {/* {Object.entries(studentInfo).map(([key, value], index) => (
-              <Box
-                sx={{ fontSize: '18px', display: 'flex', gap: '20px', minWidth: '180px' }}
-                key={index}
-              >
-                <Box sx={{ fontWeight: 'bold' }}>{studentFieldEng2Kor(key as StudentField)}</Box>{' '}
-                <Box sx={{ fontWeight: 'bold', color: 'gray' }}>{value}</Box>
-              </Box>
-            ))} */}
             </Box>
           </Box>
-
-          {/* <ProfileEditCancelButton isEditing={isEditing} setIsEditing={setIsEditing} /> */}
         </Box>
 
         <ChartInfo index={3} />
         <Box sx={{ width: '500px', height: '500px' }}>
           <ResponsiveRadar
-            data={data}
-            keys={['나', '평균']}
-            indexBy="taste"
+            data={data || []}
+            keys={['나', '최대']}
+            indexBy="type"
             valueFormat=">-.2f"
             margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
             borderColor={{ from: 'color' }}

@@ -36,3 +36,5 @@ export const ChartTwoURI = (data: ICategoryTypeCompChartReqData) =>
   `/api/mileage/charts/category-type?semester=${data.semester}${
     data.isYearFilter ? '&filter=year' : ''
   }`;
+
+export const ChartFourURI = `/api/mileage/charts/category-type/upper`;

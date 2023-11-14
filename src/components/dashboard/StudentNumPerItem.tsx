@@ -118,6 +118,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import { useQuery } from '@tanstack/react-query';
+import { getMyCategoryTypeCompChart } from 'src/apis/chart';
 import { palette } from '../../theme/palette';
 
 export const sx = {
@@ -215,8 +217,32 @@ interface StudentNumPerItemProps {
   theme: Theme;
 }
 export default class StudentNumPerItem extends PureComponent<StudentNumPerItemProps> {
+  // eslint-disable-next-line react/state-in-constructor
+  // state = {
+  //   data: null,
+  // };
+
+  // componentDidMount() {
+  //   this.fetchData();
+  // }
+
+  // fetchData = async () => {
+  //   try {
+  //     const response = await getMyCategoryTypeCompChart();
+  //     const formattedData = response.data?.list?.map(item => ({
+  //       type: item?.type,
+  //       나: item?.myMileage,
+  //       평균: item?.averageMileage,
+  //     }));
+
+  //     this.setState({ data: formattedData, isLoading: false });
+  //   }
+  // };
+
   render() {
     const { theme } = this.props;
+    // const { data } = this.state;
+
     return (
       // <ResponsiveContainer width="100%" height="100%">
       <BarChart

@@ -1,6 +1,11 @@
 import { AxiosResponse } from 'axios';
 import axiosInstance from 'src/utils/axios';
-import { ChartOneURI, ChartTwoURI, ICategoryTypeCompChartReqData } from 'src/utils/endPoints';
+import {
+  ChartFourURI,
+  ChartOneURI,
+  ChartTwoURI,
+  ICategoryTypeCompChartReqData,
+} from 'src/utils/endPoints';
 
 /**
  * @breif 통계 페이지 - 시각화 차트 1 : 마일리지 총점 비교
@@ -48,6 +53,32 @@ export const getCategoryTypeCompChart = async (
   data: ICategoryTypeCompChartReqData
 ): Promise<AxiosResponse<IGetCategoryTypeCompChart>> => {
   const response = await axiosInstance.get(ChartTwoURI(data));
+
+  return response;
+};
+
+/**
+ * @breif 마이 페이지 - 마일리지 총점 비교
+ * @endPointName chartFourURI
+ * @endPoint /api/mileage/charts/category-type/upper
+ */
+
+export interface IGetMyMilageCompChart {
+  description: string;
+  count: number;
+  list: IMileageData[];
+}
+
+interface IMileageData {
+  myMileage: number;
+  type: string;
+  upperLimitMileage: number;
+}
+
+export const getMyCategoryTypeCompChart = async (): Promise<
+  AxiosResponse<IGetMyMilageCompChart>
+> => {
+  const response = await axiosInstance.get(ChartFourURI);
 
   return response;
 };
