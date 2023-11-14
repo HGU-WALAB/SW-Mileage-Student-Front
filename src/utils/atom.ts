@@ -1,8 +1,8 @@
 import { atom } from 'recoil';
 
-export const semesterState = atom({
+export const semesterWithStatusState = atom({
   key: 'semesterState', // unique ID (with respect to other atoms/selectors)
-  default: '2022-01', // default value (aka initial value)
+  default: { name: '학기 미정', status: '진행 상태 없음' }, // default value (aka initial value)
 });
 
 export const mileageStatusState = atom({
@@ -21,4 +21,19 @@ export const userState = atom({
 export const IsShowStudentApplyModalState = atom({
   key: 'IsShowStudentApplyModalState', // unique ID (with respect to other atoms/selectors)
   default: false,
+});
+
+export const canRegisterState = atom({
+  key: 'canRegisterState', // unique ID (with respect to other atoms/selectors)
+  default: null,
+});
+
+// {
+//   applyStart: '2023-11-07T00:00:00',
+//   applyEnd: '2023-11-09T00:00:00',
+// },
+
+export const thisSemesterState = atom({
+  key: 'thisSemesterState', // unique ID (with respect to other atoms/selectors)
+  default: null,
 });

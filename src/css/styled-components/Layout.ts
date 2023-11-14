@@ -5,5 +5,5 @@ export const Layout = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '30px',
+  gap: '50px',
 });

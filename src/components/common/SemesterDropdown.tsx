@@ -5,16 +5,26 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useRecoilState } from 'recoil';
-import { semesterState } from 'src/utils/atom';
+import { semesterWithStatusState } from 'src/utils/atom';
+
+interface ISemesterWithStatus {
+  name: string;
+  status: string;
+}
 
 interface IProps {
-  semesters: string[];
+  semestersWithStatus: ISemesterWithStatus[];
 }
-export default function SemesterDropdown({ semesters }: IProps) {
-  const [semester, setSemester] = useRecoilState(semesterState);
+
+export default function SemesterDropdown({ semestersWithStatus }: IProps) {
+  const [semesterWithStatus, setSemesterWithStatus] = useRecoilState(semesterWithStatusState);
 
   const handleChange = (event: SelectChangeEvent) => {
-    setSemester(event.target.value as string);
+    const selectedSemester = semestersWithStatus.find((s) => s?.name === event.target.value);
+    console.log(selectedSemester);
+    if (selectedSemester) {
+      setSemesterWithStatus(selectedSemester as ISemesterWithStatus);
+    }
   };
 
   return (
@@ -24,13 +34,13 @@ export default function SemesterDropdown({ semesters }: IProps) {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={semester}
+          value={semesterWithStatus.name}
           label="학기"
-          onChange={handleChange}
+          onChange={handleChange} // 이벤트 핸들러를 직접 전달합니다.
         >
-          {semesters.map((s, index) => (
-            <MenuItem key={index} value={s}>
-              {s}
+          {semestersWithStatus?.map((s: ISemesterWithStatus, index: number) => (
+            <MenuItem key={index} value={s?.name}>
+              {s?.name}
             </MenuItem>
           ))}
         </Select>

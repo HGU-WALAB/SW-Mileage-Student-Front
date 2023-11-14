@@ -20,6 +20,10 @@ import {
 } from 'react-icons/pi';
 import { dateConverter } from 'src/utils/converter/dateConverter';
 import { Typography } from '@mui/material';
+import { getSemestersWithStatus } from 'src/apis/mileage';
+import { useQuery } from '@tanstack/react-query';
+import { useSetRecoilState } from 'recoil';
+import { canRegisterState } from 'src/utils/atom';
 
 const IconList = (idx: number) => {
   switch ((idx % 10) + 1) {
@@ -68,6 +72,18 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 type IStatus = '선정 완료' | '신청 완료' | '신청 가능' | '신청 기간 아님';
 
+interface IRow {
+  id: React.ReactNode;
+  semester: string;
+  applyStart: string;
+  applyEnd: string;
+  status: IStatus;
+}
+
+interface IRows {
+  list: IRow[];
+}
+
 function createData(
   id: React.ReactNode,
   semester: string,
@@ -83,39 +99,73 @@ interface IGetMileageApplyRecords {
 }
 
 interface IMileageApplyRecord {
-  semester: string;
+  name: string;
   status: string;
   applyStart: string;
   applyEnd: string;
 }
 
-const data: IGetMileageApplyRecords = {
-  list: [
-    {
-      semester: '2022-01',
-      status: '신청 완료',
-      applyStart: '2021-09-01T00:00',
-      applyEnd: '2021-09-30T00:00',
-    },
-    {
-      semester: '2022-02',
-      status: '신청 가능',
-      applyStart: '2021-09-01T00:00',
-      applyEnd: '2021-09-30T00:00',
-    },
-  ],
-};
+// const data: IGetMileageApplyRecords = {
+//   list: [
+//     {
+//       semester: '2022-01',
+//       status: '신청 완료',
+//       applyStart: '2021-09-01T00:00',
+//       applyEnd: '2021-09-30T00:00',
+//     },
+//     {
+//       semester: '2022-02',
+//       status: '신청 가능',
+//       applyStart: '2021-09-01T00:00',
+//       applyEnd: '2021-09-30T00:00',
+//     },
+//   ],
+// };
 
 const makeData = (applyRecords: IGetMileageApplyRecords) => {
   const result = applyRecords.list.map((item, idx: number) =>
-    createData(IconList(idx), item.semester, item.applyStart, item.applyEnd, item.status as IStatus)
+    createData(IconList(idx), item.name, item.applyStart, item.applyEnd, item.status as IStatus)
   );
   return result;
 };
 
-const rows = makeData(data);
+// const rows = makeData(data);
 
 export default function BeforeApply() {
+  const [rows, setRows] = React.useState();
+
+  const setCanRegister = useSetRecoilState(canRegisterState);
+
+  const [updatedAt, setUpdatedAt] = React.useState(0);
+
+  const { data, dataUpdatedAt } = useQuery<IGetMileageApplyRecords>({
+    queryKey: ['mileageApplyRecords'],
+    queryFn: async () => {
+      const response = await getSemestersWithStatus();
+
+      setRows(makeData(response.data as IGetMileageApplyRecords) as any);
+
+      const availableObj = response.data.list.find(
+        (obj: IMileageApplyRecord) => obj.status === '신청 가능'
+      );
+      const applyCompleteObj = response.data.list.find(
+        (obj: IMileageApplyRecord) => obj.status === '신청 완료'
+      );
+      if (availableObj) {
+        setCanRegister(availableObj);
+      } else if (applyCompleteObj) {
+        setCanRegister(applyCompleteObj);
+      }
+      return response.data;
+    },
+  });
+
+  React.useEffect(() => {
+    if (dataUpdatedAt > updatedAt) {
+      setUpdatedAt(dataUpdatedAt);
+    }
+  }, [updatedAt, dataUpdatedAt]);
+
   return (
     <TableContainer sx={{ width: '700px' }} component={Paper}>
       <Table aria-label="customized table">
@@ -129,8 +179,8 @@ export default function BeforeApply() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, idx) => (
-            <StyledTableRow sx={{ backgroundColor: '#EEEEEE' }} key={idx}>
+          {(rows as any)?.map((row: IRow, idx: number) => (
+            <StyledTableRow sx={{ backgroundColor: 'background.neutral' }} key={idx}>
               <StyledTableCell component="th" scope="row">
                 {row.id}
               </StyledTableCell>

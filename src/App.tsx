@@ -18,8 +18,9 @@ import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { SettingsProvider, SettingsDrawer } from 'src/components/settings';
 // auth
 import { AuthProvider, AuthConsumer } from 'src/auth/context/jwt';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider, useQueryClient } from '@tanstack/react-query';
 import { RecoilRoot } from 'recoil';
+import { SnackbarProvider } from 'notistack';
 // ----------------------------------------------------------------------
 
 export default function App() {
@@ -34,26 +35,26 @@ export default function App() {
   `;
 
   console.info(`%c${charAt}`, 'color: #5BE49B');
+  const queryClient = new QueryClient();
 
   useScrollToTop();
 
-  const queryClient = new QueryClient(); // 생성
-
   return (
-    <AuthProvider>
+    // <AuthProvider>
+    <QueryClientProvider client={queryClient}>
       <RecoilRoot>
-        <QueryClientProvider client={queryClient}>
-          <SettingsProvider
-            defaultSettings={{
-              themeMode: 'light', // 'light' | 'dark'
-              themeDirection: 'ltr', //  'rtl' | 'ltr'
-              themeContrast: 'default', // 'default' | 'bold'
-              themeLayout: 'vertical', // 'vertical' | 'horizontal' | 'mini'
-              themeColorPresets: 'default', // 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red'
-              themeStretch: false,
-            }}
-          >
-            <ThemeProvider>
+        <SettingsProvider
+          defaultSettings={{
+            themeMode: 'light', // 'light' | 'dark'
+            themeDirection: 'ltr', //  'rtl' | 'ltr'
+            themeContrast: 'default', // 'default' | 'bold'
+            themeLayout: 'vertical', // 'vertical' | 'horizontal' | 'mini'
+            themeColorPresets: 'default', // 'default' | 'cyan' | 'purple' | 'blue' | 'orange' | 'red'
+            themeStretch: false,
+          }}
+        >
+          <ThemeProvider>
+            <SnackbarProvider maxSnack={3}>
               <MotionLazy>
                 <SettingsDrawer />
                 <ProgressBar />
@@ -61,10 +62,11 @@ export default function App() {
                   <Router />
                 </AuthConsumer>
               </MotionLazy>
-            </ThemeProvider>
-          </SettingsProvider>
-        </QueryClientProvider>
+            </SnackbarProvider>
+          </ThemeProvider>
+        </SettingsProvider>
       </RecoilRoot>
-    </AuthProvider>
+      {/* </AuthProvider> */}
+    </QueryClientProvider>
   );
 }

@@ -11,10 +11,13 @@ import { paths } from 'src/routes/paths';
 // locales
 // components
 import Label from 'src/components/label';
+import { useRecoilValue } from 'recoil';
+import { userState } from 'src/utils/atom';
 
 // ----------------------------------------------------------------------
 
 export default function NavUpgrade() {
+  const userInfo = useRecoilValue(userState);
   const { user } = useMockedUser();
 
   return (
@@ -28,7 +31,7 @@ export default function NavUpgrade() {
       <Stack alignItems="center">
         <Box sx={{ position: 'relative' }}>
           <Avatar src={user?.photoURL} alt={user?.displayName} sx={{ width: 48, height: 48 }} />
-          <Label
+          {/* <Label
             color="success"
             variant="filled"
             sx={{
@@ -41,22 +44,22 @@ export default function NavUpgrade() {
             }}
           >
             Free
-          </Label>
+          </Label> */}
         </Box>
 
-        <Stack spacing={0.5} sx={{ mt: 1.5, mb: 2 }}>
+        {/* <Stack spacing={0.5} sx={{ mt: 1.5, mb: 2 }}>
           <Typography variant="subtitle2" noWrap>
-            {user?.displayName}
+            {userInfo?.name} 학부생
           </Typography>
 
           <Typography variant="body2" noWrap sx={{ color: 'text.disabled' }}>
-            {user?.email}
+            {userInfo?.sid}
           </Typography>
-        </Stack>
+        </Stack> */}
 
-        <Button variant="contained" href={paths.minimalUI} target="_blank" rel="noopener">
+        {/* <Button variant="contained" href={paths.minimalUI} target="_blank" rel="noopener">
           Upgrade to Pro
-        </Button>
+        </Button> */}
       </Stack>
     </Stack>
   );
