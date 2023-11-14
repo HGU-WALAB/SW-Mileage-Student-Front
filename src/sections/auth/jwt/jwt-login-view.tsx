@@ -44,7 +44,9 @@ export default function JwtLoginView() {
 
   const LoginSchema = Yup.object().shape({
     sid: Yup.string().required('필수 항목 입니다.'),
-    password: Yup.string().required('필수 항목 입니다.'),
+    password: Yup.string()
+      .matches(/^[^\uAC00-\uD7A3]*$/, '비밀번호에 한글을 사용할 수 없습니다.')
+      .required('필수 항목 입니다.'),
   });
 
   const defaultValues = {
@@ -122,6 +124,7 @@ export default function JwtLoginView() {
             </InputAdornment>
           ),
         }}
+        style={{ imeMode: 'disabled' }}
       />
       <Link
         to="https://hisnet.handong.edu/"
