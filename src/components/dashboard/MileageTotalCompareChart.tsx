@@ -61,7 +61,11 @@ export default function MileageTotalCompareChart() {
     queryKey: ['totalPointCompChart'],
     queryFn: async () => {
       const response = await getTotalPointCompChart();
-      return response.data.list;
+      return response.data.list?.map((item) => ({
+        name: item.semester,
+        '마일리지 총합 평균': item.averageMileage,
+        '내 마일리지 총합': item.myMileage,
+      }));
     },
   });
 

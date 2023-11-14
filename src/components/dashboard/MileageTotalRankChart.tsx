@@ -152,33 +152,25 @@ export default function MileageTotalRankChart() {
     setIsYearFilter(event.target.checked);
   };
 
-  const [updatedAt, setUpdatedAt] = React.useState(0);
-
-  const { data, dataUpdatedAt, refetch } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ['CategoryTypeCompChart'],
     queryFn: async () => {
-      if (semesterWithStatus.name !== '학기 미정') {
-        const resData: ICategoryTypeCompChartReqData = {
-          isYearFilter,
-          semester: semesterWithStatus.name,
-        };
-        const response = await getCategoryTypeCompChart(resData);
+      if (semesterWithStatus.name === '학기 미정') return [];
+      const resData: ICategoryTypeCompChartReqData = {
+        isYearFilter,
+        semester: semesterWithStatus.name,
+      };
+      const response = await getCategoryTypeCompChart(resData);
 
-        return response.data.list.map((item) => ({
-          type: item.type,
-          나: item.myMileage,
-          평균: item.averageMileage,
-        }));
-      }
-      return [];
+      return response.data?.list?.map((item) => ({
+        type: item?.type,
+        나: item?.myMileage,
+        평균: item?.averageMileage,
+      }));
+
+      // return [];
     },
   });
-
-  React.useEffect(() => {
-    if (dataUpdatedAt > updatedAt) {
-      setUpdatedAt(dataUpdatedAt);
-    }
-  }, [updatedAt, dataUpdatedAt]);
 
   React.useEffect(() => {
     refetch();
@@ -186,50 +178,50 @@ export default function MileageTotalRankChart() {
 
   return (
     <Box sx={sx}>
+      <SemesterDropdown />
       <FormControlLabel
         control={<Checkbox defaultChecked checked={isYearFilter} onChange={handleChange} />}
         label="같은 학년만 표시"
       />
-
-      <SemesterDropdown />
-
       <Box sx={{ width: '500px', height: '500px' }}>
-        <ResponsiveRadar
-          data={data as any}
-          keys={['나', '평균']}
-          indexBy="type"
-          valueFormat=">-.2f"
-          margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
-          borderColor={{ from: 'color' }}
-          gridLabelOffset={36}
-          dotSize={4}
-          dotColor={{ theme: 'background' }}
-          dotBorderWidth={2}
-          colors={{ scheme: 'nivo' }}
-          blendMode="multiply"
-          motionConfig="wobbly"
-          legends={[
-            {
-              anchor: 'top-left',
-              direction: 'column',
-              translateX: -50,
-              translateY: -40,
-              itemWidth: 80,
-              itemHeight: 20,
-              itemTextColor: '#999',
-              symbolSize: 12,
-              symbolShape: 'circle',
-              effects: [
-                {
-                  on: 'hover',
-                  style: {
-                    itemTextColor: '#000',
+        {data && (
+          <ResponsiveRadar
+            data={data}
+            keys={['나', '평균']}
+            indexBy="type"
+            valueFormat=">-.2f"
+            margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+            borderColor={{ from: 'color' }}
+            gridLabelOffset={36}
+            dotSize={4}
+            dotColor={{ theme: 'background' }}
+            dotBorderWidth={2}
+            colors={{ scheme: 'nivo' }}
+            blendMode="multiply"
+            motionConfig="wobbly"
+            legends={[
+              {
+                anchor: 'top-left',
+                direction: 'column',
+                translateX: -50,
+                translateY: -40,
+                itemWidth: 80,
+                itemHeight: 20,
+                itemTextColor: '#999',
+                symbolSize: 12,
+                symbolShape: 'circle',
+                effects: [
+                  {
+                    on: 'hover',
+                    style: {
+                      itemTextColor: '#000',
+                    },
                   },
-                },
-              ],
-            },
-          ]}
-        />
+                ],
+              },
+            ]}
+          />
+        )}
       </Box>
     </Box>
   );
