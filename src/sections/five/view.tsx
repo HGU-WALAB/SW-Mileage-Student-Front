@@ -45,21 +45,6 @@ export default function FiveView() {
   //   }
   // }, [dataUpdatedAt])
 
-  useEffect(() => {
-    const asyncFetch = async () => {
-      const res = await getSemestersWithStatus();
-      console.log(res.data);
-      setSemestersWithStatus([
-        { name: '학기 미정', status: '진행 상태 없음' },
-        ...res.data.list.map((e: IMileageSemesterWithStatus) => ({
-          name: e?.name,
-          status: e?.status,
-        })),
-      ]);
-    };
-    asyncFetch();
-  }, []);
-
   //
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
@@ -67,7 +52,10 @@ export default function FiveView() {
         <Title> 나의 마일리지 </Title>
 
         <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-          <SemesterDropdown semestersWithStatus={semestersWithStatus} />
+          <SemesterDropdown
+            semestersWithStatus={semestersWithStatus}
+            setSemestersWithStatus={setSemestersWithStatus}
+          />
           <Chip label={semesterWithStatus.name} color="primary" variant="soft" />
           <Chip label={semesterWithStatus.status} color="primary" variant="soft" />
         </Box>

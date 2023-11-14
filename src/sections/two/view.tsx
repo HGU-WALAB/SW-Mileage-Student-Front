@@ -9,6 +9,9 @@ import { Title } from 'src/css/styled-components/Title';
 import { Layout } from 'src/css/styled-components/Layout';
 import { Alert, AlertTitle } from '@mui/material';
 import { Content, ContentBox } from 'src/css/styled-components/Content';
+import { useQuery } from '@tanstack/react-query';
+import { getTotalPointCompChart } from 'src/apis/chart';
+import React from 'react';
 
 // ----------------------------------------------------------------------
 
