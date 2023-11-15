@@ -13,8 +13,6 @@ import {
   userState,
 } from 'src/utils/atom';
 import { styled } from '@mui/material';
-import { useQuery } from '@tanstack/react-query';
-import { getAllMileageThisSemester } from 'src/apis/mileage';
 import TermsCheckbox from './TermsCheckBox';
 import CancelButton from '../common/CancelButton';
 

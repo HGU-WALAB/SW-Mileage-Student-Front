@@ -14,7 +14,7 @@ import { Layout } from 'src/css/styled-components/Layout';
 import { useQuery } from '@tanstack/react-query';
 import { getStudentProfile } from 'src/apis/user';
 import ChartInfo from 'src/components/dashboard/ChartInfo';
-import { IGetMyMilageCompChart, getMyCategoryTypeCompChart } from 'src/apis/chart';
+import { getMyCategoryTypeCompChart } from 'src/apis/chart';
 
 // ----------------------------------------------------------------------
 // const data = [

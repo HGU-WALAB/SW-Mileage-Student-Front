@@ -80,9 +80,9 @@ interface IRow {
   status: IStatus;
 }
 
-interface IRows {
-  list: IRow[];
-}
+// interface IRows {
+//   list: IRow[];
+// }
 
 function createData(
   id: React.ReactNode,
@@ -138,7 +138,7 @@ export default function BeforeApply() {
 
   const [updatedAt, setUpdatedAt] = React.useState(0);
 
-  const { data, dataUpdatedAt } = useQuery<IGetMileageApplyRecords>({
+  const { dataUpdatedAt } = useQuery<IGetMileageApplyRecords>({
     queryKey: ['mileageApplyRecords'],
     queryFn: async () => {
       const response = await getSemestersWithStatus();
