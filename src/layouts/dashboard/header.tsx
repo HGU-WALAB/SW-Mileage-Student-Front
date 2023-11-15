@@ -15,7 +15,7 @@ import SvgColor from 'src/components/svg-color';
 import { useSettingsContext } from 'src/components/settings';
 //
 import { HEADER, NAV } from '../config-layout';
-import { Searchbar, AccountPopover, SettingsButton, NotificationsPopover } from '../_common';
+import { AccountPopover, SettingsButton } from '../_common';
 
 // ----------------------------------------------------------------------
 
@@ -89,7 +89,7 @@ export default function Header({ onOpenNav }: Props) {
           }),
           ...(isNavHorizontal && {
             width: 1,
-            bgcolor: 'background.default',
+
             height: HEADER.H_DESKTOP_OFFSET,
             borderBottom: `dashed 1px ${theme.palette.divider}`,
           }),

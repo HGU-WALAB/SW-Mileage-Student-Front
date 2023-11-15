@@ -1,16 +1,13 @@
-import { BarChart } from '@mui/x-charts';
-import React from 'react';
-import { Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Checkbox, FormControlLabel } from '@mui/material';
 import { ResponsiveRadar } from '@nivo/radar';
-import { sx } from './StudentNumPerItem';
 
-const myNum = '3';
-const checkMe = (num: string) => {
-  if (num === myNum) {
-    return `${num}( 나 )`;
-  }
-  return num;
-};
+import { getCategoryTypeCompChart } from 'src/apis/chart';
+import { ICategoryTypeCompChartReqData } from 'src/utils/endPoints';
+import { semesterWithStatusState } from 'src/utils/atom';
+import { useRecoilValue } from 'recoil';
+import { useQuery } from '@tanstack/react-query';
+import SemesterDropdown from '../common/SemesterDropdown';
 
 // const barChartsParams = {
 //   xAxis: [
@@ -96,89 +93,125 @@ const checkMe = (num: string) => {
 //   height: 300,
 // };
 
-const data = [
-  {
-    taste: ' A',
-    // chardonay: 25,
-    평균: 111,
-    나: 73,
-  },
-  {
-    taste: ' B',
-    // chardonay: 88,
-    평균: 108,
-    나: 45,
-  },
-  {
-    taste: ' C',
-    // chardonay: 49,
-    평균: 63,
-    나: 34,
-  },
-  {
-    taste: ' D',
-    // chardonay: 109,
-    평균: 102,
-    나: 113,
-  },
-  {
-    taste: ' E',
-    // chardonay: 51,
-    평균: 100,
-    나: 98,
-  },
-];
+// const data = [
+//   {
+//     taste: ' A',
+//     // chardonay: 25,
+//     평균: 111,
+//     나: 73,
+//   },
+//   {
+//     taste: ' B',
+//     // chardonay: 88,
+//     평균: 108,
+//     나: 45,
+//   },
+//   {
+//     taste: ' C',
+//     // chardonay: 49,
+//     평균: 63,
+//     나: 34,
+//   },
+//   {
+//     taste: ' D',
+//     // chardonay: 109,
+//     평균: 102,
+//     나: 113,
+//   },
+//   {
+//     taste: ' E',
+//     // chardonay: 51,
+//     평균: 100,
+//     나: 98,
+//   },
+// ];
+
+const sx = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: '10px',
+};
 
 export default function MileageTotalRankChart() {
-  const [xHighlight] = React.useState<'band' | 'none' | 'line'>('band');
+  const semesterWithStatus = useRecoilValue(semesterWithStatusState);
 
-  const [yHighlight] = React.useState<'none' | 'line'>('none');
+  const [isYearFilter, setIsYearFilter] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsYearFilter(event.target.checked);
+  };
+
+  const { data, refetch } = useQuery({
+    queryKey: ['CategoryTypeCompChart'],
+    queryFn: async () => {
+      if (semesterWithStatus.name === '학기 미정') return [];
+      const resData: ICategoryTypeCompChartReqData = {
+        isYearFilter,
+        semester: semesterWithStatus.name,
+      };
+      const response = await getCategoryTypeCompChart(resData);
+
+      return response.data?.list?.map((item) => ({
+        type: item?.type,
+        나: item?.myMileage,
+        평균: item?.averageMileage,
+      }));
+
+      // return [];
+    },
+  });
+
+  React.useEffect(() => {
+    refetch();
+  }, [isYearFilter, semesterWithStatus, refetch]);
+
   return (
     <Box sx={sx}>
-      {/* <BarChart
-        {...barChartsParams}
-        axisHighlight={{ x: xHighlight, y: yHighlight }}
-        width={1000}
-        height={400}
-      /> */}
-
+      <SemesterDropdown />
+      <FormControlLabel
+        control={<Checkbox defaultChecked checked={isYearFilter} onChange={handleChange} />}
+        label="같은 학년만 표시"
+      />
       <Box sx={{ width: '500px', height: '500px' }}>
-        <ResponsiveRadar
-          data={data}
-          keys={['나', '평균']}
-          indexBy="taste"
-          valueFormat=">-.2f"
-          margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
-          borderColor={{ from: 'color' }}
-          gridLabelOffset={36}
-          dotSize={4}
-          dotColor={{ theme: 'background' }}
-          dotBorderWidth={2}
-          colors={{ scheme: 'nivo' }}
-          blendMode="multiply"
-          motionConfig="wobbly"
-          legends={[
-            {
-              anchor: 'top-left',
-              direction: 'column',
-              translateX: -50,
-              translateY: -40,
-              itemWidth: 80,
-              itemHeight: 20,
-              itemTextColor: '#999',
-              symbolSize: 12,
-              symbolShape: 'circle',
-              effects: [
-                {
-                  on: 'hover',
-                  style: {
-                    itemTextColor: '#000',
+        {data && (
+          <ResponsiveRadar
+            data={data}
+            keys={['나', '평균']}
+            indexBy="type"
+            valueFormat=">-.2f"
+            margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+            borderColor={{ from: 'color' }}
+            gridLabelOffset={36}
+            dotSize={4}
+            dotColor={{ theme: 'background' }}
+            dotBorderWidth={2}
+            colors={{ scheme: 'nivo' }}
+            blendMode="multiply"
+            motionConfig="wobbly"
+            legends={[
+              {
+                anchor: 'top-left',
+                direction: 'column',
+                translateX: -50,
+                translateY: -40,
+                itemWidth: 80,
+                itemHeight: 20,
+                itemTextColor: '#999',
+                symbolSize: 12,
+                symbolShape: 'circle',
+                effects: [
+                  {
+                    on: 'hover',
+                    style: {
+                      itemTextColor: '#000',
+                    },
                   },
-                },
-              ],
-            },
-          ]}
-        />
+                ],
+              },
+            ]}
+          />
+        )}
       </Box>
     </Box>
   );

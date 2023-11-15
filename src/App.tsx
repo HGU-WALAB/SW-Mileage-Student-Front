@@ -17,8 +17,8 @@ import ProgressBar from 'src/components/progress-bar';
 import { MotionLazy } from 'src/components/animate/motion-lazy';
 import { SettingsProvider, SettingsDrawer } from 'src/components/settings';
 // auth
-import { AuthProvider, AuthConsumer } from 'src/auth/context/jwt';
-import { QueryClient, QueryClientProvider, useQueryClient } from '@tanstack/react-query';
+import { AuthConsumer } from 'src/auth/context/jwt';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RecoilRoot } from 'recoil';
 import { SnackbarProvider } from 'notistack';
 // ----------------------------------------------------------------------

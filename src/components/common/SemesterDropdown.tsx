@@ -6,21 +6,37 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useRecoilState } from 'recoil';
 import { semesterWithStatusState } from 'src/utils/atom';
+import { IMileageSemesterWithStatus, getSemestersWithStatus } from 'src/apis/mileage';
 
 interface ISemesterWithStatus {
   name: string;
   status: string;
 }
 
-interface IProps {
-  semestersWithStatus: ISemesterWithStatus[];
-}
+export default function SemesterDropdown() {
+  const [semestersWithStatus, setSemestersWithStatus] = React.useState<ISemesterWithStatus[]>([]);
 
-export default function SemesterDropdown({ semestersWithStatus }: IProps) {
+  React.useEffect(() => {
+    const asyncFetch = async () => {
+      const res = await getSemestersWithStatus();
+      console.log(res.data);
+      setSemestersWithStatus([
+        { name: '학기 미정', status: '진행 상태 없음' },
+        ...res.data.list.map((e: IMileageSemesterWithStatus) => ({
+          name: e?.name,
+          status: e?.status,
+        })),
+      ]);
+    };
+    asyncFetch();
+  }, [setSemestersWithStatus]);
+
   const [semesterWithStatus, setSemesterWithStatus] = useRecoilState(semesterWithStatusState);
 
   const handleChange = (event: SelectChangeEvent) => {
-    const selectedSemester = semestersWithStatus.find((s) => s?.name === event.target.value);
+    const selectedSemester = semestersWithStatus.find(
+      (s: ISemesterWithStatus) => s.name === event.target.value
+    );
     console.log(selectedSemester);
     if (selectedSemester) {
       setSemesterWithStatus(selectedSemester as ISemesterWithStatus);

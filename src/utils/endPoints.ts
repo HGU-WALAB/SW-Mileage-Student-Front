@@ -24,3 +24,17 @@ export const postStudentLoginURI = `/api/student/login`;
 export const GetMyProfileURI = `/api/mileage/students/me`;
 
 export const postMileageApplyURI = `/api/mileage/apply`;
+
+export const ChartOneURI = `/api/mileage/charts/total-score`;
+
+export interface ICategoryTypeCompChartReqData {
+  isYearFilter: boolean;
+  semester: string;
+}
+
+export const ChartTwoURI = (data: ICategoryTypeCompChartReqData) =>
+  `/api/mileage/charts/category-type?semester=${data.semester}${
+    data.isYearFilter ? '&filter=year' : ''
+  }`;
+
+export const ChartFourURI = `/api/mileage/charts/category-type/upper`;

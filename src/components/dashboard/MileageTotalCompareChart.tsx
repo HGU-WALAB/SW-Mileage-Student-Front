@@ -1,50 +1,52 @@
 import { Box } from '@mui/material';
-import { LineChart } from '@mui/x-charts';
 import { AreaChart, XAxis, YAxis, CartesianGrid, Tooltip, Area } from 'recharts';
+import React from 'react';
+import { getTotalPointCompChart } from 'src/apis/chart';
+import { useQuery } from '@tanstack/react-query';
 import { sx } from './StudentNumPerItem';
 
-const data = [
-  {
-    name: '2020-02',
-    '마일리지 총합 평균': 1890,
-    '내 마일리지 총합': 4800,
-  },
-  {
-    name: '2020-01',
-    '마일리지 총합 평균': 2390,
-    '내 마일리지 총합': 3800,
-  },
-  {
-    name: '2021-02',
-    '마일리지 총합 평균': 1890,
-    '내 마일리지 총합': 4800,
-  },
-  {
-    name: '2021-01',
-    '마일리지 총합 평균': 2390,
-    '내 마일리지 총합': 3800,
-  },
-  {
-    name: '2022-01',
-    '마일리지 총합 평균': 4000,
-    '내 마일리지 총합': 2400,
-  },
-  {
-    name: '2022-02',
-    '마일리지 총합 평균': 3000,
-    '내 마일리지 총합': 1398,
-  },
-  {
-    name: '2023-01',
-    '마일리지 총합 평균': 2000,
-    '내 마일리지 총합': 9800,
-  },
-  {
-    name: '2023-02',
-    '마일리지 총합 평균': 2780,
-    '내 마일리지 총합': 3908,
-  },
-];
+// const data = [
+//   {
+//     name: '2020-02',
+//     '마일리지 총합 평균': 1890,
+//     '내 마일리지 총합': 4800,
+//   },
+//   {
+//     name: '2020-01',
+//     '마일리지 총합 평균': 2390,
+//     '내 마일리지 총합': 3800,
+//   },
+//   {
+//     name: '2021-02',
+//     '마일리지 총합 평균': 1890,
+//     '내 마일리지 총합': 4800,
+//   },
+//   {
+//     name: '2021-01',
+//     '마일리지 총합 평균': 2390,
+//     '내 마일리지 총합': 3800,
+//   },
+//   {
+//     name: '2022-01',
+//     '마일리지 총합 평균': 4000,
+//     '내 마일리지 총합': 2400,
+//   },
+//   {
+//     name: '2022-02',
+//     '마일리지 총합 평균': 3000,
+//     '내 마일리지 총합': 1398,
+//   },
+//   {
+//     name: '2023-01',
+//     '마일리지 총합 평균': 2000,
+//     '내 마일리지 총합': 9800,
+//   },
+//   {
+//     name: '2023-02',
+//     '마일리지 총합 평균': 2780,
+//     '내 마일리지 총합': 3908,
+//   },
+// ];
 
 // const data = {
 //   "내 마일리지 총합"Score: [100, 120, 80, 130, 110],
@@ -52,26 +54,28 @@ const data = [
 // };
 
 export default function MileageTotalCompareChart() {
+  const [updatedAt, setUpdatedAt] = React.useState(0);
+
+  const { data, dataUpdatedAt } = useQuery({
+    queryKey: ['totalPointCompChart'],
+    queryFn: async () => {
+      const response = await getTotalPointCompChart();
+      return response.data.list?.map((item) => ({
+        name: item.semester,
+        '마일리지 총합 평균': item.averageMileage,
+        '내 마일리지 총합': item.myMileage,
+      }));
+    },
+  });
+
+  React.useEffect(() => {
+    if (dataUpdatedAt > updatedAt) {
+      setUpdatedAt(dataUpdatedAt);
+    }
+  }, [updatedAt, dataUpdatedAt]);
+
   return (
     <Box sx={sx}>
-      {/* <Chip label="" color="primary" /> */}
-      {/* <Chip label="" color="primary" /> */}
-      {/* <LineChart
-        series={[
-          { curve: 'linear', data: data."내 마일리지 총합"Score, label: '나의 마일리지 총점' },
-          { curve: 'linear', data: data.studentsAvgTotalScore, label: '평균 마일리지 총점' },
-        ]}
-        xAxis={[
-          {
-            data: ['2021-02', '2022-01', '2022-02', '2023-01', '2023-02'],
-
-            scaleType: 'point',
-          },
-        ]}
-        width={1000}
-        height={400}
-      /> */}
-
       <AreaChart
         width={1000}
         height={400}

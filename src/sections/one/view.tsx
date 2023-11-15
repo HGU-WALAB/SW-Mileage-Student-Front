@@ -4,21 +4,17 @@ import Container from '@mui/material/Container';
 // components
 import { useSettingsContext } from 'src/components/settings';
 import TermsOfUse from 'src/components/apply/TermsOfUse';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ApplyFormModal from 'src/components/apply/ApplyFormModal';
 import BeforeApply from 'src/components/apply/BeforeApply';
 import { Title } from 'src/css/styled-components/Title';
 import { Layout } from 'src/css/styled-components/Layout';
-import { Content, ContentBox } from 'src/css/styled-components/Content';
 // import { useQuery } from 'react-query';
 import { getAllMileageThisSemester } from 'src/apis/mileage';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { canRegisterState, thisSemesterState } from 'src/utils/atom';
+import { useSetRecoilState } from 'recoil';
+import { thisSemesterState } from 'src/utils/atom';
 import axiosInstance from 'src/utils/axios';
-import { daysBetween, parseMonthAndDay } from 'src/utils/converter/dateConverter';
-import { Typography } from '@mui/material';
 import ApplyDuration from 'src/components/apply/ApplyDuration';
 
 // ----------------------------------------------------------------------
