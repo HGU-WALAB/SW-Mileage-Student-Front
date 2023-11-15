@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <>
       <Helmet>
-        <title> Dashboard: Five</title>
+        <title>내 마일리지</title>
       </Helmet>
 
       <FiveView />

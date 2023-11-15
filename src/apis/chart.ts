@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import axiosInstance from 'src/utils/axios';
 import {
+  CharThirdURI,
   ChartFourURI,
   ChartOneURI,
   ChartTwoURI,
@@ -54,6 +55,31 @@ export const getCategoryTypeCompChart = async (
 ): Promise<AxiosResponse<IGetCategoryTypeCompChart>> => {
   const response = await axiosInstance.get(ChartTwoURI(data));
 
+  return response;
+};
+
+/**
+ * @brief 통계 페이지 - 시각화 차트 3 : 인기 마일리지 아이템
+ * @endPointName chartThreeURI
+ * @endPoint /api/mileage/charts/popular-item
+ */
+
+interface IMileageRecord {
+  type: string;
+  rank: number;
+  description: string;
+  recordCount: number;
+  name: string;
+}
+
+interface IGetPopularItemChart {
+  description: string;
+  count: number;
+  list: IMileageRecord[];
+}
+
+export const getPopularItemChart = async (): Promise<AxiosResponse<IGetPopularItemChart>> => {
+  const response = await axiosInstance.get(CharThirdURI);
   return response;
 };
 

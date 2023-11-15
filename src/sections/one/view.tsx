@@ -71,6 +71,7 @@ export default function OneView() {
           sx={{
             display: 'flex',
             alignItems: 'center',
+            width: '90%',
           }}
         >
           <BeforeApply />

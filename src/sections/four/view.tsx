@@ -138,9 +138,8 @@ export default function FourView() {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              p: '30px',
+
               gap: '30px',
-              height: 350,
             }}
           >
             <ProfileLottie />
@@ -150,12 +149,14 @@ export default function FourView() {
                 maxWidth: '500px',
                 display: 'grid',
                 gap: '30px',
+                py: '50px',
                 gridTemplateColumns: 'repeat(2, 1fr)',
               }}
             >
               {studentInfo &&
                 Object.entries(studentInfo).map(
                   ([key, value], index) =>
+                    value &&
                     key !== 'id' && (
                       <TypoWithEdit
                         key={index}

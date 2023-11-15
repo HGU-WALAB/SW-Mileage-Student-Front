@@ -29,6 +29,7 @@ export default function Main({ children, sx, ...other }: BoxProps) {
           display: 'flex',
           flexDirection: 'column',
           pt: `${HEADER.H_MOBILE + 24}px`,
+
           pb: 10,
           ...(lgUp && {
             pt: `${HEADER.H_MOBILE * 2 + 40}px`,
@@ -52,7 +53,7 @@ export default function Main({ children, sx, ...other }: BoxProps) {
         py: `${HEADER.H_MOBILE + SPACING}px`,
         ...(lgUp && {
           px: 2,
-          py: `${HEADER.H_DESKTOP + SPACING}px`,
+          py: `${HEADER.H_DESKTOP - 10}px`,
           width: `calc(100% - ${NAV.W_VERTICAL}px)`,
           ...(isNavMini && {
             width: `calc(100% - ${NAV.W_MINI}px)`,

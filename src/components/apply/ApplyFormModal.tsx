@@ -238,7 +238,7 @@ export default function ApplyFormModal({ thisSemesterItemNum, data }: IProps) {
                 </MileageTitle>
                 <SizedBox />
 
-                <DataGrid {...makeData(ItemNcategory)} />
+                <DataGrid {...makeData(ItemNcategory)} pageSizeOptions={[10]} />
               </MileageBox>
             ))}
           </MileageContainer>

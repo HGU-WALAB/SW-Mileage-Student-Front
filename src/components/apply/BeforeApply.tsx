@@ -167,7 +167,7 @@ export default function BeforeApply() {
   }, [updatedAt, dataUpdatedAt]);
 
   return (
-    <TableContainer sx={{ width: '700px' }} component={Paper}>
+    <TableContainer component={Paper}>
       <Table aria-label="customized table">
         <TableHead>
           <TableRow color="primary">
@@ -180,7 +180,12 @@ export default function BeforeApply() {
         </TableHead>
         <TableBody>
           {(rows as any)?.map((row: IRow, idx: number) => (
-            <StyledTableRow sx={{ backgroundColor: 'background.neutral' }} key={idx}>
+            <StyledTableRow
+              sx={{
+                backgroundColor: 'background.neutral',
+              }}
+              key={idx}
+            >
               <StyledTableCell component="th" scope="row">
                 {row.id}
               </StyledTableCell>

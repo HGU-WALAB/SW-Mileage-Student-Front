@@ -130,7 +130,6 @@ const sx = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '10px',
 };
 
 export default function MileageTotalRankChart() {
@@ -168,11 +167,19 @@ export default function MileageTotalRankChart() {
 
   return (
     <Box sx={sx}>
-      <SemesterDropdown />
-      <FormControlLabel
-        control={<Checkbox defaultChecked checked={isYearFilter} onChange={handleChange} />}
-        label="같은 학년만 표시"
-      />
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '30px',
+          alignItems: 'center',
+        }}
+      >
+        <SemesterDropdown />
+        <FormControlLabel
+          control={<Checkbox defaultChecked checked={isYearFilter} onChange={handleChange} />}
+          label="같은 학년만 표시"
+        />
+      </Box>
       <Box sx={{ width: '500px', height: '500px' }}>
         {data && (
           <ResponsiveRadar

@@ -28,8 +28,8 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
         ref={ref}
         component="div"
         sx={{
-          width: 200,
-          height: 200,
+          width: 40,
+          height: 40,
           display: 'inline-flex',
           ...sx,
         }}
@@ -68,7 +68,7 @@ const Logo = forwardRef<HTMLDivElement, LogoProps>(
             />
           </g>
         </svg> */}
-        <img src="/assets/ai/mileageLogo.png" alt="logo" />
+        {/* <img src="/assets/ai/mileageLogo.png" alt="logo" /> */}
       </Box>
     );
 
