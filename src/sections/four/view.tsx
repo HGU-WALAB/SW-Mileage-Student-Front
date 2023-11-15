@@ -139,9 +139,8 @@ export default function FourView() {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              p: '30px',
+
               gap: '30px',
-              height: 350,
             }}
           >
             <ProfileLottie />

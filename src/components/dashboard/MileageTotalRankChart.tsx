@@ -130,7 +130,6 @@ const sx = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '10px',
 };
 
 export default function MileageTotalRankChart() {
