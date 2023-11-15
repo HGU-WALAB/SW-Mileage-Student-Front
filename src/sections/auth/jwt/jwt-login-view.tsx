@@ -10,15 +10,11 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 // routes
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
-import { useSearchParams, useRouter } from 'src/routes/hooks';
+import { useRouter } from 'src/routes/hooks';
 // config
-import { PATH_AFTER_LOGIN } from 'src/config-global';
 // hooks
 import { useBoolean } from 'src/hooks/use-boolean';
 // auth
-import { useAuthContext } from 'src/auth/hooks';
 // components
 import Iconify from 'src/components/iconify';
 import FormProvider, { RHFTextField } from 'src/components/hook-form';
@@ -27,8 +23,6 @@ import { useSetRecoilState } from 'recoil';
 import { userState } from 'src/utils/atom';
 import { Link } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import { _emails } from '../../../_mock/assets';
-import { direction } from '../../../theme/options/right-to-left';
 
 // ----------------------------------------------------------------------
 

@@ -4,15 +4,11 @@ import Container from '@mui/material/Container';
 import { useSettingsContext } from 'src/components/settings';
 import MyMileageTable from 'src/components/dashboard/MyMileageTable';
 import SemesterDropdown from 'src/components/common/SemesterDropdown';
-import { Box, Checkbox, Chip, FormControlLabel } from '@mui/material';
+import { Box, Chip } from '@mui/material';
 import { useRecoilValue } from 'recoil';
-import { mileageStatusState, semesterWithStatusState } from 'src/utils/atom';
+import { semesterWithStatusState } from 'src/utils/atom';
 import { Layout } from 'src/css/styled-components/Layout';
 import { Title } from 'src/css/styled-components/Title';
-import { IMileageSemesterWithStatus, getSemestersWithStatus } from 'src/apis/mileage';
-import { useEffect, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 
 // ----------------------------------------------------------------------
 
@@ -24,7 +20,6 @@ export interface ISemesterWithStatus {
 export default function FiveView() {
   const semesterWithStatus = useRecoilValue(semesterWithStatusState);
 
-  const status = useRecoilValue(mileageStatusState);
   const settings = useSettingsContext();
 
   // const [updatedAt, setUpdatedAt] = useState(0);

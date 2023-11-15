@@ -1,16 +1,11 @@
 // @mui
-import { alpha } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 // components
 import { useSettingsContext } from 'src/components/settings';
 import ChartTabs from 'src/components/dashboard/ChartTabs';
 import { Title } from 'src/css/styled-components/Title';
 import { Layout } from 'src/css/styled-components/Layout';
-import { Alert, AlertTitle } from '@mui/material';
-import { Content, ContentBox } from 'src/css/styled-components/Content';
-import { useQuery } from '@tanstack/react-query';
-import { getTotalPointCompChart } from 'src/apis/chart';
+
 import React from 'react';
 
 // ----------------------------------------------------------------------

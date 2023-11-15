@@ -1,8 +1,6 @@
-import { BarChart } from '@mui/x-charts';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Box, Checkbox, FormControlLabel } from '@mui/material';
 import { ResponsiveRadar } from '@nivo/radar';
-import { ISemesterWithStatus } from 'src/sections/five/view';
 
 import { getCategoryTypeCompChart } from 'src/apis/chart';
 import { ICategoryTypeCompChartReqData } from 'src/utils/endPoints';
@@ -10,14 +8,6 @@ import { semesterWithStatusState } from 'src/utils/atom';
 import { useRecoilValue } from 'recoil';
 import { useQuery } from '@tanstack/react-query';
 import SemesterDropdown from '../common/SemesterDropdown';
-
-const myNum = '3';
-const checkMe = (num: string) => {
-  if (num === myNum) {
-    return `${num}( 나 )`;
-  }
-  return num;
-};
 
 // const barChartsParams = {
 //   xAxis: [

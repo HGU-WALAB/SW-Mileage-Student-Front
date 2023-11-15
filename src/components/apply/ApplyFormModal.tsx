@@ -74,39 +74,39 @@ interface IItem {
   isRegistered: boolean;
 }
 
-const contents: IGetThisSemesterItem = {
-  count: 3,
-  list: [
-    {
-      category: '교과 - 전공활동',
-      items: [
-        {
-          id: 1,
-          itemName: 'TOPCIT 성적 우수자',
-          description: 'TOPCIT 성적 우수자입니다.',
-          isRegistered: true,
-        },
-        {
-          id: 2,
-          itemName: '대경권 프로그래밍 대회',
-          description: '대경권 프로그래밍 대회입니다.',
-          isRegistered: false,
-        },
-      ],
-    },
-    {
-      category: '교과 - 캡스톤',
-      items: [
-        {
-          id: 3,
-          itemName: '캡스톤 프로젝트',
-          description: '캡스톤 프로젝트입니다.',
-          isRegistered: true,
-        },
-      ],
-    },
-  ],
-};
+// const contents: IGetThisSemesterItem = {
+//   count: 3,
+//   list: [
+//     {
+//       category: '교과 - 전공활동',
+//       items: [
+//         {
+//           id: 1,
+//           itemName: 'TOPCIT 성적 우수자',
+//           description: 'TOPCIT 성적 우수자입니다.',
+//           isRegistered: true,
+//         },
+//         {
+//           id: 2,
+//           itemName: '대경권 프로그래밍 대회',
+//           description: '대경권 프로그래밍 대회입니다.',
+//           isRegistered: false,
+//         },
+//       ],
+//     },
+//     {
+//       category: '교과 - 캡스톤',
+//       items: [
+//         {
+//           id: 3,
+//           itemName: '캡스톤 프로젝트',
+//           description: '캡스톤 프로젝트입니다.',
+//           isRegistered: true,
+//         },
+//       ],
+//     },
+//   ],
+// };
 
 const DataGripHeaderData = [
   {
@@ -183,10 +183,10 @@ interface IItem {
   isRegistered: boolean;
 }
 
-function countRegisteredItems(items: IItem[]) {
-  const registeredItems = items.filter((item) => item.isRegistered === true);
-  return registeredItems.length;
-}
+// function countRegisteredItems(items: IItem[]) {
+//   const registeredItems = items.filter((item) => item.isRegistered === true);
+//   return registeredItems.length;
+// }
 
 export default function ApplyFormModal({ thisSemesterItemNum, data }: IProps) {
   const { enqueueSnackbar } = useSnackbar();

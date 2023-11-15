@@ -15,7 +15,7 @@ import SvgColor from 'src/components/svg-color';
 import { useSettingsContext } from 'src/components/settings';
 //
 import { HEADER, NAV } from '../config-layout';
-import { Searchbar, AccountPopover, SettingsButton, NotificationsPopover } from '../_common';
+import { AccountPopover, SettingsButton } from '../_common';
 
 // ----------------------------------------------------------------------
 

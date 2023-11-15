@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-import { LineChart } from '@mui/x-charts';
 import { AreaChart, XAxis, YAxis, CartesianGrid, Tooltip, Area } from 'recharts';
 import React from 'react';
 import { getTotalPointCompChart } from 'src/apis/chart';

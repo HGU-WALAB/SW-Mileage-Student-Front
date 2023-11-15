@@ -1,15 +1,8 @@
 // @mui
 import { alpha, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-// auth
-import { useAuthContext } from 'src/auth/hooks';
-// routes
-import { paths } from 'src/routes/paths';
-import { RouterLink } from 'src/routes/components';
 // hooks
 import { useResponsive } from 'src/hooks/use-responsive';
 // theme
@@ -17,18 +10,8 @@ import { bgGradient } from 'src/theme/css';
 // components
 import Logo from 'src/components/logo';
 import ApplyDuration from 'src/components/apply/ApplyDuration';
-import { Alert, AlertTitle } from '@mui/material';
 
 // ----------------------------------------------------------------------
-
-const METHODS = [
-  {
-    id: 'jwt',
-    label: 'Jwt',
-    path: paths.auth.jwt.login,
-    icon: '/assets/icons/auth/ic_jwt.svg',
-  },
-];
 
 type Props = {
   title?: string;
@@ -37,8 +20,6 @@ type Props = {
 };
 
 export default function AuthClassicLayout({ children, image, title }: Props) {
-  const { method } = useAuthContext();
-
   const theme = useTheme();
 
   const mdUp = useResponsive('up', 'md');
@@ -75,7 +56,6 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
       alignItems="center"
       justifyContent="center"
       sx={{
-        backgroundColor: 'background.neutral',
         ...bgGradient({
           color: alpha(
             theme.palette.background.default,
