@@ -150,6 +150,7 @@ export default function FourView() {
                 maxWidth: '500px',
                 display: 'grid',
                 gap: '30px',
+                py: '50px',
                 gridTemplateColumns: 'repeat(2, 1fr)',
               }}
             >
