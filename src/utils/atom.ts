@@ -13,8 +13,8 @@ export const mileageStatusState = atom({
 export const userState = atom({
   key: 'userAtom', // unique ID (with respect to other atoms/selectors)
   default: {
-    name: '김민수',
-    sid: '2018000',
+    name: '오인혁',
+    sid: '21800446',
   },
 });
 

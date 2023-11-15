@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <>
       <Helmet>
-        <title> Dashboard: Two</title>
+        <title>통계</title>
       </Helmet>
       <TwoView />
     </>
