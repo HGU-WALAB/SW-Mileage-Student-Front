@@ -37,4 +37,6 @@ export const ChartTwoURI = (data: ICategoryTypeCompChartReqData) =>
     data.isYearFilter ? '&filter=year' : ''
   }`;
 
+export const CharThirdURI = `api/mileage/charts/popular-item`;
+
 export const ChartFourURI = `/api/mileage/charts/category-type/upper`;
