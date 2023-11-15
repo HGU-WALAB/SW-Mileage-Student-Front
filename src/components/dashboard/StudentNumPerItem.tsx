@@ -1,6 +1,7 @@
 import { Avatar, Card, CardContent, CardHeader, Theme, Typography } from '@mui/material';
-import React, { PureComponent } from 'react';
+import { PureComponent } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { getPopularItemChart } from 'src/apis/chart';
 
 export const sx = {
   display: 'flex',
@@ -8,58 +9,6 @@ export const sx = {
   alignItems: 'center',
   gap: '50px',
 };
-
-const data = [
-  {
-    name: 'PPS 캠프',
-    '마일리지 항목': 2400,
-    type: 'A',
-    description: 'PPS 캠프에 대한 설명입니다.',
-    rank: '1',
-  },
-  {
-    name: '웹 서비스 캠프',
-    '마일리지 항목': 1398,
-    type: 'A',
-    description: '웹 서비스 캠프에 대한 설명입니다.',
-    rank: '2',
-  },
-  {
-    name: '코딩 테스트 활동',
-    '마일리지 항목': 9800,
-    type: 'B',
-    description: '코딩 테스트에 대한 설명입니다.',
-    rank: '3',
-  },
-  {
-    name: '강연',
-    '마일리지 항목': 3908,
-    type: 'B',
-    description: '강연에 대한 설명입니다.',
-    rank: '4',
-  },
-  {
-    name: '종강 총회',
-    '마일리지 항목': 4800,
-    type: 'C',
-    description: '종강 총회에 대한 설명입니다.',
-    rank: '5',
-  },
-  {
-    name: '캡스톤 디자인1',
-    '마일리지 항목': 3800,
-    type: 'E',
-    description: '캡스톤 디자인1에 대한 설명입니다.',
-    rank: '6',
-  },
-  {
-    name: '캡스톤 디자인2',
-    '마일리지 항목': 4300,
-    type: 'B',
-    description: '캡스톤 디자인2에 대한 설명입니다.',
-    rank: '7',
-  },
-];
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
@@ -98,35 +47,39 @@ interface StudentNumPerItemProps {
 }
 export default class StudentNumPerItem extends PureComponent<StudentNumPerItemProps> {
   // eslint-disable-next-line react/state-in-constructor
-  // state = {
-  //   data: null,
-  // };
+  state = {
+    data: [],
+  };
 
-  // componentDidMount() {
-  //   this.fetchData();
-  // }
+  componentDidMount() {
+    this.fetchData();
+  }
 
-  // fetchData = async () => {
-  //   try {
-  //     const response = await getMyCategoryTypeCompChart();
-  //     const formattedData = response.data?.list?.map(item => ({
-  //       type: item?.type,
-  //       나: item?.myMileage,
-  //       평균: item?.averageMileage,
-  //     }));
+  fetchData = async () => {
+    try {
+      const response = await getPopularItemChart();
+      const formattedData = response.data?.list?.map((item) => ({
+        name: item.name,
+        '등록된 학생 수': item.recordCount,
+        type: item.type,
+        description: item.description,
+        rank: item.rank,
+      }));
 
-  //     this.setState({ data: formattedData, isLoading: false });
-  //   }
-  // };
+      this.setState({ data: formattedData });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   render() {
     const { theme } = this.props;
-    // const { data } = this.state;
+    const { data } = this.state;
 
     return (
       // <ResponsiveContainer width="100%" height="100%">
       <BarChart
-        width={1000}
+        width={1150}
         height={400}
         data={data}
         margin={{
@@ -137,11 +90,11 @@ export default class StudentNumPerItem extends PureComponent<StudentNumPerItemPr
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
+        <XAxis dataKey="name" style={{ fontSize: '11px' }} />
         <YAxis />
         <Tooltip content={<CustomTooltip />} />
         <Legend />
-        <Bar dataKey="마일리지 항목" barSize={30} fill={theme.palette.primary.main} />
+        <Bar dataKey="등록된 학생 수" barSize={30} fill={theme.palette.primary.main} />
       </BarChart>
       // </ResponsiveContainer>
     );

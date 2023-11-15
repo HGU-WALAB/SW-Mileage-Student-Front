@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import axiosInstance from 'src/utils/axios';
 import {
+  CharThirdURI,
   ChartFourURI,
   ChartOneURI,
   ChartTwoURI,
@@ -78,7 +79,7 @@ interface IGetPopularItemChart {
 }
 
 export const getPopularItemChart = async (): Promise<AxiosResponse<IGetPopularItemChart>> => {
-  const response = await axiosInstance.get(ChartFourURI);
+  const response = await axiosInstance.get(CharThirdURI);
   return response;
 };
 
