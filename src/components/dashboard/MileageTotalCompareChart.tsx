@@ -4,7 +4,6 @@ import React from 'react';
 import { getTotalPointCompChart } from 'src/apis/chart';
 import { useQuery } from '@tanstack/react-query';
 import { sx } from './StudentNumPerItem';
-import { ColorSchema } from '../../theme/palette';
 
 // const data = [
 //   {

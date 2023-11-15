@@ -9,7 +9,6 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import { bgGradient } from 'src/theme/css';
 // components
 import Logo from 'src/components/logo';
-import ApplyDuration from 'src/components/apply/ApplyDuration';
 
 // ----------------------------------------------------------------------
 

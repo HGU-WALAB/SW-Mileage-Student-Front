@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 // @mui
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -31,8 +30,6 @@ export default function JwtLoginView() {
   const setUserInfo = useSetRecoilState(userState);
 
   const router = useRouter();
-
-  const [errorMsg, setErrorMsg] = useState('');
 
   const password = useBoolean();
 
@@ -89,7 +86,6 @@ export default function JwtLoginView() {
 
       console.error(error);
       reset();
-      setErrorMsg(typeof error === 'string' ? error : error.message);
     }
   });
 

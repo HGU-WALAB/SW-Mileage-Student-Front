@@ -15,7 +15,6 @@ import { useQuery } from '@tanstack/react-query';
 import { getStudentProfile } from 'src/apis/user';
 import ChartInfo from 'src/components/dashboard/ChartInfo';
 import { getMyCategoryTypeCompChart } from 'src/apis/chart';
-import { Key } from '@mui/icons-material';
 
 // ----------------------------------------------------------------------
 // const data = [
