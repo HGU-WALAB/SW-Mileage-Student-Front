@@ -82,7 +82,7 @@ export default function JwtLoginView() {
 
       router.push('/dashboard');
     } catch (error) {
-      enqueueSnackbar('로그인 실패', {
+      enqueueSnackbar('로그인 정보가 틀렸습니다', {
         variant: 'error',
         autoHideDuration: 1000,
       });
@@ -101,9 +101,9 @@ export default function JwtLoginView() {
 
   const renderForm = (
     <Stack spacing={2.5}>
-      {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
+      {/* {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>} */}
 
-      <RHFTextField name="sid" label="히즈넷 아이디" />
+      <RHFTextField name="sid" label="학번" />
 
       <RHFTextField
         name="password"

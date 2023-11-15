@@ -103,7 +103,7 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
         ))}
       </Stack> */}
 
-      <ApplyDuration />
+      {/* <ApplyDuration /> */}
     </Stack>
   );
 
