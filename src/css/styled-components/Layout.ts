@@ -6,4 +6,7 @@ export const Layout = styled(Box)({
   flexDirection: 'column',
   alignItems: 'center',
   gap: '50px',
+  minWidth: '700px',
+  overflowX: 'scroll',
+  px: '50px',
 });

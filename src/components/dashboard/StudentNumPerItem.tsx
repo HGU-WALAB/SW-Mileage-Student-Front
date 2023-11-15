@@ -8,6 +8,7 @@ export const sx = {
   flexDirection: 'column',
   alignItems: 'center',
   gap: '50px',
+  width: '100%',
 };
 
 const CustomTooltip = ({ active, payload, label }: any) => {

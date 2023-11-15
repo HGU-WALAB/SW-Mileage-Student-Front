@@ -22,25 +22,6 @@ export default function FiveView() {
 
   const settings = useSettingsContext();
 
-  // const [updatedAt, setUpdatedAt] = useState(0);
-
-  // const { data, dataUpdatedAt } = useQuery<IMileageSemesterWithStatus[]>(
-  //   {
-  //     queryKey: ['semestersWithStatus'],
-  //     queryFn: async () => {
-  //       const response = await getSemestersWithStatus();
-  //       return response.data;  // Axios의 응답에서 .data 속성을 반환
-  //     }
-  //   }
-  // );
-
-  // useEffect(() => {
-  //   if (dataUpdatedAt > updatedAt) {
-  //     setUpdatedAt(dataUpdatedAt)
-  //   }
-  // }, [dataUpdatedAt])
-
-  //
   return (
     <Container maxWidth={settings.themeStretch ? false : 'xl'}>
       <Layout>

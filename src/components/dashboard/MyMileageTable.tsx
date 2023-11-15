@@ -127,14 +127,14 @@ export default function MyMileageTable() {
   }
 
   return (
-    <Box sx={{ width: '100%', maxHeight: '700px', overflowY: 'scroll' }}>
+    <Box sx={{ width: '100%' }}>
       {data?.list.map((ItemNcategory, idx) => (
         <Box key={idx}>
           <Typography variant="h6" sx={{ color: 'gray' }}>
             {idx + 1}. {ItemNcategory.category}
           </Typography>
           <Box sx={{ height: '20px' }} />
-          <DataGrid {...makeData(ItemNcategory)} />
+          <DataGrid {...makeData(ItemNcategory)} pageSizeOptions={[10]} />
         </Box>
       ))}
     </Box>
