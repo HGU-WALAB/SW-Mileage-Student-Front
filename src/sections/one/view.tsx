@@ -41,6 +41,23 @@ export default function OneView() {
 
   const settings = useSettingsContext();
 
+  function countRegisteredItems(data?: IGetThisSemesterItem) {
+    let count = 0;
+
+    // 각 카테고리를 순회
+    data?.list.forEach((category: IThisSemesterItemWithCategory) => {
+      // 카테고리 내의 각 항목을 순회
+      category.items.forEach((item: IItem) => {
+        // isRegistered가 true인 경우 카운트 증가
+        if (item.isRegistered) {
+          count += 1;
+        }
+      });
+    });
+
+    return count;
+  }
+
   const [updatedAt, setUpdatedAt] = React.useState(0);
 
   const { data, dataUpdatedAt } = useQuery<IGetThisSemesterItem>({
@@ -78,11 +95,11 @@ export default function OneView() {
         </Box>
 
         <Box>
-          <TermsOfUse thisSemesterItemNum={data?.count as number} />
+          <TermsOfUse thisSemesterItemNum={countRegisteredItems(data) as number} />
         </Box>
         <ApplyFormModal
           data={data as IGetThisSemesterItem}
-          thisSemesterItemNum={data?.count as number}
+          thisSemesterItemNum={countRegisteredItems(data) as number}
         />
       </Layout>
     </Container>

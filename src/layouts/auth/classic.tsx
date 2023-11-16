@@ -65,7 +65,7 @@ export default function AuthClassicLayout({ children, image, title }: Props) {
       }}
     >
       <Typography variant="h3" sx={{ maxWidth: 480, textAlign: 'center' }} color="primary">
-        {title || 'SW 마일리지 시스템'}
+        {title || 'SW 소중대 마일리지 시스템'}
       </Typography>
 
       <Box
