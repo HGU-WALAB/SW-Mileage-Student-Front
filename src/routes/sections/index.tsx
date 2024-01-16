@@ -7,13 +7,14 @@ import { mainRoutes } from './main';
 
 import { authRoutes } from './auth';
 import { dashboardRoutes } from './dashboard';
+import { DOMAIN } from '../paths';
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
   return useRoutes([
     {
-      path: `/`,
+      path: `${DOMAIN}/`,
       element: <Navigate to={PATH_AFTER_LOGIN} replace />,
     },
 
