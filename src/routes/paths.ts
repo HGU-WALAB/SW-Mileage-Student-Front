@@ -1,5 +1,5 @@
 // ----------------------------------------------------------------------
-const DOMAIN = process.env.REACT_APP_HOST_BASE_DOMAIN;
+export const DOMAIN = process.env.REACT_APP_HOST_BASE_DOMAIN;
 
 const ROOTS = {
   AUTH: `${DOMAIN}/auth`,
@@ -12,6 +12,7 @@ export const paths = {
   minimalUI: 'https://mui.com/store/items/minimal-dashboard/',
   // AUTH
   auth: {
+    root: `${ROOTS.AUTH}`,
     jwt: {
       login: `${ROOTS.AUTH}/jwt/login`,
       register: `${ROOTS.AUTH}/jwt/register`,
@@ -19,7 +20,7 @@ export const paths = {
   },
   // DASHBOARD
   dashboard: {
-    root: ROOTS.DASHBOARD,
+    root: `${ROOTS.DASHBOARD}`,
     one: `${ROOTS.DASHBOARD}/one`,
     two: `${ROOTS.DASHBOARD}/two`,
     three: `${ROOTS.DASHBOARD}/three`,

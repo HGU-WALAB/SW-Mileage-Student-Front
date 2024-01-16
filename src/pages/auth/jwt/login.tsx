@@ -11,7 +11,7 @@ export default function LoginPage() {
         <title>SW 마일리지 학생 시스템 로그인</title>
       </Helmet>
 
-      <JwtLoginView />
+    <JwtLoginView />
     </>
   );
 }

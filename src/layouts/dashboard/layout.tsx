@@ -53,6 +53,7 @@ export default function DashboardLayout({ children }: Props) {
 
         <Box
           sx={{
+            
             minHeight: 1,
             display: 'flex',
             flexDirection: { xs: 'column', lg: 'row' },

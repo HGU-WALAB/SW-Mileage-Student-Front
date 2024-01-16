@@ -22,6 +22,7 @@ import { useSetRecoilState } from 'recoil';
 import { userState } from 'src/utils/atom';
 import { Link } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import { paths } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -77,7 +78,7 @@ export default function JwtLoginView() {
 
       // await login?.(data.email, data.password);
 
-      router.push('/dashboard');
+      router.push(`${paths.dashboard.root}`);
     } catch (error) {
       enqueueSnackbar('로그인 정보가 틀렸습니다', {
         variant: 'error',
