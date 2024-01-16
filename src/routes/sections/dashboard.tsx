@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom';
 import DashboardLayout from 'src/layouts/dashboard';
 // components
 import { LoadingScreen } from 'src/components/loading-screen';
+import { DOMAIN, paths } from '../paths';
 
 // ----------------------------------------------------------------------
 
@@ -20,7 +21,7 @@ const PageSix = lazy(() => import('src/pages/dashboard/six'));
 
 export const dashboardRoutes = [
   {
-    path: 'dashboard',
+    path: `${paths.dashboard.root}`,
     element: (
       <DashboardLayout>
         <Suspense fallback={<LoadingScreen />}>

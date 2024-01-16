@@ -6,6 +6,7 @@ import { Outlet } from 'react-router-dom';
 import AuthClassicLayout from 'src/layouts/auth/classic';
 // components
 import { SplashScreen } from 'src/components/loading-screen';
+import { DOMAIN, paths } from '../paths';
 
 // ----------------------------------------------------------------------
 
@@ -44,7 +45,7 @@ const authJwt = {
 
 export const authRoutes = [
   {
-    path: 'auth',
+    path: `${paths.auth.root}`,
     children: [authJwt],
   },
 ];
