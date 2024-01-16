@@ -16,6 +16,7 @@ import { varHover } from 'src/components/animate';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 import { useRecoilValue } from 'recoil';
 import { userState } from 'src/utils/atom';
+import { paths } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -47,10 +48,8 @@ export default function AccountPopover() {
 
   const handleLogout = async () => {
     try {
-      // await logout();
-
       popover.onClose();
-      router.replace('/auth/jwt/login');
+      router.replace(paths.auth.jwt.login);
     } catch (error) {
       console.error(error);
     }
