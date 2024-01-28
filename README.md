@@ -1,4 +1,4 @@
-# 한동대학교 대상 소중대 마일리지 관리자 시스템 [ 프론트엔드 ]
+# 한동대학교 대상 소중대 마일리지 학생 시스템 [ 프론트엔드 ]
 
 
 <a href="http://walab.handong.edu/sw_mileage" target='_blank' >
